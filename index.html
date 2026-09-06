@@ -794,6 +794,23 @@ a{color:inherit}
   .barra-fixa{transition:none}
 }
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '735853032032044');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 
 <body>
@@ -820,7 +837,7 @@ a{color:inherit}
       </div>
 
       <div class="acao">
-        <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero minha rotina personalizada. Acesso vitalício por 37 reais, pagamento único.">Quero minha rotina personalizada</a>
+        <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero minha rotina personalizada. Acesso vitalício por 37 reais, pagamento único.">Quero minha rotina personalizada</a>
         <p class="sob-botao">Acesso vitalício por R$ 37 · Pagamento único · 30 dias de garantia</p>
       </div>
 
@@ -965,7 +982,7 @@ a{color:inherit}
     </div>
 
     <div class="acao">
-      <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero começar agora. Acesso vitalício por 37 reais.">Quero começar agora</a>
+      <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero começar agora. Acesso vitalício por 37 reais.">Quero começar agora</a>
     </div>
   </div>
 </section>
@@ -1238,7 +1255,7 @@ a{color:inherit}
       </ul>
 
       <div class="acao">
-        <a class="botao botao-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero meu acesso vitalício por 37 reais, pagamento único.">Quero meu acesso vitalício</a>
+        <a class="botao botao-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero meu acesso vitalício por 37 reais, pagamento único.">Quero meu acesso vitalício</a>
       </div>
       <p class="imediato">Acesso imediato após a compra</p>
     </div>
@@ -1355,7 +1372,7 @@ a{color:inherit}
     <h2 id="t-final" class="revelar">Você pode começar de novo na próxima segunda. Ou pode começar diferente hoje.</h2>
     <p>Acesso vitalício. Pagamento único de R$ 37. Trinta dias de garantia.</p>
     <div class="acao">
-      <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero meu acesso vitalício por 37 reais, pagamento único.">Quero meu acesso vitalício</a>
+      <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero meu acesso vitalício por 37 reais, pagamento único.">Quero meu acesso vitalício</a>
     </div>
   </div>
 </section>
@@ -1377,7 +1394,7 @@ a{color:inherit}
 
 <!-- ============================ BARRA FIXA (MOBILE) ============================ -->
 <div class="barra-fixa" id="barraFixa">
-  <a class="botao botao-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero meu acesso por 37 reais, pagamento único.">Quero meu acesso por R$ 37</a>
+  <a class="botao botao-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero meu acesso por 37 reais, pagamento único.">Quero meu acesso por R$ 37</a>
 </div>
 
 <script>
