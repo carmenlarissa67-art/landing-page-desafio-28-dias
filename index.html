@@ -1,565 +1,1414 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafio 28 Dias - Organização Mental e Rotina Cíclica</title>
-    <meta name="description" content="Pare de lutar contra o seu corpo. Organize sua mente e sua vida respeitando a sua biologia com o Desafio 28 Dias.">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-color: #FDFBF7;
-            --primary-color: #7BA082;
-            --primary-dark: #638669;
-            --secondary-color: #D98A6C;
-            --text-main: #2A2A2A;
-            --text-light: #5A5A5A;
-            --white: #FFFFFF;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!-- PREENCHER: nome da marca, para compor o title e o og:title -->
+<title>Entenda como você funciona · Organização pessoal com inteligência artificial para a mulher</title>
+<meta name="description" content="Um app de organização pessoal com inteligência artificial, feito para a mulher. Ele conhece a sua vida, entende o seu ciclo, observa a sua energia e monta o plano do seu dia. Acesso vitalício por R$ 37.">
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Entenda como você funciona. E finalmente aja a partir disso.">
+<meta property="og:description" content="Um app de organização pessoal com inteligência artificial, feito para a mulher. Ele conhece a sua vida, entende o seu ciclo, observa a sua energia e monta o plano do seu dia.">
+<!-- PREENCHER: trocar por URL absoluta (https://seudominio.com.br/assets/og-image.jpg) antes de publicar -->
+<meta property="og:image" content="assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Três telas do app: check-in diário, painel do dia e plano do dia.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Entenda como você funciona. E finalmente aja a partir disso.">
+<meta name="twitter:description" content="Organização pessoal com inteligência artificial, feita para a mulher. Acesso vitalício por R$ 37.">
+<meta name="twitter:image" content="assets/og-image.jpg">
 
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            color: var(--text-main);
-            line-height: 1.3;
-        }
+<meta name="theme-color" content="#F7F3EE">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
-        a {
-            text-decoration: none;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-        /* Reusable Components */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+<style>
+/* ===============================================================
+   TOKENS
+   Sistema Monad aplicado sobre a paleta da marca.
+   Elevacao: nao existe sombra. A hierarquia vem de fio de 1px
+   em --linha e da troca de superficie (areia, linho, neblina,
+   salvia-clara), como manda o sistema.
+   =============================================================== */
+:root{
+  /* Superficies, do nivel 1 ao 4 */
+  --areia:#F7F3EE;
+  --linho:#FFFCF8;
+  --neblina:#EDE6DE;
+  --salvia-clara:#C6CFC0;
 
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--white);
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 18px 36px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(123, 160, 130, 0.3);
-            border: 2px solid transparent;
-            cursor: pointer;
-        }
+  /* Texto */
+  --tinta:#2C2622;
+  --grafite:#5A5049;
+  --sombra-clara:#8C817A;
+  --nota:#6E635C;
 
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(123, 160, 130, 0.4);
-        }
+  /* Marca */
+  --terracota:#C08466;
+  --terracota-esc:#A66B50;
+  --argila:#D9B8A5;
+  --salvia:#8E9A87;
+  --linha:#DDD4CB;
 
-        .btn-pulse {
-            animation: pulse 2s infinite;
-            font-size: 1.25rem;
-            padding: 22px 45px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+  --fase-dinamica:#C08466;
+  --fase-expressiva:#D9B8A5;
+  --fase-criativa:#A9AF9C;
+  --fase-reflexiva:#8E9A87;
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(123, 160, 130, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(123, 160, 130, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(123, 160, 130, 0);
-            }
-        }
+  /* Familias: a serifada anuncia, a mono instrui */
+  --serif:'Fraunces','Newsreader',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 
-        .section-padding {
-            padding: 100px 0;
-        }
+  /* Escala de espacamento, base 8px */
+  --s8:8px;  --s16:16px; --s24:24px; --s32:32px;
+  --s40:40px; --s64:64px; --s72:72px; --s80:80px;
 
-        .text-highlight {
-            color: var(--secondary-color);
-            font-style: italic;
-        }
+  /* Formato */
+  --raio-pill:100px;
+  --raio-cartao:40px;
+  --raio-card:24px;
+  --raio-img:16px;
 
-        /* SEÇÃO 1: Hero Section */
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #ffffff 0%, var(--bg-color) 100%);
-            padding-top: 60px;
-        }
+  /* Largura */
+  --leitura:680px;
+  --largo:1120px;
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 24px;
-            font-weight: 700;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+  --fio:1px solid var(--linha);
+}
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-            font-weight: 400;
-        }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-        /* SEÇÃO 2: A Causa */
-        .cause {
-            background-color: var(--white);
-            text-align: center;
-        }
+html{-webkit-text-size-adjust:100%}
 
-        .cause h2 {
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-        }
+body{
+  font-family:var(--mono);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.7;
+  letter-spacing:-.02em;
+  color:var(--grafite);
+  background:var(--areia);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+@media(min-width:769px){body{font-size:17px}}
 
-        .cause .content-box {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--bg-color);
-            padding: 50px;
-            border-radius: 20px;
-            border-left: 6px solid var(--secondary-color);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.03);
-            text-align: left;
-        }
+/* Ruido quase imperceptivel: tira o aspecto chapado da tela */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:60;
+  opacity:.022;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-        .cause p {
-            font-size: 1.15rem;
-            margin-bottom: 20px;
-            color: var(--text-light);
-        }
+/* ---------------------------------------------------------------
+   TIPOGRAFIA
+   Serifada travada em peso 400 em todos os tamanhos.
+   --------------------------------------------------------------- */
+h1,h2,h3,.serif{
+  font-family:var(--serif);
+  font-optical-sizing:auto;
+  font-weight:400;
+  color:var(--tinta);
+  letter-spacing:-.02em;
+  line-height:1.2;
+}
 
-        .cause p:last-child {
-            margin-bottom: 0;
-            font-weight: 600;
-            color: var(--text-main);
-        }
+h1{
+  font-size:clamp(36px,6.2vw,52px);
+  line-height:1.08;
+  max-width:16ch;
+}
+@media(min-width:769px){h1{font-size:clamp(52px,4.8vw,64px)}}
 
-        /* SEÇÃO 3: A Solução (4 Passos) */
-        .solution {
-            background-color: var(--bg-color);
-        }
+h2{
+  font-size:clamp(30px,4.8vw,38px);
+  max-width:20ch;
+}
+@media(min-width:769px){h2{font-size:clamp(38px,3.6vw,48px)}}
 
-        .solution h2 {
-            font-size: 2.8rem;
-            text-align: center;
-            margin-bottom: 60px;
-        }
+h3{font-size:24px;line-height:1.2}
 
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
+p{max-width:58ch}
+p + p{margin-top:1.15em}
 
-        .step-card {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            position: relative;
-            transition: transform 0.3s ease;
-            border-top: 4px solid var(--primary-color);
-        }
+strong{font-weight:500;color:var(--tinta)}
+/* a voz citada entra na serifada, nunca em italico sintetico da mono */
+em,i{font-family:var(--serif);font-style:italic;letter-spacing:-.01em}
 
-        .step-card:hover {
-            transform: translateY(-5px);
-        }
+a{color:inherit}
 
-        .step-number {
-            position: absolute;
-            top: -20px;
-            left: 30px;
-            background: var(--primary-color);
-            color: var(--white);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            box-shadow: 0 5px 15px rgba(123, 160, 130, 0.4);
-        }
+/* Etiquetas, badges e letra miuda: mono em caixa alta, tracking apertado */
+.etiqueta{
+  font-family:var(--mono);
+  font-size:12px;
+  line-height:1.2;
+  letter-spacing:-.033em;
+  text-transform:uppercase;
+  color:var(--nota);
+}
 
-        .step-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            margin-top: 10px;
-        }
+.legenda{
+  font-size:14px;
+  line-height:1.65;
+  letter-spacing:-.02em;
+  color:var(--nota);
+  max-width:56ch;
+}
 
-        .step-card p {
-            color: var(--text-light);
-            font-size: 1rem;
-        }
-        
-        .solution .cta-container {
-            text-align: center;
-        }
+.destaque{
+  font-family:var(--serif);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(21px,3vw,26px);
+  line-height:1.45;
+  letter-spacing:-.02em;
+  color:var(--tinta);
+}
 
-        /* SEÇÃO 4: Ancoragem de Preço */
-        .offer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .offer::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            z-index: 1;
-        }
+/* ---------------------------------------------------------------
+   ESTRUTURA
+   --------------------------------------------------------------- */
+.envelope{width:100%;max-width:var(--largo);margin:0 auto;padding:0 var(--s24)}
+.envelope-leitura{width:100%;max-width:var(--leitura);margin:0 auto;padding:0 var(--s24)}
+@media(min-width:769px){
+  .envelope{padding:0 var(--s40)}
+  .envelope-leitura{padding:0 var(--s40)}
+}
 
-        .offer .container {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
+.fundo-areia{background:var(--areia)}
+.fundo-neblina{background:var(--neblina)}
 
-        .offer h2, .offer h3 {
-            color: var(--white);
-        }
+.r96{padding-block:var(--s64)}
+.r128{padding-block:var(--s80)}
+.r160{padding-block:96px}
+@media(min-width:769px){
+  .r96{padding-block:96px}
+  .r128{padding-block:128px}
+  .r160{padding-block:160px}
+}
 
-        .offer h2 {
-            font-size: 2.8rem;
-            margin-bottom: 30px;
-        }
+.grade{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s32)}
+@media(max-width:768px){.grade{grid-template-columns:1fr;gap:var(--s40)}}
 
-        .price-box {
-            background: var(--white);
-            color: var(--text-main);
-            padding: 50px;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
+.risco{border:0;border-top:var(--fio);width:88px;margin:0}
 
-        .price-box p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        
-        .strike {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 1.4rem;
-        }
+/* ---------------------------------------------------------------
+   BOTOES E LINKS
+   Container pill de 100px, rotulo em mono caixa alta.
+   --------------------------------------------------------------- */
+.botao{
+  display:inline-block;
+  max-width:100%;
+  background:var(--terracota);
+  color:var(--linho);
+  font-family:var(--mono);
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  line-height:1.4;
+  text-decoration:none;
+  padding:var(--s16) var(--s32);
+  border-radius:var(--raio-pill);
+  border:1px solid var(--terracota);
+  transition:background-color .15s ease-out,border-color .15s ease-out;
+}
+.botao:hover,.botao:focus-visible{background:var(--terracota-esc);border-color:var(--terracota-esc)}
+@media(min-width:769px){.botao{font-size:15px;padding:var(--s16) var(--s40)}}
 
-        .price {
-            font-size: 4.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            line-height: 1;
-            margin: 15px 0;
-            font-family: 'Playfair Display', serif;
-        }
+.botao-largo{display:block;text-align:center;width:100%}
 
-        .price span {
-            font-size: 2rem;
-            vertical-align: super;
-        }
-        
-        .offer-btn {
-            background-color: var(--secondary-color);
-            box-shadow: 0 10px 20px rgba(217, 138, 108, 0.4);
-            width: 100%;
-            max-width: 500px;
-        }
-        
-        .offer-btn:hover {
-            background-color: #C8795A;
-            box-shadow: 0 12px 25px rgba(217, 138, 108, 0.5);
-        }
+.link-sutil{
+  color:var(--grafite);
+  text-decoration:none;
+  border-bottom:1px solid var(--linha);
+  transition:border-color .15s ease-out;
+}
+.link-sutil:hover,.link-sutil:focus-visible{border-bottom-color:var(--terracota)}
 
-        /* SEÇÃO 5: Garantia e FAQ */
-        .faq-guarantee {
-            background-color: var(--white);
-        }
+.pendente{color:var(--nota);border-bottom:1px dashed var(--linha);font-size:.95em}
 
-        .guarantee-box {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            background: var(--bg-color);
-            padding: 40px;
-            border-radius: 20px;
-            margin-bottom: 80px;
-            border: 1px solid rgba(123, 160, 130, 0.2);
-        }
+:focus-visible{outline:2px solid var(--terracota-esc);outline-offset:3px;border-radius:4px}
 
-        .guarantee-icon {
-            flex-shrink: 0;
-            width: 100px;
-            height: 100px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+/* ---------------------------------------------------------------
+   IMAGENS E BLOCOS RESERVADOS
+   --------------------------------------------------------------- */
+.tela{
+  display:block;
+  width:100%;
+  height:auto;
+  border:var(--fio);
+  border-radius:var(--raio-img);
+  background:var(--linho);
+}
 
-        .guarantee-icon svg {
-            width: 50px;
-            height: 50px;
-            fill: var(--white);
-        }
+.reservado{
+  border:1px dashed var(--linha);
+  border-radius:var(--raio-cartao);
+  padding:var(--s40) var(--s32);
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:var(--s8);
+  background:transparent;
+}
+.reservado span{
+  font-size:12px;
+  line-height:1.2;
+  letter-spacing:-.033em;
+  text-transform:uppercase;
+  color:var(--nota);
+}
+.reservado p{font-size:14px;line-height:1.65;color:var(--nota);max-width:40ch}
 
-        .guarantee-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
+/* ---------------------------------------------------------------
+   BARRA SUPERIOR
+   --------------------------------------------------------------- */
+.barra-topo{
+  background:var(--neblina);
+  border-bottom:var(--fio);
+  min-height:var(--s40);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px var(--s24);
+}
+.barra-topo p{
+  font-size:12px;
+  line-height:1.35;
+  letter-spacing:-.033em;
+  text-transform:uppercase;
+  color:var(--grafite);
+  text-align:center;
+  max-width:none;
+}
 
-        .guarantee-content p {
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
+/* ---------------------------------------------------------------
+   1. HERO
+   --------------------------------------------------------------- */
+.hero{padding-top:var(--s64);padding-bottom:var(--s80)}
+@media(min-width:769px){.hero{padding-top:96px;padding-bottom:128px}}
 
-        .faq-section {
-            max-width: 800px;
-            margin: 0 auto 60px auto;
-        }
+.hero-texto{grid-column:1 / span 7}
+.hero-visual{grid-column:8 / span 5;align-self:center}
+@media(max-width:900px) and (min-width:769px){
+  .hero-texto{grid-column:1 / span 12}
+  .hero-visual{grid-column:1 / span 12}
+}
+@media(max-width:768px){.hero-texto,.hero-visual{grid-column:auto}}
 
-        .faq-section h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 40px;
-        }
+.hero .pre{
+  font-size:12px;
+  line-height:1.7;
+  letter-spacing:-.033em;
+  text-transform:uppercase;
+  color:var(--nota);
+  max-width:52ch;
+  margin-bottom:var(--s24);
+}
+.hero h1{margin-bottom:var(--s24)}
+.hero .sub{max-width:52ch}
+.hero .sub p{font-size:clamp(16px,2vw,20px);line-height:1.55}
+.hero .acao{margin-top:var(--s40)}
+.hero .sob-botao{margin-top:var(--s16);font-size:12px;line-height:1.6;letter-spacing:-.033em;text-transform:uppercase;color:var(--nota);max-width:none}
+.hero .credito{margin-top:var(--s32);padding-top:var(--s24);border-top:var(--fio);max-width:44ch;font-size:14px;color:var(--nota)}
 
-        .faq-item {
-            margin-bottom: 20px;
-            background: var(--bg-color);
-            border-radius: 12px;
-            padding: 25px;
-        }
+.colagem{display:flex;align-items:flex-start;justify-content:center;padding-top:var(--s8)}
+.colagem picture{display:block}
+.colagem img{display:block;width:100%;height:auto;border:var(--fio);border-radius:var(--raio-img)}
+.colagem .c1{flex:0 0 36%;transform:rotate(-2.6deg) translateY(26px);margin-right:-6%;z-index:1}
+.colagem .c2{flex:0 0 42%;transform:rotate(.6deg);z-index:3}
+.colagem .c3{flex:0 0 36%;transform:rotate(2.8deg) translateY(22px);margin-left:-6%;z-index:2}
+/* enquanto o hero fica empilhado, a colagem nao pode tomar a largura toda */
+@media(max-width:959px){
+  .colagem{max-width:460px;margin-inline:auto}
+}
+/* no mobile as telas crescem por sobreposicao, sem estourar a largura */
+@media(max-width:768px){
+  .colagem .c1{flex-basis:42%;margin-right:-16%}
+  .colagem .c2{flex-basis:48%}
+  .colagem .c3{flex-basis:42%;margin-left:-16%}
+}
 
-        .faq-item h4 {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--primary-dark);
-        }
+/* ---------------------------------------------------------------
+   2. ESPELHO
+   --------------------------------------------------------------- */
+.espelho h2{margin-bottom:var(--s64)}
+.anotacoes{display:flex;flex-direction:column;gap:var(--s24);max-width:860px}
+.anotacao{
+  background:transparent;
+  border:var(--fio);
+  border-radius:var(--raio-img);
+  padding:var(--s32) var(--s40);
+  max-width:min(100%,560px);
+}
+.anotacao p{font-size:clamp(19px,2.6vw,23px);line-height:1.45;max-width:32ch}
+/* recuos e larguras irregulares: parecem anotacoes soltas, nao lista */
+.anotacoes .a1{margin-left:0;max-width:min(100%,490px)}
+.anotacoes .a2{margin-left:6%;max-width:min(100%,560px)}
+.anotacoes .a3{margin-left:2%;max-width:min(100%,525px)}
+.anotacoes .a4{margin-left:11%;max-width:min(100%,450px)}
+.anotacoes .a5{margin-left:4%;max-width:min(100%,540px)}
+.anotacoes .a6{margin-left:9%;max-width:min(100%,500px)}
+@media(max-width:768px){
+  .anotacao{padding:var(--s24) var(--s32)}
+  .anotacoes .a2,.anotacoes .a4,.anotacoes .a6{margin-left:var(--s16)}
+  .anotacoes .a3,.anotacoes .a5{margin-left:var(--s8)}
+}
+.espelho .fecho{margin-top:var(--s64);max-width:60ch}
 
-        .faq-item p {
-            color: var(--text-light);
-        }
-        
-        .final-cta {
-            text-align: center;
-        }
+/* ---------------------------------------------------------------
+   3. A VIRADA
+   --------------------------------------------------------------- */
+.virada .corpo{max-width:58ch}
+@media(min-width:1000px){.virada .desloca{margin-left:6%}}
 
-        /* Footer */
-        footer {
-            background-color: var(--bg-color);
-            text-align: center;
-            padding: 30px 24px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            border-top: 1px solid #EAEAEA;
-        }
+.bloco-honesto{
+  background:var(--linho);
+  border:var(--fio);
+  border-radius:var(--raio-cartao);
+  padding:var(--s32);
+  margin-top:var(--s64);
+  max-width:660px;
+}
+@media(min-width:769px){.bloco-honesto{padding:var(--s40)}}
+.bloco-honesto p{max-width:52ch}
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero p {
-                font-size: 1.1rem;
-            }
-            .cause h2, .solution h2, .offer h2 {
-                font-size: 2.2rem;
-            }
-            .guarantee-box {
-                flex-direction: column;
-                text-align: center;
-            }
-            .price {
-                font-size: 3.5rem;
-            }
-            .btn-pulse {
-                font-size: 1rem;
-                padding: 18px 25px;
-            }
-        }
-    </style>
+.manifesto{margin-top:var(--s80);display:flex;justify-content:center}
+.manifesto div{max-width:min(100%,480px)}
+.manifesto p{max-width:none}
+.manifesto .risco{margin-bottom:var(--s24)}
+
+/* ---------------------------------------------------------------
+   4. COMO FUNCIONA
+   --------------------------------------------------------------- */
+.passos{display:flex;flex-direction:column;gap:var(--s72);margin-top:var(--s64)}
+@media(min-width:769px){.passos{gap:104px}}
+
+.passo{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s32);align-items:center}
+@media(max-width:768px){.passo{grid-template-columns:1fr;gap:var(--s32)}}
+
+.passo .texto{grid-column:1 / span 7}
+.passo .figura{grid-column:9 / span 4}
+.passo.invertido .texto{grid-column:6 / span 7}
+.passo.invertido .figura{grid-column:1 / span 4;grid-row:1}
+@media(max-width:768px){
+  .passo .texto,.passo .figura,
+  .passo.invertido .texto,.passo.invertido .figura{grid-column:auto;grid-row:auto}
+  .passo .figura{max-width:280px}
+}
+
+.passo .numero{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:48px;
+  line-height:1;
+  letter-spacing:-.02em;
+  color:var(--salvia);
+  display:block;
+  margin-bottom:var(--s16);
+}
+.passo h3{margin-bottom:var(--s16);max-width:22ch;font-size:clamp(22px,2.6vw,28px)}
+.passo p{max-width:48ch}
+.como .acao{margin-top:var(--s80)}
+
+/* ---------------------------------------------------------------
+   5. VIDEO
+   --------------------------------------------------------------- */
+.video-secao{text-align:center}
+.video-secao h2{margin:0 auto var(--s16);max-width:22ch}
+.video-secao .apoio{font-size:12px;letter-spacing:-.033em;text-transform:uppercase;color:var(--nota);margin:0 auto var(--s40);max-width:52ch}
+.moldura-video{
+  max-width:520px;
+  margin:0 auto;
+  border:var(--fio);
+  border-radius:var(--raio-cartao);
+  background:var(--linho);
+  padding:var(--s24);
+}
+@media(min-width:769px){.moldura-video{padding:var(--s40)}}
+.recorte-video{
+  width:100%;
+  max-width:340px;
+  margin:0 auto;
+  border-radius:var(--raio-img);
+  overflow:hidden;
+  background:var(--areia);
+  line-height:0;
+}
+.moldura-video video{display:block;width:100%;height:auto}
+
+/* ---------------------------------------------------------------
+   6. O QUE TEM DENTRO
+   Cartoes de verdade: fio de 1px, canto 24px, respiro de 32px.
+   --------------------------------------------------------------- */
+.dentro h2{margin-bottom:var(--s64)}
+.recursos{
+  list-style:none;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--s16);
+}
+@media(min-width:600px){.recursos{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.recursos{grid-template-columns:repeat(3,1fr)}}
+
+.recursos li{
+  border:var(--fio);
+  border-radius:var(--raio-card);
+  padding:var(--s32);
+  background:var(--linho);
+  display:flex;
+  flex-direction:column;
+  gap:var(--s16);
+}
+.recursos .icone{color:var(--salvia);display:block}
+.recursos .icone svg{display:block;width:24px;height:24px}
+.recursos b{
+  display:block;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:22px;
+  line-height:1.2;
+  letter-spacing:-.02em;
+  color:var(--tinta);
+  margin-bottom:var(--s8);
+}
+.recursos span.desc{display:block;font-size:15px;line-height:1.6;letter-spacing:-.02em;color:var(--grafite)}
+
+/* ---------------------------------------------------------------
+   7. AS QUATRO FASES
+   --------------------------------------------------------------- */
+.fases-topo{grid-column:1 / span 7}
+@media(max-width:768px){.fases-topo{grid-column:auto}}
+.fases-topo h2{margin-bottom:var(--s24)}
+.fases-topo p{max-width:52ch}
+
+.fases{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--s16);
+  margin-top:var(--s64);
+}
+@media(min-width:640px){.fases{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.fases{grid-template-columns:repeat(4,1fr)}}
+
+.fase{
+  border:var(--fio);
+  border-radius:var(--raio-card);
+  padding:var(--s24);
+  background:var(--linho);
+}
+@media(min-width:640px) and (max-width:999px){.fase{padding:var(--s32)}}
+.fase .forma{display:block;width:64px;height:64px;margin-bottom:var(--s24)}
+.fase .nome{
+  font-size:12px;
+  letter-spacing:-.033em;
+  text-transform:uppercase;
+  color:var(--nota);
+  font-weight:500;
+  display:block;
+  margin-bottom:var(--s8);
+}
+.fase .sub{
+  font-family:var(--serif);
+  font-size:19px;
+  line-height:1.2;
+  letter-spacing:-.02em;
+  color:var(--tinta);
+  display:block;
+  margin-bottom:var(--s16);
+}
+.fase p{font-size:14px;line-height:1.6;letter-spacing:-.02em;max-width:30ch}
+.fases-nota{margin-top:var(--s32)}
+
+/* ---------------------------------------------------------------
+   8. PERSONALIZACAO
+   --------------------------------------------------------------- */
+.temas .texto{grid-column:1 / span 6}
+.temas .visual{grid-column:8 / span 5}
+@media(max-width:768px){.temas .texto,.temas .visual{grid-column:auto}}
+.temas h2{margin-bottom:var(--s24)}
+
+/* ---------------------------------------------------------------
+   9. POR QUE E DIFERENTE
+   --------------------------------------------------------------- */
+.diferente h2{margin-bottom:var(--s24)}
+.diferente .intro{margin-bottom:48px;max-width:56ch}
+
+.comparativo{width:100%;border-collapse:collapse;text-align:left}
+.comparativo th{
+  font-family:var(--mono);
+  font-weight:500;
+  font-size:12px;
+  letter-spacing:-.033em;
+  text-transform:uppercase;
+  color:var(--nota);
+  padding:0 var(--s24) var(--s16) 0;
+  border-bottom:var(--fio);
+  vertical-align:bottom;
+  width:50%;
+}
+.comparativo th:last-child{padding-right:0;padding-left:var(--s24);color:var(--terracota-esc)}
+.comparativo td{
+  padding:var(--s24) var(--s24) var(--s24) 0;
+  border-bottom:var(--fio);
+  vertical-align:top;
+  font-size:15px;
+  line-height:1.6;
+  letter-spacing:-.02em;
+  width:50%;
+}
+.comparativo td:last-child{padding-right:0;padding-left:var(--s24);color:var(--tinta);border-left:var(--fio)}
+.comparativo td::before{display:none}
+
+@media(max-width:700px){
+  .comparativo,.comparativo tbody,.comparativo tr,.comparativo td{display:block;width:100%}
+  .comparativo thead{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);border:0}
+  .comparativo tr{border-bottom:var(--fio);padding:var(--s24) 0}
+  .comparativo tr:first-child{border-top:var(--fio)}
+  .comparativo td{border:0;padding:0}
+  .comparativo td:last-child{border-left:0;padding-left:0;margin-top:var(--s16)}
+  .comparativo td::before{
+    display:block;
+    content:attr(data-rot);
+    font-size:12px;
+    letter-spacing:-.033em;
+    text-transform:uppercase;
+    color:var(--nota);
+    margin-bottom:6px;
+  }
+  .comparativo td:last-child::before{color:var(--terracota-esc)}
+}
+
+/* ---------------------------------------------------------------
+   10. DE ONDE NASCEU
+   --------------------------------------------------------------- */
+.origem .texto{grid-column:1 / span 7}
+.origem .provas{grid-column:9 / span 4;align-self:start}
+@media(max-width:768px){.origem .texto,.origem .provas{grid-column:auto}}
+.origem h2{margin-bottom:var(--s32)}
+.origem .provas{display:flex;flex-direction:column;gap:var(--s24)}
+.origem .provas figure{max-width:215px}
+@media(min-width:769px){
+  .origem .provas{padding-top:76px}
+  .origem .provas figure:last-child{margin-left:14%}
+}
+@media(max-width:768px){
+  .origem .provas{flex-direction:row;gap:var(--s16)}
+  .origem .provas figure{flex:1 1 0}
+}
+.origem figcaption{margin-top:10px;font-size:13px;line-height:1.5;letter-spacing:-.02em;color:var(--nota)}
+
+/* a unica superficie colorida do sistema */
+.faixa-fundadora{
+  background:var(--salvia-clara);
+  margin-top:var(--s80);
+  padding:var(--s32);
+  border-radius:var(--raio-cartao);
+}
+@media(min-width:769px){.faixa-fundadora{padding:var(--s40)}}
+.faixa-fundadora p{color:var(--tinta);max-width:62ch}
+
+/* ---------------------------------------------------------------
+   11. OFERTA
+   --------------------------------------------------------------- */
+.oferta h2{margin:0 auto var(--s40);max-width:20ch;text-align:center}
+.cartao{
+  max-width:480px;
+  margin:0 auto;
+  background:var(--linho);
+  border:1px solid var(--terracota);
+  border-radius:var(--raio-cartao);
+  padding:var(--s32);
+}
+@media(min-width:769px){.cartao{padding:var(--s40)}}
+.cartao .selo{
+  font-size:12px;
+  letter-spacing:-.033em;
+  text-transform:uppercase;
+  color:var(--terracota-esc);
+  font-weight:500;
+  display:block;
+  margin-bottom:var(--s24);
+}
+.cartao .antigo{font-size:15px;color:var(--nota);text-decoration:line-through;display:block}
+.cartao .preco{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(48px,11vw,64px);
+  line-height:1.05;
+  letter-spacing:-.03em;
+  color:var(--tinta);
+  margin:2px 0;
+}
+.cartao .parcela{font-size:15px;color:var(--grafite)}
+.cartao .condicao{margin-top:var(--s24);padding-bottom:var(--s24);border-bottom:var(--fio);color:var(--tinta)}
+.cartao .recebe{margin-top:var(--s24);font-size:12px;letter-spacing:-.033em;text-transform:uppercase;color:var(--nota)}
+
+.lista-marcada{list-style:none;margin-top:var(--s16)}
+.lista-marcada li{
+  position:relative;
+  padding-left:26px;
+  font-size:15px;
+  line-height:1.55;
+  letter-spacing:-.02em;
+  margin-top:10px;
+}
+.lista-marcada li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.5em;
+  width:14px;
+  height:14px;
+  background-repeat:no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M9 2.1A5.6 5.6 0 1 0 9 11.9 6.6 6.6 0 0 1 9 2.1Z' fill='%238E9A87'/%3E%3C/svg%3E");
+}
+.cartao .acao{margin-top:var(--s32)}
+.cartao .imediato{margin-top:var(--s16);font-size:12px;letter-spacing:-.033em;text-transform:uppercase;color:var(--nota);text-align:center}
+
+.ancoragem{margin:var(--s64) auto 0;display:flex;justify-content:center}
+.ancoragem div{max-width:min(100%,470px)}
+.ancoragem p{max-width:none}
+.ancoragem p + p{margin-top:1.1em}
+
+/* ---------------------------------------------------------------
+   12. GARANTIA
+   --------------------------------------------------------------- */
+.garantia h2{margin-bottom:var(--s24)}
+@media(min-width:1000px){.garantia .interno{margin-left:8%}}
+
+/* ---------------------------------------------------------------
+   13. FAQ
+   Pergunta na serifada, fio inferior de 1px, sem preenchimento.
+   --------------------------------------------------------------- */
+.faq h2{margin-bottom:var(--s40)}
+.faq details{border-bottom:var(--fio)}
+.faq details:first-of-type{border-top:var(--fio)}
+.faq summary{
+  list-style:none;
+  cursor:pointer;
+  padding:var(--s24) var(--s40) var(--s24) 0;
+  position:relative;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(19px,2.4vw,24px);
+  line-height:1.25;
+  letter-spacing:-.02em;
+  color:var(--tinta);
+}
+@media(min-width:769px){.faq summary{padding-top:var(--s32);padding-bottom:var(--s32)}}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";
+  position:absolute;
+  right:2px;
+  top:calc(var(--s24) + .35em);
+  width:20px;
+  height:20px;
+  background-repeat:no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M4 7.5l6 5.5 6-5.5' fill='none' stroke='%232C2622' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  transition:transform .15s ease-out;
+}
+@media(min-width:769px){.faq summary::after{top:calc(var(--s32) + .35em)}}
+.faq details[open] summary::after{transform:rotate(180deg)}
+.faq .resposta{padding:0 0 var(--s32)}
+.faq .resposta p{max-width:58ch;font-size:15px;line-height:1.7}
+
+/* ---------------------------------------------------------------
+   14. CARTA
+   --------------------------------------------------------------- */
+.carta .retrato{grid-column:1 / span 4}
+.carta .texto{grid-column:6 / span 7}
+@media(max-width:768px){.carta .retrato,.carta .texto{grid-column:auto}}
+.carta h2{margin-bottom:var(--s32)}
+.carta .texto p{max-width:52ch}
+
+/* ---------------------------------------------------------------
+   15. CTA FINAL
+   --------------------------------------------------------------- */
+.final h2{margin-bottom:var(--s24);max-width:24ch}
+.final .acao{margin-top:var(--s40)}
+
+/* ---------------------------------------------------------------
+   RODAPE
+   --------------------------------------------------------------- */
+.rodape{background:var(--neblina);border-top:var(--fio);padding:var(--s64) 0 var(--s40)}
+.rodape p{font-size:12px;line-height:1.7;letter-spacing:-.033em;text-transform:uppercase;color:var(--nota);max-width:70ch}
+.rodape .links{margin-top:var(--s8)}
+.rodape .aviso{
+  margin-top:var(--s24);
+  padding-top:var(--s24);
+  border-top:var(--fio);
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:14px;
+  letter-spacing:-.01em;
+  text-transform:none;
+  max-width:66ch;
+}
+@media(max-width:768px){.rodape{padding-bottom:104px}}
+
+/* ---------------------------------------------------------------
+   BARRA FIXA (SO MOBILE)
+   --------------------------------------------------------------- */
+.barra-fixa{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  z-index:50;
+  background:var(--linho);
+  border-top:1px solid var(--linha);
+  padding:12px var(--s16) calc(12px + env(safe-area-inset-bottom,0px));
+  transform:translateY(110%);
+  transition:transform .25s ease-out;
+}
+.barra-fixa.visivel{transform:none}
+.barra-fixa .botao{font-size:13px;padding:var(--s16) var(--s24)}
+@media(min-width:769px){.barra-fixa{display:none}}
+
+/* ---------------------------------------------------------------
+   MOVIMENTO
+   --------------------------------------------------------------- */
+.revelar{opacity:0;transform:translateY(8px)}
+.revelar.aparece{opacity:1;transform:none;transition:opacity .5s ease-out,transform .5s ease-out}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .revelar{opacity:1;transform:none}
+  .barra-fixa{transition:none}
+}
+</style>
 </head>
+
 <body>
 
-    <!-- SEÇÃO 1: A DOBRA PRINCIPAL (Hero Section) -->
-    <header class="hero">
-        <div class="container">
-            <h1>Pare de lutar contra o seu corpo. Organize sua mente respeitando a sua <span class="text-highlight">biologia.</span></h1>
-            <p>Descubra o sistema inteligente guiado por IA que exige <strong>apenas 10 minutos diários</strong> para acabar com a sobrecarga, a culpa e a procrastinação.</p>
-            <a href="https://pay.kiwify.com.br/NXZ0sjz" class="btn">Quero acessar meu plano personalizado - R$ 27</a>
+<!-- ============================ 0. BARRA SUPERIOR ============================ -->
+<header class="barra-topo">
+  <p>Acesso vitalício · Pagamento único · Sem mensalidade</p>
+</header>
+
+<main>
+
+<!-- ============================ 1. HERO ============================ -->
+<section class="hero fundo-areia" aria-labelledby="titulo-principal">
+  <div class="envelope grade">
+
+    <div class="hero-texto">
+      <p class="pre">Para a mulher que já tentou planner, aplicativo, Notion, lista e rotina matinal. E continua recomeçando.</p>
+
+      <h1 id="titulo-principal">Entenda como você funciona. E finalmente aja a partir disso.</h1>
+
+      <div class="sub">
+        <p>Um app de organização pessoal com inteligência artificial, feito para a mulher. Ele conhece a sua vida, entende o seu ciclo, observa a sua energia e monta o plano do seu dia.</p>
+        <p>Chega de brigar com a sua natureza cíclica. Chega de abandonar tudo pelo caminho.</p>
+      </div>
+
+      <div class="acao">
+        <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero minha rotina personalizada. Acesso vitalício por 37 reais, pagamento único.">Quero minha rotina personalizada</a>
+        <p class="sob-botao">Acesso vitalício por R$ 37 · Pagamento único · 30 dias de garantia</p>
+      </div>
+
+      <p class="credito">Criado por uma terapeuta, criadora do método TEPM.</p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="colagem">
+        <picture class="c1">
+          <source srcset="assets/check-in-diario.webp" type="image/webp">
+          <img src="assets/check-in-diario.jpg" width="590" height="1280" decoding="async" alt="Tela de check-in diário do app, com escolha de fase, nível de energia e foco do dia.">
+        </picture>
+        <picture class="c2">
+          <source srcset="assets/painel-do-dia.webp" type="image/webp">
+          <img src="assets/painel-do-dia.jpg" width="590" height="1280" fetchpriority="high" decoding="async" alt="Painel do app mostrando o dia atual, a fase da usuária e os atalhos para as quatro fases, os 28 dias, o relatório e o planner.">
+        </picture>
+        <picture class="c3">
+          <source srcset="assets/plano-do-dia.webp" type="image/webp">
+          <img src="assets/plano-do-dia.jpg" width="590" height="1280" decoding="async" alt="Plano do dia montado pelo app, dividido em manhã e tarde, com horário e duração de cada tarefa.">
+        </picture>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ 2. ESPELHO ============================ -->
+<section class="espelho fundo-neblina r128" aria-labelledby="t-espelho">
+  <div class="envelope">
+    <h2 id="t-espelho" class="revelar">Você já viveu isso quantas vezes?</h2>
+
+    <div class="anotacoes">
+      <blockquote class="anotacao a1"><p class="destaque">&#8220;Eu começo tudo animada e não termino nada.&#8221;</p></blockquote>
+      <blockquote class="anotacao a2"><p class="destaque">&#8220;Tem dias em que eu dou conta de tudo. E dias em que eu não consigo nada.&#8221;</p></blockquote>
+      <blockquote class="anotacao a3"><p class="destaque">&#8220;Eu sei exatamente o que preciso fazer. E mesmo assim não faço.&#8221;</p></blockquote>
+      <blockquote class="anotacao a4"><p class="destaque">&#8220;Cuido de todo mundo e me deixo por último.&#8221;</p></blockquote>
+      <blockquote class="anotacao a5"><p class="destaque">&#8220;Já tentei planner, aplicativo, lista, tudo. Nada dura.&#8221;</p></blockquote>
+      <blockquote class="anotacao a6"><p class="destaque">&#8220;Estou cansada de começar de novo toda segunda-feira.&#8221;</p></blockquote>
+    </div>
+
+    <div class="fecho">
+      <p>Não é falta de vontade. Não é falta de disciplina.</p>
+      <p>É que todo método que você tentou foi construído para alguém que funciona igual todos os dias. <strong>E você não funciona assim. Nenhuma mulher funciona.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 3. A VIRADA ============================ -->
+<section class="virada fundo-areia r160" aria-labelledby="t-virada">
+  <div class="envelope">
+    <div class="desloca">
+      <h2 id="t-virada" class="revelar">Sua energia muda ao longo do mês. Seu plano nunca mudou junto.</h2>
+
+      <div class="corpo" style="margin-top:32px">
+        <p>Tem semanas em que você resolve tudo, decide rápido, começa projeto novo e ainda sobra disposição.</p>
+        <p>Tem semanas em que a mesma lista parece impossível, você se irrita com pouco e não consegue se concentrar em nada.</p>
+        <p>Você já reparou nisso. E provavelmente já concluiu que o problema é você.</p>
+        <p>Não é. Isso tem nome, tem lógica e tem padrão. E, principalmente: <strong>dá para planejar em cima disso.</strong></p>
+      </div>
+
+      <div class="bloco-honesto">
+        <p>Mas aqui eu preciso ser honesta com você.</p>
+        <p>Entender o seu ciclo não é licença para não fazer nada. O objetivo não é trocar <em>&#8220;eu sou indisciplinada&#8221;</em> por <em>&#8220;hoje não dá, estou nessa fase&#8221;</em>.</p>
+        <p>Seguir a sua natureza cíclica é usar a sua energia a favor do que você quer. Não é se esconder atrás dela.</p>
+      </div>
+
+      <div class="manifesto">
+        <div>
+          <hr class="risco">
+          <p class="destaque">Consciência sem ação não muda a vida.<br>
+          Ação sem consciência gera exaustão.<br>
+          <strong style="font-weight:400;color:var(--tinta)">Você precisa das duas. É isso que este app faz.</strong></p>
         </div>
-    </header>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- SEÇÃO 2: A CAUSA (Quebra de Padrão e Conexão) -->
-    <section class="cause section-padding">
-        <div class="container">
-            <h2>Por que os métodos tradicionais <span class="text-highlight">nunca funcionam</span> para você?</h2>
-            
-            <div class="content-box">
-                <p>Você já comprou planners caros, baixou dezenas de aplicativos de produtividade e tentou seguir rotinas rígidas e milagrosas. E, em poucos dias, acabou desistindo. <strong>A culpa não é sua.</strong></p>
-                
-                <p>O mundo corporativo e as ferramentas de produtividade foram criados para o ciclo hormonal masculino, que se renova a cada 24 horas. Eles acordam biologicamente iguais todos os dias. Você não.</p>
-                
-                <p>Forçar uma rotina linear em um corpo feminino — que vive uma <strong>jornada cíclica de 28 dias</strong> — é a receita perfeita para a exaustão, a culpa e a procrastinação constante.</p>
-                
-                <p>É hora de tirar esse peso das suas costas. O seu corpo não está errado; o método que você estava usando sim.</p>
-            </div>
+<!-- ============================ 4. COMO FUNCIONA ============================ -->
+<section class="como fundo-areia r128" aria-labelledby="t-como" style="padding-top:0">
+  <div class="envelope">
+    <h2 id="t-como" class="revelar">Como funciona, na prática</h2>
+
+    <div class="passos">
+
+      <article class="passo">
+        <div class="texto">
+          <span class="numero" aria-hidden="true">01</span>
+          <h3>A IA conhece a sua vida em uma conversa</h3>
+          <p>Nada de formulário. A inteligência artificial conversa com você e mapeia trabalho, casa, família, fé, corpo, projetos, hábitos e o que você vem adiando. Também registra o seu ciclo a partir do que você informa, sem depender de fórmula fixa.</p>
         </div>
-    </section>
+        <figure class="figura">
+          <picture>
+            <source srcset="assets/entrevista-ia.webp" type="image/webp">
+            <img class="tela" src="assets/entrevista-ia.jpg" width="384" height="796" loading="lazy" decoding="async" alt="Tela de boas-vindas da entrevista: a inteligência artificial se apresenta e explica que vai mapear as seis áreas da vida e depois o ciclo biológico.">
+          </picture>
+        </figure>
+      </article>
 
-    <!-- SEÇÃO 3: A SOLUÇÃO (Como o sistema funciona - 4 Passos) -->
-    <section class="solution section-padding">
-        <div class="container">
-            <h2>Como o Desafio 28 Dias funciona?</h2>
-            
-            <div class="steps-grid">
-                <!-- Passo 1 -->
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>A Entrevista Inicial</h3>
-                    <p>Nossa Inteligência Artificial mapeia sua rotina atual, seus horários e seus principais bloqueios emocionais de forma acolhedora, criando a base do seu plano.</p>
-                </div>
-                
-                <!-- Passo 2 -->
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>A Matriz de Prioridades</h3>
-                    <p>O sistema descarta o que é inútil e organiza sua vida em 4 quadrantes: Prioridade, Planejamento, Delegação e Descarte. Fim da sobrecarga mental.</p>
-                </div>
-                
-                <!-- Passo 3 -->
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>A Trava de Ação Diária</h3>
-                    <p>Sem ansiedade com listas infinitas. Um único exercício prático, guiado pela neuroplasticidade, é liberado por dia (às 06:00 da manhã), exigindo apenas 10 minutos.</p>
-                </div>
-                
-                <!-- Passo 4 -->
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3>O Relatório Final</h3>
-                    <p>No 28º dia, você recebe um mapeamento profundo dos seus padrões comportamentais e um Planner Cíclico exclusivo para usar por toda a vida.</p>
-                </div>
-            </div>
-            
-            <div class="cta-container">
-                <a href="https://pay.kiwify.com.br/NXZ0sjz" class="btn">Quero respeitar minha biologia e agir (R$ 27)</a>
-            </div>
+      <article class="passo invertido">
+        <div class="texto">
+          <span class="numero" aria-hidden="true">02</span>
+          <h3>Ela monta o seu plano cruzando tudo</h3>
+          <p>Sua vida, seus objetivos, suas responsabilidades, a fase em que você está e a sua energia de hoje. Desse cruzamento sai o que fazer, quando fazer, o que delegar, o que adiar e o que parar de fazer.</p>
         </div>
-    </section>
+        <figure class="figura">
+          <picture>
+            <source srcset="assets/plano-do-dia.webp" type="image/webp">
+            <img class="tela" src="assets/plano-do-dia.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Plano do dia montado pelo app, separado em manhã e tarde, com horário, duração e marcação do que é inegociável.">
+          </picture>
+        </figure>
+      </article>
 
-    <!-- SEÇÃO 4: ANCORAGEM DE PREÇO (A Oferta Irresistível) -->
-    <section class="offer section-padding">
-        <div class="container">
-            <h2>A Oferta Irresistível</h2>
-            
-            <div class="price-box">
-                <p>Mapear sua rotina, entender sua inteligência emocional e alinhar seus ciclos com um profissional custaria facilmente mais de <strong>R$ 900,00</strong>.</p>
-                
-                <p>Mas hoje, você terá acesso vitalício a todo este ecossistema por um valor simbólico.</p>
-                
-                <div class="strike">De R$ 97,00</div>
-                <div class="price"><span>R$</span>27</div>
-                <p>Um pagamento único. O preço de um café na padaria para transformar sua rotina para sempre.</p>
-                
-                <a href="https://pay.kiwify.com.br/NXZ0sjz" class="btn btn-pulse offer-btn">QUERO MEU PLANO DE 28 DIAS AGORA</a>
-            </div>
+      <article class="passo">
+        <div class="texto">
+          <span class="numero" aria-hidden="true">03</span>
+          <h3>Você abre o app e já sabe o que fazer hoje</h3>
+          <p>Sem lista de 25 tarefas. Uma prioridade, uma ação de 10 minutos, o essencial do dia, o que pode esperar e o seu autocuidado.</p>
         </div>
-    </section>
+        <figure class="figura">
+          <picture>
+            <source srcset="assets/painel-do-dia.webp" type="image/webp">
+            <img class="tela" src="assets/painel-do-dia.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Painel do dia com a fase atual, o progresso dos 28 dias e a prioridade aberta logo no topo.">
+          </picture>
+        </figure>
+      </article>
 
-    <!-- SEÇÃO 5: GARANTIA E FAQ -->
-    <section class="faq-guarantee section-padding">
-        <div class="container">
-            
-            <!-- Garantia -->
-            <div class="guarantee-box">
-                <div class="guarantee-icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-                    </svg>
-                </div>
-                <div class="guarantee-content">
-                    <h3>Garantia Incondicional de 7 Dias</h3>
-                    <p><strong>Risco Zero.</strong> Se você entrar no desafio, testar a Inteligência Artificial e achar que não se adapta à sua realidade, basta mandar um e-mail. Eu devolvo 100% do seu dinheiro, sem letras miúdas e sem ressentimentos.</p>
-                </div>
-            </div>
-
-            <!-- FAQ -->
-            <div class="faq-section">
-                <h2>Perguntas Frequentes</h2>
-                
-                <div class="faq-item">
-                    <h4>Serve para quem não menstrua (menopausa, uso de anticoncepcional contínuo, etc.)?</h4>
-                    <p>Sim, com certeza. O comportamento feminino segue um modelo arquetípico e biológico de 28 dias (dividido em fases Reflexiva, Dinâmica, Expressiva e Criativa) independentemente do sangramento. O método integrativo funciona para a sua biologia.</p>
-                </div>
-                
-                <div class="faq-item">
-                    <h4>O desafio toma muito tempo?</h4>
-                    <p>Não. Ele foi desenhado especificamente para mulheres sobrecarregadas e exaustas. Você precisará de <strong>apenas 10 minutos por dia</strong> para realizar a prática diária e construir novos caminhos neurais.</p>
-                </div>
-                
-                <div class="faq-item">
-                    <h4>Como recebo o acesso?</h4>
-                    <p>Imediatamente por e-mail após a confirmação do pagamento. Você já poderá iniciar a sua entrevista com a IA e dar o primeiro passo hoje mesmo.</p>
-                </div>
-            </div>
-
-            <div class="final-cta">
-                <a href="https://pay.kiwify.com.br/NXZ0sjz" class="btn">Garantir minha vaga por R$ 27</a>
-            </div>
-
+      <article class="passo invertido">
+        <div class="texto">
+          <span class="numero" aria-hidden="true">04</span>
+          <h3>O plano aprende com você e se ajusta</h3>
+          <p>Você faz um check-in rápido por dia. A IA percebe seus padrões, entende quando você rende mais e recalibra o plano. Ele não engessa na primeira semana como todos os outros.</p>
         </div>
-    </section>
+        <figure class="figura">
+          <picture>
+            <source srcset="assets/check-in-diario.webp" type="image/webp">
+            <img class="tela" src="assets/check-in-diario.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Check-in do dia com seleção de fase, nível de energia de um a cinco, foco e presença, e um campo aberto sobre o que o corpo diz hoje.">
+          </picture>
+        </figure>
+      </article>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Desafio 28 Dias. Todos os direitos reservados.</p>
-            <p>Este site não faz parte do site do Facebook ou Facebook Inc. Além disso, este site NÃO é endossado pelo Facebook de nenhuma maneira.</p>
-        </div>
-    </footer>
+    </div>
+
+    <div class="acao">
+      <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero começar agora. Acesso vitalício por 37 reais.">Quero começar agora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 5. VÍDEO ============================ -->
+<section class="video-secao fundo-neblina r96" aria-labelledby="t-video">
+  <div class="envelope">
+    <h2 id="t-video" class="revelar">Veja o app por dentro</h2>
+    <p class="apoio">Menos de 1 minuto. Sem narração de vendas, só as telas.</p>
+
+    <div class="moldura-video">
+      <div class="recorte-video">
+      <video
+        controls
+        preload="metadata"
+        playsinline
+        muted
+        poster="assets/video-app-poster.jpg"
+        width="576" height="1194"
+        aria-label="Vídeo silencioso mostrando o app por dentro: a entrevista inicial com a inteligência artificial, o mapeamento da vida e do ciclo, e depois o painel do dia, o check-in, a matriz de prioridades e o relatório de padrões.">
+        <source src="assets/video-app.mp4" type="video/mp4">
+        <p>Seu navegador não reproduz este vídeo. <a class="link-sutil" href="assets/video-app.mp4">Abrir o arquivo do vídeo</a>.</p>
+      </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 6. O QUE TEM DENTRO ============================ -->
+<section class="dentro fundo-areia r160" aria-labelledby="t-dentro">
+  <div class="envelope">
+    <h2 id="t-dentro" class="revelar">Tudo o que você precisa organizar, em um só lugar</h2>
+
+    <ul class="recursos">
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 13.4A9 9 0 1 1 18.7 6.4"/><path d="M18.3 2.4l.6 4.3-4.3.6"/></svg></span>
+        <span><b>Rotina cíclica personalizada</b><span class="desc">construída a partir da sua vida, não de um modelo pronto</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="4.5" width="17.6" height="15" rx="2.4"/><path d="M3.2 9.2h17.6M7.4 13.2h9.2M7.4 16.2h5.6"/></svg></span>
+        <span><b>Painel do dia</b><span class="desc">fase, energia, foco, prioridade e sua ação de 10 minutos</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6.4" r="1.9"/><circle cx="5" cy="12" r="1.9"/><circle cx="5" cy="17.6" r="1.9"/><path d="M10 6.4h9M10 12h9M10 17.6h5.4"/></svg></span>
+        <span><b>Hábitos</b><span class="desc">acompanhamento simples, sem culpa por dia perdido</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.6 21.4V3.2"/><path d="M5.6 4.4h12.8l-2.6 4 2.6 4H5.6"/></svg></span>
+        <span><b>Metas e projetos</b><span class="desc">divididos em etapas que cabem na sua semana</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.9l7.4 3v6c0 4.6-3.1 8-7.4 9.6C7.7 19.9 4.6 16.5 4.6 11.9v-6l7.4-3Z"/><path d="M9.2 12.1l2 2 3.6-3.9"/></svg></span>
+        <span><b>Tarefas fixas</b><span class="desc">o que é inegociável na sua vida continua protegido</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.4" y="5.2" width="17.2" height="15.4" rx="2.4"/><path d="M3.4 10h17.2M8 2.9v4.2M16 2.9v4.2"/><circle cx="12" cy="15.2" r="2.1"/></svg></span>
+        <span><b>Check-in diário</b><span class="desc">energia, humor, disposição, sintomas e foco</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.3C12 7.3 9.4 4.9 4.6 4.9v13.2c4.8 0 7.4 2.4 7.4 2.4s2.6-2.4 7.4-2.4V4.9c-4.8 0-7.4 2.4-7.4 2.4Z"/><path d="M12 7.3v13.2"/></svg></span>
+        <span><b>Diário adaptativo</b><span class="desc">as perguntas mudam conforme o que você registra</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2 5.9 5.9 0 0 0 0-17.2Z" fill="currentColor" stroke="none"/></svg></span>
+        <span><b>Mapa do ciclo</b><span class="desc">funciona mesmo com ciclo irregular</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8l8 4.6v9.2l-8 4.6-8-4.6V7.4l8-4.6Z"/><path d="M12 2.8v18.4M4 7.4l16 9.2M20 7.4l-16 9.2"/></svg></span>
+        <span><b>Seis áreas da vida</b><span class="desc">pessoal, profissional, família, espiritual, saúde e autocuidado</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3.4v17.2h16"/><path d="M7.2 16.4l3.6-4.8 3.1 2.6 5.1-6.6"/></svg></span>
+        <span><b>Relatório de padrões</b><span class="desc">o que se repete em você, e o que funciona</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.2 9.8a6.2 6.2 0 1 0-12.4 0c0 5.6-2.1 7.2-2.1 7.2h16.6s-2.1-1.6-2.1-7.2Z"/><path d="M10.1 20.4a2.2 2.2 0 0 0 3.8 0"/></svg></span>
+        <span><b>Notificações inteligentes</b><span class="desc">no horário em que você realmente rende</span></span>
+      </li>
+
+      <li>
+        <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4.4" width="13" height="9.8" rx="1.8"/><path d="M6.4 18.6h5.4M9.1 14.2v4.4"/><rect x="16.8" y="9.4" width="4.8" height="10.8" rx="1.5"/></svg></span>
+        <span><b>Acesso em qualquer lugar</b><span class="desc">celular, computador e navegador</span></span>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ 7. AS QUATRO FASES ============================ -->
+<section class="quatro fundo-neblina r128" aria-labelledby="t-fases">
+  <div class="envelope">
+    <div class="grade">
+      <div class="fases-topo">
+        <h2 id="t-fases" class="revelar">Quatro fases. Quatro formas diferentes de agir.</h2>
+        <p>Não são quatro caixinhas iguais em que toda mulher se encaixa. São lentes de planejamento, ajustadas pelo que você mesma registra.</p>
+      </div>
+    </div>
+
+    <div class="fases">
+
+      <article class="fase">
+        <svg class="forma" viewBox="0 0 100 100" aria-hidden="true"><path d="M1.7 63.7C-1.9 55.4 7.7 37.2 15.3 27.4C22.8 17.6 37.5 5.5 47.0 5.0C56.4 4.5 64.4 15.0 72.1 24.3C79.8 33.6 93.9 48.2 93.1 60.7C92.4 73.2 76.9 96.5 67.5 99.2C58.2 101.9 48.1 82.7 37.2 76.8C26.2 70.9 5.4 71.9 1.7 63.7Z" fill="#C08466"/></svg>
+        <span class="nome">Dinâmica</span>
+        <span class="sub">Expansão e execução</span>
+        <p>Começar projetos, decidir, criar, encarar o que exige mais da sua cabeça.</p>
+      </article>
+
+      <article class="fase">
+        <svg class="forma" viewBox="0 0 100 100" aria-hidden="true"><path d="M81.0 60.0C76.6 72.2 68.7 92.7 60.0 94.6C51.4 96.6 38.6 80.4 29.2 71.4C19.8 62.4 1.3 50.3 3.6 40.7C5.8 31.1 28.9 17.3 42.7 14.0C56.5 10.8 79.9 13.6 86.3 21.3C92.7 28.9 85.4 47.7 81.0 60.0Z" fill="#D9B8A5"/></svg>
+        <span class="nome">Expressiva</span>
+        <span class="sub">Comunicação e conexão</span>
+        <p>Reuniões, vendas, apresentações, conversas importantes, vida social.</p>
+      </article>
+
+      <article class="fase">
+        <svg class="forma" viewBox="0 0 100 100" aria-hidden="true"><path d="M58.5 14.3C66.5 15.3 78.5 19.1 82.3 27.0C86.1 34.8 83.0 51.3 81.2 61.6C79.4 71.8 79.2 85.1 71.4 88.4C63.7 91.7 45.1 84.6 34.6 81.5C24.2 78.5 11.3 76.7 8.7 70.1C6.1 63.5 14.6 50.1 18.9 41.9C23.2 33.7 28.0 25.4 34.6 20.8C41.2 16.2 50.6 13.3 58.5 14.3Z" fill="#A9AF9C"/></svg>
+        <span class="nome">Criativa</span>
+        <span class="sub">Avaliação e organização</span>
+        <p>Revisar, organizar, fechar ciclos, ajustar o que não está funcionando.</p>
+      </article>
+
+      <article class="fase">
+        <svg class="forma" viewBox="0 0 100 100" aria-hidden="true"><path d="M18.9 11.4C26.6 1.7 53.3 1.7 66.7 5.6C80.1 9.6 99.0 23.7 99.2 35.1C99.5 46.5 77.6 64.4 68.3 73.8C59.0 83.1 51.5 92.8 43.6 91.1C35.6 89.4 24.6 77.0 20.5 63.7C16.4 50.5 11.2 21.1 18.9 11.4Z" fill="#8E9A87"/></svg>
+        <span class="nome">Reflexiva</span>
+        <span class="sub">Recolhimento e recuperação</span>
+        <p>Descanso, autocuidado, oração, reflexão, atividades de menor demanda.</p>
+      </article>
+
+    </div>
+
+    <p class="legenda fases-nota">Tendências, não regras. Seu corpo não é uma tabela, e o app trabalha com os seus registros reais.</p>
+  </div>
+</section>
+
+<!-- ============================ 8. PERSONALIZAÇÃO ============================ -->
+<section class="temas fundo-neblina r96" aria-labelledby="t-temas" style="padding-top:0">
+  <div class="envelope grade">
+    <div class="texto">
+      <h2 id="t-temas" class="revelar">Do seu jeito, inclusive na aparência</h2>
+      <p>Temas claros e escuros, em paleta suave. Porque abrir um app que você acha bonito também é um motivo a mais para voltar nele amanhã.</p>
+    </div>
+    <div class="visual">
+      <!-- PREENCHER: capturas dos temas claro e escuro, lado a lado -->
+      <div class="reservado">
+        <span>Espaço reservado</span>
+        <p>Faltam as capturas dos temas claro e escuro, lado a lado. A pasta de mídia não trouxe nenhuma tela em tema escuro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 9. POR QUE É DIFERENTE ============================ -->
+<section class="diferente fundo-areia r128" aria-labelledby="t-diferente">
+  <div class="envelope">
+    <h2 id="t-diferente" class="revelar">Por que isto é diferente do que você já tentou</h2>
+    <p class="intro">Sim, é um app de organização pessoal com inteligência artificial. A diferença está no que ele faz antes de te mostrar qualquer coisa.</p>
+
+    <table class="comparativo">
+      <thead>
+        <tr>
+          <th scope="col">O que você já usou</th>
+          <th scope="col">O que este app faz</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-rot="O que você já usou">Uma tela em branco esperando você preencher</td>
+          <td data-rot="O que este app faz">Uma conversa que descobre a sua vida antes de sugerir algo</td>
+        </tr>
+        <tr>
+          <td data-rot="O que você já usou">A mesma lista todos os dias</td>
+          <td data-rot="O que este app faz">Um plano que muda conforme a sua energia muda</td>
+        </tr>
+        <tr>
+          <td data-rot="O que você já usou">Vinte e cinco tarefas na tela</td>
+          <td data-rot="O que este app faz">Uma prioridade e uma ação de 10 minutos</td>
+        </tr>
+        <tr>
+          <td data-rot="O que você já usou">Culpa quando você falha um dia</td>
+          <td data-rot="O que este app faz">Reajuste automático quando a semana vira do avesso</td>
+        </tr>
+        <tr>
+          <td data-rot="O que você já usou">Você se adapta ao método</td>
+          <td data-rot="O que este app faz">O método se adapta a você</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================ 10. DE ONDE NASCEU ============================ -->
+<section class="origem fundo-areia r160" aria-labelledby="t-origem" style="padding-top:0">
+  <div class="envelope grade">
+
+    <div class="texto">
+      <h2 id="t-origem" class="revelar">De onde este app nasceu</h2>
+      <p>Este sistema não veio de um curso de produtividade. Veio do consultório.</p>
+      <p>Cada pergunta que a inteligência artificial faz é uma pergunta que eu já fiz centenas de vezes para mulheres reais, sentadas na minha frente, dizendo a mesma frase: <em>&#8220;eu sei o que preciso fazer, eu só não consigo.&#8221;</em></p>
+      <p>As ferramentas que estão dentro do app têm nome e função. O Filtro de Prioridades, para decidir o que fazer, planejar, delegar ou eliminar. O Mapeamento da Procrastinação, para entender o que acontece no momento em que você foge da tarefa. A Substituição Comportamental, para trocar a resposta antiga por uma nova. A Gestão de Energia, para colocar cada tarefa no horário em que ela é possível.</p>
+      <p>Não é improviso com inteligência artificial por cima. É método clínico transformado em sistema.</p>
+    </div>
+
+    <div class="provas">
+      <figure>
+        <picture>
+          <source srcset="assets/matriz-quadrantes.webp" type="image/webp">
+          <img class="tela" src="assets/matriz-quadrantes.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Matriz de priorização do app, com os quadrantes fazer, planejar, delegar e eliminar cruzando importância e urgência.">
+        </picture>
+        <figcaption>O Filtro de Prioridades, dentro do app.</figcaption>
+      </figure>
+      <figure>
+        <picture>
+          <source srcset="assets/mapeamento-procrastinacao.webp" type="image/webp">
+          <img class="tela" src="assets/mapeamento-procrastinacao.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Tela de mapeamento da procrastinação, perguntando qual tarefa foi evitada e o que entrou no lugar dela.">
+        </picture>
+        <figcaption>O Mapeamento da Procrastinação, dentro do app.</figcaption>
+      </figure>
+    </div>
+
+  </div>
+
+  <div class="envelope">
+    <div class="faixa-fundadora">
+      <p><strong>Turma fundadora.</strong> O app está sendo aberto agora para as primeiras usuárias. Você entra no começo, com preço de lançamento e acesso vitalício, e ajuda a moldar o que ele vai se tornar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 11. OFERTA ============================ -->
+<section class="oferta fundo-neblina r128" aria-labelledby="t-oferta">
+  <div class="envelope">
+    <h2 id="t-oferta" class="revelar">Seu acesso vitalício</h2>
+
+    <div class="cartao">
+      <span class="selo">App completo</span>
+
+      <div>
+        <span class="antigo"><s>R$ 97</s></span>
+        <p class="preco">R$ 37</p>
+        <p class="parcela">ou 12x de R$ 3,79</p>
+      </div>
+
+      <p class="condicao"><strong>Pagamento único. Sem mensalidade. Para sempre.</strong></p>
+
+      <p class="recebe">Você recebe:</p>
+      <ul class="lista-marcada">
+        <li>App completo, com acesso vitalício</li>
+        <li>Rotina cíclica personalizada com inteligência artificial</li>
+        <li>Painel do dia com prioridade e ação de 10 minutos</li>
+        <li>Hábitos, metas, projetos e tarefas fixas</li>
+        <li>Check-in diário e diário adaptativo</li>
+        <li>Mapa do ciclo, mesmo irregular</li>
+        <li>As seis áreas da vida</li>
+        <li>Relatório de padrões</li>
+        <li>Notificações inteligentes</li>
+        <li>Acesso no celular, computador e navegador</li>
+        <li>Todas as próximas atualizações</li>
+        <li>30 dias de garantia</li>
+      </ul>
+
+      <div class="acao">
+        <a class="botao botao-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero meu acesso vitalício por 37 reais, pagamento único.">Quero meu acesso vitalício</a>
+      </div>
+      <p class="imediato">Acesso imediato após a compra</p>
+    </div>
+
+    <div class="ancoragem">
+      <div>
+        <p class="destaque" style="font-size:20px">R$ 37 é menos do que um delivery de sexta à noite.<br>
+        A diferença é que o delivery acaba em vinte minutos, e este app fica com você para sempre.</p>
+        <p class="destaque" style="font-size:20px">E é menos do que você já gastou em planners que ficaram em branco depois de março.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 12. GARANTIA ============================ -->
+<section class="garantia fundo-areia r96" aria-labelledby="t-garantia">
+  <div class="envelope">
+    <div class="interno" style="max-width:62ch">
+      <h2 id="t-garantia" class="revelar">O risco é meu, não seu</h2>
+      <p>Você tem 30 dias para usar o app inteiro. Faz o mapeamento, recebe o seu plano, vive as primeiras semanas.</p>
+      <p>Se você sentir que é mais uma lista de tarefas disfarçada, ou que não foi feito para a sua vida, você me escreve em <!-- PREENCHER: e-mail de contato --><span class="pendente">[preencher: e-mail de contato]</span> e eu devolvo 100% do valor. Sem formulário, sem justificativa, sem constrangimento.</p>
+      <p>Você já pagou caro demais por métodos que exigiram tudo de você e não devolveram nada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 13. PERGUNTAS FREQUENTES ============================ -->
+<section class="faq fundo-areia r128" aria-labelledby="t-faq" style="padding-top:0">
+  <div class="envelope-leitura">
+    <h2 id="t-faq" class="revelar">Perguntas frequentes</h2>
+
+    <details open>
+      <summary>&#8220;Já tentei planner e aplicativo. Por que este seria diferente?&#8221;</summary>
+      <div class="resposta"><p>Porque planner é uma folha em branco que espera que você já saiba o que fazer. Aqui, a inteligência artificial descobre a sua vida primeiro e decide com você o que merece a sua energia. O primeiro trabalho dela é tirar coisa da sua lista, não colocar.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;Meu ciclo é irregular. Funciona para mim?&#8221;</summary>
+      <div class="resposta"><p>Funciona, e essa é uma diferença importante. O app não depende de previsão matemática nem assume que todo corpo funciona em quatro blocos iguais de 28 dias. Ele trabalha com os seus registros e com a sua percepção. A irregularidade em si já é uma informação útil sobre o seu funcionamento.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;Eu não tenho tempo.&#8221;</summary>
+      <div class="resposta"><p>É exatamente por isso que ele existe. O compromisso diário é de poucos minutos: um check-in curto e uma ação de 10 minutos. Ele organiza a rotina considerando o tempo que realmente existe no seu dia.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;Não sei usar inteligência artificial.&#8221;</summary>
+      <div class="resposta"><p>Não precisa saber. A inteligência artificial faz as perguntas e você responde em português normal. Se você usa WhatsApp, usa isto.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;Tenho medo de virar mais uma obrigação.&#8221;</summary>
+      <div class="resposta"><p>Esse medo é legítimo. O objetivo não é aumentar a sua lista, é te ajudar a decidir o que realmente precisa continuar na sua vida. Boa parte do trabalho dos primeiros dias é eliminar e delegar.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;É mensalidade?&#8221;</summary>
+      <div class="resposta"><p>Não. Pagamento único de R$ 37, acesso vitalício, incluindo as próximas atualizações.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;Funciona no celular?&#8221;</summary>
+      <div class="resposta"><p>Sim. Celular, computador e navegador. O acesso é liberado imediatamente após a compra.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;E se eu não conseguir usar todos os dias?&#8221;</summary>
+      <div class="resposta"><p>Você não precisa ser perfeita, senão seria mais um método que te faz fracassar. O app considera dias de menor disponibilidade e se reajusta. Falhar um dia não invalida nada.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;Isso substitui terapia?&#8221;</summary>
+      <div class="resposta"><p>Não, e não deve. É um sistema de autoconhecimento aplicado à organização da vida. Ele não faz diagnóstico e não é tratamento. Se você faz acompanhamento profissional, ele funciona bem ao lado.</p></div>
+    </details>
+
+    <details>
+      <summary>&#8220;Como recebo o acesso?&#8221;</summary>
+      <div class="resposta"><p>Assim que o pagamento é confirmado, você recebe o acesso por e-mail e já pode entrar.</p></div>
+    </details>
+
+  </div>
+</section>
+
+<!-- ============================ 14. CARTA DA FUNDADORA ============================ -->
+<section class="carta fundo-neblina r160" aria-labelledby="t-carta">
+  <div class="envelope grade">
+
+    <div class="retrato">
+      <!-- PREENCHER: foto real da fundadora -->
+      <div class="reservado">
+        <span>Espaço reservado</span>
+        <p>Falta a foto real da fundadora. A pasta de mídia trouxe apenas telas do app.</p>
+      </div>
+    </div>
+
+    <div class="texto">
+      <h2 id="t-carta" class="revelar">Carta da fundadora</h2>
+      <p>Eu atendo mulheres há anos. E existe uma frase que eu ouço mais do que qualquer outra:</p>
+      <p class="destaque" style="margin-top:1.15em">&#8220;Eu sei o que eu preciso fazer. Eu só não consigo.&#8221;</p>
+      <p>Por muito tempo isso foi tratado como falta de disciplina. Eu vi mulheres inteligentes, capazes, que sustentam casa, trabalho e família, chegarem convencidas de que tinham algum defeito de caráter.</p>
+      <p>Nenhuma delas tinha.</p>
+      <p>O que faltava não era força de vontade. Era um plano que reconhecesse que elas não são as mesmas todos os dias, e que ainda assim as colocasse em movimento.</p>
+      <p><strong>Você não precisa lutar contra quem você é para viver a vida que você quer. Você precisa entender o seu funcionamento e agir a partir dele.</strong></p>
+      <p>Eu te espero lá dentro.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ 15. CTA FINAL ============================ -->
+<section class="final fundo-areia r128" aria-labelledby="t-final">
+  <div class="envelope-leitura">
+    <h2 id="t-final" class="revelar">Você pode começar de novo na próxima segunda. Ou pode começar diferente hoje.</h2>
+    <p>Acesso vitalício. Pagamento único de R$ 37. Trinta dias de garantia.</p>
+    <div class="acao">
+      <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero meu acesso vitalício por 37 reais, pagamento único.">Quero meu acesso vitalício</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ RODAPÉ ============================ -->
+<footer class="rodape">
+  <div class="envelope">
+    <p>&copy; 2026 <!-- PREENCHER: nome da marca, se quiser exibir aqui -->&middot; Todos os direitos reservados</p>
+    <p class="links">
+      <!-- PREENCHER: link da política de privacidade --><a class="link-sutil" href="#">Política de Privacidade</a> ·
+      <!-- PREENCHER: link dos termos de uso --><a class="link-sutil" href="#">Termos de Uso</a> ·
+      <!-- PREENCHER: e-mail de contato --><a class="link-sutil" href="#">Contato</a>
+    </p>
+    <p class="aviso">Este produto não realiza diagnóstico e não substitui acompanhamento psicológico, psiquiátrico ou médico.</p>
+  </div>
+</footer>
+
+<!-- ============================ BARRA FIXA (MOBILE) ============================ -->
+<div class="barra-fixa" id="barraFixa">
+  <a class="botao botao-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero meu acesso por 37 reais, pagamento único.">Quero meu acesso por R$ 37</a>
+</div>
+
+<script>
+(function () {
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Uma única animação: títulos de seção entram com 8px de deslocamento. */
+  var titulos = document.querySelectorAll('.revelar');
+  if (reduz || !('IntersectionObserver' in window)) {
+    titulos.forEach(function (t) { t.classList.add('aparece'); });
+  } else {
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('aparece'); obs.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
+    titulos.forEach(function (t) { obs.observe(t); });
+  }
+
+  /* Barra fixa do mobile: aparece depois da primeira dobra. */
+  var barra = document.getElementById('barraFixa');
+  var limite = function () { return window.innerHeight * 0.9; };
+  var pendente = false;
+  function avalia() {
+    barra.classList.toggle('visivel', window.scrollY > limite());
+    pendente = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!pendente) { pendente = true; window.requestAnimationFrame(avalia); }
+  }, { passive: true });
+  avalia();
+})();
+</script>
 
 </body>
 </html>
