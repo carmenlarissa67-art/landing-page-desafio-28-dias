@@ -28,633 +28,536 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
 <style>
 /* ===============================================================
-   TOKENS
-   Sistema Monad aplicado sobre a paleta da marca.
-   Elevacao: nao existe sombra. A hierarquia vem de fio de 1px
-   em --linha e da troca de superficie (areia, linho, neblina,
-   salvia-clara), como manda o sistema.
+   FUSAO DAS TRES REFERENCIAS
+
+   Steep  : tipografia (serifada de display em peso 400 + sans de
+            meio-peso), artefatos de produto flutuantes, o par de
+            pills, o acento pessego usado uma unica vez, base 4px.
+   Monad  : a tela morna de papel, o fio de 1px, a contencao.
+   Dala   : a escala monumental, o tracking muito negativo, o ritmo
+            de duas colunas em zigue-zague, uma unica cor de acao,
+            e a densidade baixissima: um ou dois elementos por tela.
    =============================================================== */
 :root{
-  /* Superficies, do nivel 1 ao 4 */
-  --areia:#F7F3EE;
-  --linho:#FFFCF8;
-  --neblina:#EDE6DE;
-  --salvia-clara:#C6CFC0;
+  /* Superficies, do nivel 0 ao 4 */
+  --papel:#F7F3EE;        /* 0 canvas morno */
+  --nevoa:#FBF9F6;        /* 1 banda alternada, o mais claro */
+  --bruma:#EFEAE4;        /* 2 cartao neutro */
+  --pessego:#FBE1D1;      /* 3 acento editorial, uma vez na pagina */
+  --alto:#FFFDFB;         /* 4 artefato flutuante */
 
-  /* Texto */
-  --tinta:#2C2622;
-  --grafite:#5A5049;
-  --sombra-clara:#8C817A;
-  --nota:#6E635C;
-
-  /* Marca */
+  /* Tinta */
+  --tinta:#1F1B18;
+  --grafite:#544B44;
+  --ardosia:#6E645B;
+  --cinza:#8C8279;
+  --sienna:#5D2A1A;       /* acao primaria e tinta sobre o pessego */
   --terracota:#C08466;
-  --terracota-esc:#A66B50;
-  --argila:#D9B8A5;
-  --salvia:#8E9A87;
-  --linha:#DDD4CB;
+  --fio:#E4DDD5;
 
-  /* Familias: a serifada anuncia, a mono instrui */
-  --serif:'Fraunces','Newsreader',Georgia,'Times New Roman',serif;
-  --mono:'IBM Plex Mono','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  /* Familias */
+  --serif:'Instrument Serif','Source Serif 4',Georgia,'Times New Roman',serif;
+  --sans:'Archivo','Sohne',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;
 
-  /* Escala de espacamento, base 8px */
-  --s8:8px;  --s16:16px; --s24:24px; --s32:32px;
-  --s40:40px; --s64:64px; --s72:72px; --s80:80px;
+  /* Base 4px */
+  --e4:4px;   --e8:8px;   --e12:12px; --e16:16px; --e20:20px;
+  --e24:24px; --e32:32px; --e40:40px; --e64:64px; --e80:80px;
+  --e96:96px; --e128:128px; --e160:160px;
 
   /* Formato */
-  --raio-pill:100px;
-  --raio-cartao:40px;
-  --raio-card:24px;
-  --raio-img:16px;
+  --r-pill:9999px;
+  --r-cartao:24px;
+  --r-alto:20px;
+  --r-pequeno:16px;
+  --r-img:12px;
 
-  /* Largura */
-  --leitura:680px;
-  --largo:1120px;
+  --largo:1200px;
+  --leitura:660px;
 
-  --fio:1px solid var(--linha);
+  /* So o artefato flutuante tem sombra */
+  --flutua:0 0 0 1px rgba(31,27,24,.05), 0 20px 25px -5px rgba(31,27,24,.10), 0 8px 10px -6px rgba(31,27,24,.10);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 
 body{
-  font-family:var(--mono);
+  font-family:var(--sans);
   font-weight:400;
-  font-size:16px;
-  line-height:1.7;
-  letter-spacing:-.02em;
+  font-size:17px;
+  line-height:1.55;
   color:var(--grafite);
-  background:var(--areia);
+  background:var(--papel);
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-@media(min-width:769px){body{font-size:17px}}
-
-/* Ruido quase imperceptivel: tira o aspecto chapado da tela */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:60;
-  opacity:.022;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-}
 
 /* ---------------------------------------------------------------
-   TIPOGRAFIA
+   TIPOGRAFIA  (Steep)
+   A serifada fica em peso 400 em todos os tamanhos. A hierarquia
+   vem da escala e do tracking negativo, nunca do peso.
    --------------------------------------------------------------- */
 h1,h2,h3,.serif{
   font-family:var(--serif);
-  font-optical-sizing:auto;
   font-weight:400;
   color:var(--tinta);
-  letter-spacing:-.02em;
-  line-height:1.2;
+  font-style:normal;
 }
 
 h1{
-  font-size:clamp(34px,5.8vw,50px);
-  line-height:1.08;
+  font-size:clamp(40px,8.2vw,90px);
+  line-height:1.06;
+  letter-spacing:-.025em;
+  max-width:14ch;
+}
+h2{
+  font-size:clamp(34px,5.6vw,64px);
+  line-height:1.12;
+  letter-spacing:-.02em;
   max-width:17ch;
 }
-@media(min-width:769px){h1{font-size:clamp(48px,4.4vw,62px)}}
-
-h2{
-  font-size:clamp(28px,4.6vw,38px);
-  max-width:20ch;
+h3{
+  font-size:clamp(24px,3vw,32px);
+  line-height:1.18;
+  letter-spacing:-.015em;
 }
-@media(min-width:769px){h2{font-size:clamp(36px,3.4vw,46px)}}
+h1 em,h2 em,h3 em,.serif em{font-style:italic}
 
-h3{font-size:22px;line-height:1.2}
-
-p{max-width:58ch}
-p + p{margin-top:1.15em}
+p{max-width:62ch}
+p + p{margin-top:1.1em}
 
 strong{font-weight:500;color:var(--tinta)}
-em,i{font-family:var(--serif);font-style:italic;letter-spacing:-.01em}
-
+em,i{font-style:italic}
 a{color:inherit}
 
-.legenda{
-  font-size:14px;
-  line-height:1.65;
-  letter-spacing:-.02em;
-  color:var(--nota);
-  max-width:56ch;
-}
-
-.destaque{
-  font-family:var(--serif);
-  font-style:italic;
-  font-weight:400;
-  font-size:clamp(21px,3vw,26px);
-  line-height:1.45;
-  letter-spacing:-.02em;
-  color:var(--tinta);
-}
-
-/* ---------------------------------------------------------------
-   ESTRUTURA
-   --------------------------------------------------------------- */
-.envelope{width:100%;max-width:var(--largo);margin:0 auto;padding:0 var(--s24)}
-.envelope-leitura{width:100%;max-width:var(--leitura);margin:0 auto;padding:0 var(--s24)}
-@media(min-width:769px){
-  .envelope{padding:0 var(--s40)}
-  .envelope-leitura{padding:0 var(--s40)}
-}
-
-.fundo-areia{background:var(--areia)}
-.fundo-neblina{background:var(--neblina)}
-
-.r96{padding-block:var(--s64)}
-.r128{padding-block:var(--s80)}
-.r160{padding-block:96px}
-@media(min-width:769px){
-  .r96{padding-block:96px}
-  .r128{padding-block:128px}
-  .r160{padding-block:160px}
-}
-
-.grade{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s32)}
-@media(max-width:768px){.grade{grid-template-columns:1fr;gap:var(--s40)}}
-
-.risco{border:0;border-top:var(--fio);width:88px;margin:0}
-
-/* ---------------------------------------------------------------
-   BOTOES E LINKS
-   --------------------------------------------------------------- */
-.botao{
-  display:inline-block;
-  max-width:100%;
-  background:var(--terracota);
-  color:var(--linho);
-  font-family:var(--mono);
-  font-size:14px;
-  font-weight:500;
-  letter-spacing:-.02em;
-  text-transform:uppercase;
-  line-height:1.4;
-  text-decoration:none;
-  padding:var(--s16) var(--s32);
-  border-radius:var(--raio-pill);
-  border:1px solid var(--terracota);
-  transition:background-color .15s ease-out,border-color .15s ease-out,color .15s ease-out;
-}
-.botao:hover,.botao:focus-visible{background:var(--terracota-esc);border-color:var(--terracota-esc)}
-@media(min-width:769px){.botao{font-size:15px;padding:var(--s16) var(--s40)}}
-
-.botao-fantasma{
-  background:transparent;
-  color:var(--tinta);
-  border:1px solid var(--tinta);
-}
-.botao-fantasma:hover,.botao-fantasma:focus-visible{
-  background:transparent;
-  border-color:var(--terracota-esc);
-  color:var(--terracota-esc);
-}
-
-.botao-largo{display:block;text-align:center;width:100%}
-
-.acoes{display:flex;flex-wrap:wrap;gap:var(--s16);align-items:center}
-
-.link-sutil{
-  color:var(--grafite);
-  text-decoration:none;
-  border-bottom:1px solid var(--linha);
-  transition:border-color .15s ease-out;
-}
-.link-sutil:hover,.link-sutil:focus-visible{border-bottom-color:var(--terracota)}
-
-.pendente{color:var(--nota);border-bottom:1px dashed var(--linha);font-size:.95em}
-
-:focus-visible{outline:2px solid var(--terracota-esc);outline-offset:3px;border-radius:4px}
-
-/* ---------------------------------------------------------------
-   IMAGENS E BLOCOS RESERVADOS
-   --------------------------------------------------------------- */
-.tela{
+.corpo-g{font-size:clamp(18px,1.6vw,20px);line-height:1.5;color:var(--ardosia)}
+.rotulo{
   display:block;
-  width:100%;
-  height:auto;
-  border:var(--fio);
-  border-radius:var(--raio-img);
-  background:var(--linho);
-}
-
-.reservado{
-  border:1px dashed var(--linha);
-  border-radius:var(--raio-cartao);
-  padding:var(--s40) var(--s32);
-  min-height:200px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:var(--s8);
-  background:transparent;
-}
-.reservado span{
-  font-size:12px;
-  line-height:1.2;
-  letter-spacing:-.033em;
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.11em;
   text-transform:uppercase;
-  color:var(--nota);
+  color:var(--sienna);
 }
-.reservado p{font-size:14px;line-height:1.65;color:var(--nota);max-width:46ch}
+.legenda{font-size:15px;line-height:1.5;color:var(--cinza);max-width:52ch}
 
 /* ---------------------------------------------------------------
-   1. HERO
+   ESTRUTURA  (Dala: baixissima densidade, zigue-zague)
    --------------------------------------------------------------- */
-.hero{padding-top:var(--s64);padding-bottom:var(--s80)}
-@media(min-width:769px){.hero{padding-top:96px;padding-bottom:128px}}
+.env{width:100%;max-width:var(--largo);margin:0 auto;padding:0 var(--e24)}
+.env-leitura{width:100%;max-width:var(--leitura);margin:0 auto;padding:0 var(--e24)}
+@media(min-width:769px){.env{padding:0 var(--e40)}.env-leitura{padding:0 var(--e40)}}
 
-.hero-texto{grid-column:1 / span 7}
-.hero-visual{grid-column:8 / span 5;align-self:center}
-@media(max-width:900px) and (min-width:769px){
-  .hero-texto,.hero-visual{grid-column:1 / span 12}
-}
-@media(max-width:768px){.hero-texto,.hero-visual{grid-column:auto}}
+.papel{background:var(--papel)}
+.nevoa{background:var(--nevoa)}
 
-.hero h1{margin-bottom:var(--s24)}
-.hero .sub{max-width:54ch}
-.hero .sub p{font-size:clamp(16px,2vw,19px);line-height:1.6}
-.hero .acoes{margin-top:var(--s40)}
-.hero .apoio{
-  margin-top:var(--s24);
-  font-size:12px;
-  line-height:1.7;
-  letter-spacing:-.033em;
-  text-transform:uppercase;
-  color:var(--nota);
-  max-width:none;
+.r-md{padding-block:var(--e80)}
+.r-lg{padding-block:var(--e96)}
+.r-xl{padding-block:var(--e96)}
+@media(min-width:769px){
+  .r-md{padding-block:var(--e96)}
+  .r-lg{padding-block:var(--e128)}
+  .r-xl{padding-block:var(--e160)}
 }
 
-.colagem{display:flex;align-items:flex-start;justify-content:center;padding-top:var(--s8)}
-.colagem picture{display:block}
-.colagem img{display:block;width:100%;height:auto;border:var(--fio);border-radius:var(--raio-img)}
-.colagem .c1{flex:0 0 36%;transform:rotate(-2.6deg) translateY(26px);margin-right:-6%;z-index:1}
-.colagem .c2{flex:0 0 42%;transform:rotate(.6deg);z-index:3}
-.colagem .c3{flex:0 0 36%;transform:rotate(2.8deg) translateY(22px);margin-left:-6%;z-index:2}
-@media(max-width:959px){.colagem{max-width:460px;margin-inline:auto}}
-@media(max-width:768px){
-  .colagem .c1{flex-basis:42%;margin-right:-16%}
-  .colagem .c2{flex-basis:48%}
-  .colagem .c3{flex-basis:42%;margin-left:-16%}
+/* duas colunas assimetricas, alternando o lado */
+.duo{display:grid;grid-template-columns:1fr;gap:var(--e40)}
+@media(min-width:940px){
+  .duo{grid-template-columns:repeat(12,1fr);gap:var(--e40);align-items:center}
+  .duo > .lado-texto{grid-column:1 / span 6}
+  .duo > .lado-visual{grid-column:8 / span 5}
+  .duo.espelhado > .lado-texto{grid-column:7 / span 6}
+  .duo.espelhado > .lado-visual{grid-column:1 / span 5;grid-row:1}
+}
+
+.risco{border:0;border-top:1px solid var(--fio);width:64px;margin:0}
+
+/* ---------------------------------------------------------------
+   BOTOES  (Steep: pill cheio + pill fantasma, sempre em par)
+   --------------------------------------------------------------- */
+.acoes{display:flex;flex-wrap:wrap;gap:var(--e12);align-items:center}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  max-width:100%;
+  font-family:var(--sans);
+  font-size:16px;
+  font-weight:450;
+  letter-spacing:-.004em;
+  line-height:1.3;
+  text-decoration:none;
+  padding:15px var(--e24);
+  border-radius:var(--r-pill);
+  border:1px solid transparent;
+  transition:background-color .16s ease,border-color .16s ease,color .16s ease;
+}
+.pill-cheio{background:var(--sienna);color:#FFFDFB;border-color:var(--sienna)}
+.pill-cheio:hover,.pill-cheio:focus-visible{background:#4A2015;border-color:#4A2015}
+.pill-fantasma{background:transparent;color:var(--tinta);border-color:var(--tinta)}
+.pill-fantasma:hover,.pill-fantasma:focus-visible{background:transparent;border-color:var(--sienna);color:var(--sienna)}
+.pill-largo{display:flex;width:100%}
+@media(min-width:769px){.pill{font-size:17px;padding:16px var(--e32)}}
+
+.link-seta{
+  display:inline-block;
+  font-size:16px;
+  color:var(--tinta);
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:border-color .16s ease;
+}
+.link-seta:hover,.link-seta:focus-visible{border-bottom-color:var(--tinta)}
+
+.pendente{color:var(--cinza);border-bottom:1px dashed var(--fio)}
+:focus-visible{outline:2px solid var(--sienna);outline-offset:3px;border-radius:4px}
+
+/* ---------------------------------------------------------------
+   ARTEFATO FLUTUANTE  (Steep)
+   O unico elemento com sombra. Recorta a tela do app como
+   fragmento de interface, nao como celular inteiro.
+   --------------------------------------------------------------- */
+.artefato{
+  background:var(--alto);
+  border-radius:var(--r-alto);
+  box-shadow:var(--flutua);
+  padding:var(--e12);
+  overflow:hidden;
+}
+.artefato .quadro{
+  border-radius:var(--r-img);
+  overflow:hidden;
+  background:var(--bruma);
+  line-height:0;
+}
+.artefato .quadro img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.artefato figcaption{
+  font-size:13px;
+  line-height:1.4;
+  color:var(--cinza);
+  padding:var(--e12) var(--e4) var(--e4);
+}
+
+/* cartao neutro, sem sombra (Steep) */
+.cartao-neutro{
+  background:var(--bruma);
+  border-radius:var(--r-cartao);
+  padding:var(--e32) var(--e24);
+}
+@media(min-width:769px){.cartao-neutro{padding:var(--e40) var(--e32)}}
+
+/* ---------------------------------------------------------------
+   1. HERO  (Steep: manchete gigante + colagem de artefatos)
+   --------------------------------------------------------------- */
+.hero{padding-top:var(--e64);padding-bottom:var(--e96)}
+@media(min-width:769px){.hero{padding-top:var(--e96);padding-bottom:var(--e160)}}
+
+.hero .grade{display:grid;grid-template-columns:1fr;gap:var(--e64)}
+@media(min-width:1000px){
+  .hero .grade{grid-template-columns:repeat(12,1fr);gap:var(--e40);align-items:center}
+  .hero .texto{grid-column:1 / span 6}
+  .hero .colagem{grid-column:7 / span 6}
+}
+.hero h1{margin-bottom:var(--e24)}
+.hero .sub{max-width:46ch}
+.hero .acoes{margin-top:var(--e32)}
+.hero .apoio{margin-top:var(--e20);font-size:15px;color:var(--cinza);max-width:none}
+
+/* colagem: tres fragmentos flutuando em offsets diferentes */
+.colagem{position:relative;width:100%;aspect-ratio:1/.94;max-width:620px;margin-inline:auto}
+.colagem .artefato{position:absolute}
+.colagem .f1{width:47%;left:0;top:4%;transform:rotate(-3deg);z-index:1}
+.colagem .f2{width:50%;right:1%;top:0;transform:rotate(2.2deg);z-index:3}
+.colagem .f3{width:52%;left:12%;bottom:0;transform:rotate(1.2deg);z-index:2}
+.colagem .f1 .quadro{aspect-ratio:1/1}
+.colagem .f2 .quadro{aspect-ratio:4/3}
+.colagem .f3 .quadro{aspect-ratio:5/3}
+@media(max-width:520px){
+  .colagem{aspect-ratio:1/1.02}
+  .colagem .f1{width:52%}
+  .colagem .f2{width:54%}
+  .colagem .f3{width:58%;left:8%}
 }
 
 /* ---------------------------------------------------------------
    2. O PROBLEMA
    --------------------------------------------------------------- */
-.problema h2{margin-bottom:var(--s40)}
-.problema .interno{max-width:720px}
-@media(min-width:1000px){.problema .interno{margin-left:4%}}
-
-.ciclo{list-style:none;border-top:var(--fio);counter-reset:passo}
+.problema h2{margin-bottom:var(--e40)}
+.ciclo{list-style:none;counter-reset:passo;max-width:640px}
 .ciclo li{
-  border-bottom:var(--fio);
-  padding:var(--s24) 0 var(--s24) 56px;
-  position:relative;
-  font-size:clamp(16px,2vw,18px);
-  line-height:1.55;
-  max-width:52ch;
+  counter-increment:passo;
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:var(--e16);
+  padding:var(--e20) 0;
+  border-bottom:1px solid var(--fio);
+  font-size:clamp(17px,1.8vw,19px);
+  line-height:1.45;
+  color:var(--grafite);
 }
+.ciclo li:first-child{border-top:1px solid var(--fio)}
 .ciclo li::before{
   content:counter(passo,decimal-leading-zero);
-  counter-increment:passo;
-  position:absolute;
-  left:0;
-  top:var(--s24);
   font-family:var(--serif);
-  font-size:18px;
-  line-height:1.55;
-  letter-spacing:-.02em;
-  color:var(--salvia);
+  font-size:20px;
+  line-height:1.45;
+  color:var(--cinza);
 }
-.problema .fecho{margin-top:var(--s40);max-width:56ch}
+.problema .fecho{margin-top:var(--e40)}
 
 /* ---------------------------------------------------------------
-   3 e 4. PERSPECTIVA E PARADIGMA
+   3 e 4. TESES  (Dala: um bloco por tela, muito ar)
    --------------------------------------------------------------- */
-.tese h2{margin-bottom:var(--s32)}
+.tese h2{margin-bottom:var(--e32)}
 .tese .corpo{max-width:58ch}
-@media(min-width:1000px){.tese.desloca .interno{margin-left:8%}}
+.tese .corpo p{font-size:clamp(18px,1.6vw,20px);line-height:1.5;color:var(--ardosia)}
 
 /* ---------------------------------------------------------------
    5. COMO FUNCIONA
    --------------------------------------------------------------- */
-.como .topo{grid-column:1 / span 7}
-@media(max-width:768px){.como .topo{grid-column:auto}}
-.como h2{margin-bottom:var(--s24)}
-.como .intro{max-width:56ch}
+.como h2{margin-bottom:var(--e24)}
+.como .intro{max-width:52ch}
 
-.moldura-video{
-  max-width:520px;
-  margin:var(--s64) auto 0;
-  border:var(--fio);
-  border-radius:var(--raio-cartao);
-  background:var(--linho);
-  padding:var(--s24);
-}
-@media(min-width:769px){.moldura-video{padding:var(--s40);margin-top:var(--s80)}}
-.recorte-video{
-  width:100%;
-  max-width:340px;
-  margin:0 auto;
-  border-radius:var(--raio-img);
-  overflow:hidden;
-  background:var(--areia);
-  line-height:0;
-}
-.moldura-video video{display:block;width:100%;height:auto}
+.palco-video{width:100%;max-width:380px;margin-inline:auto}
+@media(min-width:940px){.palco-video{margin-inline:0}}
+.palco-video .quadro{aspect-ratio:auto}
+.palco-video video{display:block;width:100%;height:auto}
 
-.passos{
-  list-style:none;
-  display:grid;
-  grid-template-columns:1fr;
-  gap:var(--s16);
-  margin-top:var(--s64);
-  counter-reset:etapa;
-}
-@media(min-width:700px){.passos{grid-template-columns:1fr 1fr}}
-
+.passos{list-style:none;counter-reset:etapa;display:grid;grid-template-columns:1fr;gap:var(--e16);margin-top:var(--e96)}
+@media(min-width:700px){.passos{grid-template-columns:1fr 1fr;gap:var(--e20)}}
+@media(min-width:1100px){.passos{grid-template-columns:repeat(4,1fr)}}
 .passos li{
-  border:var(--fio);
-  border-radius:var(--raio-card);
-  padding:var(--s32);
-  background:var(--linho);
+  counter-increment:etapa;
+  background:var(--bruma);
+  border-radius:var(--r-cartao);
+  padding:var(--e24) var(--e20) var(--e32);
 }
 .passos li::before{
   content:counter(etapa,decimal-leading-zero);
-  counter-increment:etapa;
   display:block;
   font-family:var(--serif);
-  font-size:36px;
+  font-size:40px;
   line-height:1;
   letter-spacing:-.02em;
-  color:var(--salvia);
-  margin-bottom:var(--s16);
+  color:var(--cinza);
+  margin-bottom:var(--e16);
 }
-.passos li p{font-size:15px;line-height:1.65;max-width:none}
+.passos li p{font-size:16px;line-height:1.5;max-width:none}
 
-/* Metodo CICLO: a unica superficie colorida do sistema */
+/* O UNICO cartao pessego da pagina (Steep) */
 .metodo{
-  background:var(--salvia-clara);
-  border-radius:var(--raio-cartao);
-  padding:var(--s32);
-  margin-top:var(--s64);
+  background:var(--pessego);
+  color:var(--sienna);
+  border-radius:var(--r-cartao);
+  padding:var(--e32) var(--e24);
+  margin-top:var(--e64);
 }
-@media(min-width:769px){.metodo{padding:var(--s40)}}
-.metodo h3{margin-bottom:var(--s24);color:var(--tinta)}
-.metodo ol{list-style:none;display:grid;gap:var(--s16)}
-@media(min-width:820px){.metodo ol{grid-template-columns:repeat(5,1fr);gap:var(--s24)}}
-.metodo li{display:flex;gap:var(--s16);align-items:baseline}
-@media(min-width:820px){.metodo li{flex-direction:column;gap:var(--s8);align-items:flex-start}}
-.metodo .letra{
-  font-family:var(--serif);
-  font-size:28px;
-  line-height:1;
-  letter-spacing:-.02em;
-  color:var(--tinta);
-  flex:0 0 auto;
-}
-.metodo .texto{font-size:15px;line-height:1.5;color:var(--tinta)}
+@media(min-width:769px){.metodo{padding:var(--e64) var(--e40)}}
+.metodo h3{color:var(--sienna);margin-bottom:var(--e32)}
+.metodo ol{list-style:none;display:grid;gap:var(--e24)}
+@media(min-width:860px){.metodo ol{grid-template-columns:repeat(5,1fr);gap:var(--e20)}}
+.metodo li{display:flex;gap:var(--e16);align-items:baseline}
+@media(min-width:860px){.metodo li{flex-direction:column;gap:var(--e8);align-items:flex-start}}
+.metodo .letra{font-family:var(--serif);font-size:44px;line-height:.9;letter-spacing:-.02em;color:var(--sienna);flex:0 0 auto}
+.metodo .txt{font-size:16px;line-height:1.4;color:var(--sienna)}
 
 /* ---------------------------------------------------------------
    6. O QUE VOCE RECEBE
    --------------------------------------------------------------- */
-.recebe h2{margin-bottom:var(--s64)}
-.recebe .grade-conteudo{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s32)}
-@media(max-width:900px){.recebe .grade-conteudo{grid-template-columns:1fr}}
-.recebe .itens{grid-column:1 / span 8}
-.recebe .provas{grid-column:10 / span 3;align-self:start}
-@media(max-width:900px){.recebe .itens,.recebe .provas{grid-column:auto}}
-
-.entregas{list-style:none;display:grid;grid-template-columns:1fr;gap:var(--s16)}
-@media(min-width:620px){.entregas{grid-template-columns:1fr 1fr}}
-.entregas li{
-  border:var(--fio);
-  border-radius:var(--raio-card);
-  padding:var(--s24);
-  background:var(--linho);
-  display:flex;
-  gap:var(--s16);
-  align-items:flex-start;
+.recebe h2{margin-bottom:var(--e64)}
+.entregas{list-style:none;display:grid;grid-template-columns:1fr;gap:var(--e32)}
+@media(min-width:640px){.entregas{grid-template-columns:1fr 1fr;gap:var(--e40) var(--e32)}}
+.entregas li{border-top:1px solid var(--fio);padding-top:var(--e20)}
+.entregas .num{
+  display:block;
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.11em;
+  color:var(--cinza);
+  margin-bottom:var(--e12);
 }
-.entregas .icone{flex:0 0 24px;color:var(--salvia);margin-top:3px}
-.entregas .icone svg{display:block;width:24px;height:24px}
-.entregas p{font-size:15px;line-height:1.6;max-width:none}
+.entregas p{font-size:17px;line-height:1.5;max-width:none}
 
-.recebe .provas{display:flex;flex-direction:column;gap:var(--s24)}
-@media(min-width:901px){.recebe .provas{padding-top:var(--s40)}}
-@media(max-width:900px){
-  .recebe .provas{flex-direction:row;gap:var(--s16);max-width:460px}
-  .recebe .provas figure{flex:1 1 0}
+.par-artefatos{display:grid;grid-template-columns:1fr 1fr;gap:var(--e20);margin-top:var(--e64)}
+@media(min-width:940px){
+  .duo > .largo7{grid-column:1 / span 7}
+  .duo > .estreito4{grid-column:9 / span 4}
+  .par-artefatos{grid-template-columns:1fr;gap:var(--e32);margin-top:0}
+  .par-artefatos figure:last-child{margin-left:16%}
 }
-.recebe figcaption{margin-top:10px;font-size:13px;line-height:1.5;color:var(--nota)}
+.par-artefatos .quadro{aspect-ratio:3/4}
 
 /* ---------------------------------------------------------------
    7. DIFERENCIAL
    --------------------------------------------------------------- */
-.diferencial h2{margin-bottom:var(--s24)}
-.diferencial .intro{margin-bottom:var(--s64);max-width:52ch}
+.diferencial h2{margin-bottom:var(--e24)}
+.diferencial .intro{margin-bottom:var(--e64);max-width:26ch}
+.diferencial .intro .serif{font-size:clamp(22px,2.4vw,30px);line-height:1.25;letter-spacing:-.015em;display:block;max-width:22ch}
 
 .comparativo{width:100%;border-collapse:collapse;text-align:left}
 .comparativo th{
-  font-family:var(--mono);
+  font-family:var(--sans);
   font-weight:500;
-  font-size:12px;
-  letter-spacing:-.033em;
+  font-size:13px;
+  letter-spacing:.11em;
   text-transform:uppercase;
-  color:var(--nota);
-  padding:0 var(--s24) var(--s16) 0;
-  border-bottom:var(--fio);
+  color:var(--cinza);
+  padding:0 var(--e24) var(--e12) 0;
+  border-bottom:1px solid var(--fio);
   vertical-align:bottom;
   width:50%;
 }
-.comparativo th:last-child{padding-right:0;padding-left:var(--s24)}
+.comparativo th:last-child{padding-right:0;padding-left:var(--e24)}
 .comparativo td{
-  padding:var(--s24) var(--s24) var(--s24) 0;
-  border-bottom:var(--fio);
+  padding:var(--e24) var(--e24) var(--e24) 0;
+  border-bottom:1px solid var(--fio);
   vertical-align:top;
-  font-size:16px;
-  line-height:1.55;
+  font-size:clamp(17px,1.7vw,19px);
+  line-height:1.4;
   width:50%;
 }
-.comparativo td:last-child{padding-right:0;padding-left:var(--s24);border-left:var(--fio)}
-.comparativo tr:last-child td{color:var(--tinta);font-weight:500}
+.comparativo td:last-child{padding-right:0;padding-left:var(--e24)}
+.comparativo tr:last-child td{color:var(--tinta)}
+.comparativo tr:last-child td:last-child{font-family:var(--serif);font-size:clamp(20px,2.2vw,26px);letter-spacing:-.015em;line-height:1.2}
 .comparativo td::before{display:none}
-
 @media(max-width:700px){
   .comparativo,.comparativo tbody,.comparativo tr,.comparativo td{display:block;width:100%}
   .comparativo thead{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);border:0}
-  .comparativo tr{border-bottom:var(--fio);padding:var(--s24) 0}
-  .comparativo tr:first-child{border-top:var(--fio)}
+  .comparativo tr{border-bottom:1px solid var(--fio);padding:var(--e24) 0}
+  .comparativo tr:first-child{border-top:1px solid var(--fio)}
   .comparativo td{border:0;padding:0}
-  .comparativo td:last-child{border-left:0;padding-left:0;margin-top:var(--s8)}
+  .comparativo td:last-child{padding-left:0;margin-top:var(--e8)}
   .comparativo td::before{
-    display:block;
-    content:attr(data-rot);
-    font-size:12px;
-    letter-spacing:-.033em;
-    text-transform:uppercase;
-    color:var(--nota);
-    margin-bottom:5px;
+    display:block;content:attr(data-rot);
+    font-size:12px;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--cinza);margin-bottom:var(--e4);
   }
 }
 
 /* ---------------------------------------------------------------
    8. A TRANSFORMACAO
    --------------------------------------------------------------- */
-.transformacao h2{margin-bottom:var(--s64)}
-.momentos{display:grid;grid-template-columns:1fr;gap:var(--s16)}
-@media(min-width:820px){.momentos{grid-template-columns:repeat(3,1fr)}}
-.momento{
-  border:var(--fio);
-  border-radius:var(--raio-card);
-  padding:var(--s32);
-  background:var(--linho);
+.transformacao h2{margin-bottom:var(--e64)}
+.momentos{display:grid;grid-template-columns:1fr;gap:var(--e20)}
+@media(min-width:860px){.momentos{grid-template-columns:repeat(3,1fr);gap:var(--e24)}}
+.momento{background:var(--bruma);border-radius:var(--r-cartao);padding:var(--e32) var(--e24)}
+@media(min-width:769px){.momento{padding:var(--e40) var(--e32)}}
+.momento .rotulo{margin-bottom:var(--e20);color:var(--cinza)}
+.momento p{
+  font-family:var(--serif);
+  font-size:clamp(21px,2.2vw,26px);
+  line-height:1.25;
+  letter-spacing:-.015em;
+  color:var(--tinta);
+  max-width:none;
 }
-.momento .rotulo{
-  display:block;
-  font-size:12px;
-  letter-spacing:-.033em;
-  text-transform:uppercase;
-  color:var(--nota);
-  font-weight:500;
-  margin-bottom:var(--s16);
-}
-.momento p{font-size:clamp(18px,2.2vw,21px);max-width:none}
-.transformacao .fecho{margin-top:var(--s40);max-width:60ch}
+.transformacao .fecho{margin-top:var(--e64);max-width:56ch}
 
 /* ---------------------------------------------------------------
    9. PROVA SOCIAL
    --------------------------------------------------------------- */
-.prova h2{margin-bottom:var(--s32)}
-.prova .interno{max-width:720px}
+.prova h2{margin-bottom:var(--e32)}
+.reservado{
+  border:1px dashed var(--fio);
+  border-radius:var(--r-cartao);
+  padding:var(--e40) var(--e32);
+  min-height:180px;
+  display:flex;flex-direction:column;justify-content:center;gap:var(--e8);
+  max-width:640px;
+}
+.reservado .rotulo{color:var(--cinza)}
+.reservado p{font-size:15px;line-height:1.5;color:var(--cinza);max-width:44ch}
 
 /* ---------------------------------------------------------------
    10. OFERTA
    --------------------------------------------------------------- */
-.oferta h2{margin:0 auto var(--s40);max-width:18ch;text-align:center}
-.cartao{
-  max-width:480px;
-  margin:0 auto;
-  background:var(--linho);
-  border:1px solid var(--terracota);
-  border-radius:var(--raio-cartao);
-  padding:var(--s32);
-  text-align:center;
-}
-@media(min-width:769px){.cartao{padding:var(--s40)}}
-.cartao .preco{
+.oferta{text-align:center}
+.oferta h2{margin:0 auto var(--e40);max-width:15ch}
+.preco{
   font-family:var(--serif);
-  font-weight:400;
-  font-size:clamp(48px,11vw,64px);
-  line-height:1.05;
-  letter-spacing:-.03em;
+  font-size:clamp(72px,15vw,140px);
+  line-height:.92;
+  letter-spacing:-.035em;
   color:var(--tinta);
   max-width:none;
 }
-.cartao .condicao{
-  margin-top:var(--s16);
-  padding-bottom:var(--s32);
-  border-bottom:var(--fio);
-  color:var(--tinta);
-  max-width:none;
-}
-.cartao .acao{margin-top:var(--s32)}
+.oferta .condicao{margin-top:var(--e20);font-size:clamp(18px,1.8vw,22px);color:var(--ardosia);max-width:none}
+.oferta .acoes{margin-top:var(--e40);justify-content:center}
 
 /* ---------------------------------------------------------------
-   12. FAQ
+   11. FAQ
    --------------------------------------------------------------- */
-.faq h2{margin-bottom:var(--s40)}
-.faq details{border-bottom:var(--fio)}
-.faq details:first-of-type{border-top:var(--fio)}
+.faq h2{margin-bottom:var(--e40)}
+.faq details{border-bottom:1px solid var(--fio)}
+.faq details:first-of-type{border-top:1px solid var(--fio)}
 .faq summary{
-  list-style:none;
-  cursor:pointer;
-  padding:var(--s24) var(--s40) var(--s24) 0;
-  position:relative;
-  font-family:var(--serif);
-  font-weight:400;
-  font-size:clamp(19px,2.4vw,24px);
-  line-height:1.25;
-  letter-spacing:-.02em;
-  color:var(--tinta);
+  list-style:none;cursor:pointer;position:relative;
+  padding:var(--e24) var(--e40) var(--e24) 0;
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(21px,2.6vw,28px);
+  line-height:1.2;letter-spacing:-.015em;color:var(--tinta);
 }
-@media(min-width:769px){.faq summary{padding-top:var(--s32);padding-bottom:var(--s32)}}
+@media(min-width:769px){.faq summary{padding-top:var(--e32);padding-bottom:var(--e32)}}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{
-  content:"";
-  position:absolute;
-  right:2px;
-  top:calc(var(--s24) + .35em);
-  width:20px;
-  height:20px;
-  background-repeat:no-repeat;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M4 7.5l6 5.5 6-5.5' fill='none' stroke='%232C2622' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  transition:transform .15s ease-out;
+  content:"";position:absolute;right:2px;top:calc(var(--e24) + .32em);
+  width:20px;height:20px;background-repeat:no-repeat;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M4 7.5l6 5.5 6-5.5' fill='none' stroke='%231F1B18' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  transition:transform .16s ease;
 }
-@media(min-width:769px){.faq summary::after{top:calc(var(--s32) + .35em)}}
+@media(min-width:769px){.faq summary::after{top:calc(var(--e32) + .32em)}}
 .faq details[open] summary::after{transform:rotate(180deg)}
-.faq .resposta{padding:0 0 var(--s32)}
-.faq .resposta p{max-width:58ch;font-size:15px;line-height:1.7}
+.faq .resposta{padding:0 0 var(--e32)}
+.faq .resposta p{max-width:58ch;font-size:17px;line-height:1.6;color:var(--ardosia)}
 
 /* ---------------------------------------------------------------
-   13. CHAMADA FINAL
+   12. CHAMADA FINAL
    --------------------------------------------------------------- */
-.final h2{margin-bottom:var(--s24);max-width:20ch}
-.final .acoes{margin-top:var(--s40)}
+.final{text-align:center}
+.final h2{margin:0 auto var(--e24);max-width:13ch;font-size:clamp(40px,7.4vw,80px);letter-spacing:-.025em}
+.final .corpo{margin:0 auto;max-width:52ch}
+.final .acoes{margin-top:var(--e40);justify-content:center}
 
 /* ---------------------------------------------------------------
    RODAPE
    --------------------------------------------------------------- */
-.rodape{background:var(--neblina);border-top:var(--fio);padding:var(--s64) 0 var(--s40)}
-.rodape p{font-size:12px;line-height:1.7;letter-spacing:-.033em;text-transform:uppercase;color:var(--nota);max-width:70ch}
-.rodape .links{margin-top:var(--s8)}
-.rodape .aviso{
-  margin-top:var(--s24);
-  padding-top:var(--s24);
-  border-top:var(--fio);
-  font-family:var(--serif);
-  font-style:italic;
-  font-size:14px;
-  letter-spacing:-.01em;
-  text-transform:none;
-  max-width:66ch;
-}
-@media(max-width:768px){.rodape{padding-bottom:104px}}
+.rodape{border-top:1px solid var(--fio);padding:var(--e64) 0 var(--e40)}
+.rodape p{font-size:14px;line-height:1.6;color:var(--cinza);max-width:70ch}
+.rodape .links{margin-top:var(--e8)}
+.rodape .links a{color:var(--ardosia);text-decoration:none;border-bottom:1px solid var(--fio)}
+.rodape .links a:hover,.rodape .links a:focus-visible{border-bottom-color:var(--sienna)}
+.rodape .aviso{margin-top:var(--e24);padding-top:var(--e24);border-top:1px solid var(--fio);font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ardosia);max-width:62ch}
+@media(max-width:768px){.rodape{padding-bottom:108px}}
 
 /* ---------------------------------------------------------------
    BARRA FIXA (SO MOBILE)
    --------------------------------------------------------------- */
 .barra-fixa{
-  position:fixed;
-  left:0;right:0;bottom:0;
-  z-index:50;
-  background:var(--linho);
-  border-top:1px solid var(--linha);
-  padding:12px var(--s16) calc(12px + env(safe-area-inset-bottom,0px));
-  transform:translateY(110%);
-  transition:transform .25s ease-out;
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(247,243,238,.94);
+  backdrop-filter:saturate(1.2) blur(10px);
+  border-top:1px solid var(--fio);
+  padding:var(--e12) var(--e16) calc(var(--e12) + env(safe-area-inset-bottom,0px));
+  transform:translateY(115%);
+  transition:transform .26s ease;
 }
 .barra-fixa.visivel{transform:none}
-.barra-fixa .botao{font-size:13px;padding:var(--s16) var(--s24)}
+.barra-fixa .pill{font-size:15px;padding:14px var(--e20)}
 @media(min-width:769px){.barra-fixa{display:none}}
 
 /* ---------------------------------------------------------------
    MOVIMENTO
    --------------------------------------------------------------- */
-.revelar{opacity:0;transform:translateY(8px)}
-.revelar.aparece{opacity:1;transform:none;transition:opacity .5s ease-out,transform .5s ease-out}
+.revelar{opacity:0;transform:translateY(10px)}
+.revelar.aparece{opacity:1;transform:none;transition:opacity .6s ease-out,transform .6s ease-out}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -687,54 +590,66 @@ src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
 <main>
 
 <!-- ============================ 1. HERO ============================ -->
-<section class="hero fundo-areia" aria-labelledby="titulo-principal">
-  <div class="envelope grade">
+<section class="hero papel" aria-labelledby="titulo-principal">
+  <div class="env grade">
 
-    <div class="hero-texto">
-      <!-- Headline em uso: opcao 1 das tres oferecidas no documento de copy.
-           Alternativas para teste A/B, trocar apenas o texto do h1:
+    <div class="texto">
+      <!-- Headline em uso: opcao 1 das tres do documento de copy.
+           Alternativas para teste A/B:
            "O plano se adapta à sua fase. Não você ao plano."
            "Pare de recomeçar. Comece a sustentar." -->
-      <h1 id="titulo-principal">Você não precisa de mais uma rotina. Precisa de um plano que acompanhe você.</h1>
+      <h1 id="titulo-principal">Você não precisa de mais uma rotina. Precisa de um plano <em>que acompanhe você</em>.</h1>
 
       <div class="sub">
-        <p>Em 28 dias, uma inteligência artificial transforma sua vida real, suas metas, projetos, hábitos e responsabilidades em um plano de execução organizado de acordo com o seu ciclo e com a forma como você funciona.</p>
+        <p class="corpo-g">Em 28 dias, uma inteligência artificial transforma sua vida real, suas metas, projetos, hábitos e responsabilidades em um plano de execução organizado de acordo com o seu ciclo e com a forma como você funciona.</p>
       </div>
 
       <div class="acoes">
-        <a class="botao" href="#problema" aria-label="Quero montar meu plano de 28 dias. Continuar para a próxima seção.">Quero montar meu plano de 28 dias</a>
-        <a class="botao botao-fantasma" href="#como" aria-label="Entender como funciona. Ir para a seção Como funciona.">Entender como funciona</a>
+        <a class="pill pill-cheio" href="#problema" aria-label="Quero montar meu plano de 28 dias. Continuar para a próxima seção.">Quero montar meu plano de 28 dias</a>
+        <a class="pill pill-fantasma" href="#como" aria-label="Entender como funciona. Ir para a seção Como funciona.">Entender como funciona</a>
       </div>
 
       <p class="apoio">Desafio Ciclo da Consciência. Pagamento único. Acesso vitalício.</p>
     </div>
 
-    <div class="hero-visual">
-      <div class="colagem">
-        <picture class="c1">
-          <source srcset="assets/check-in-diario.webp" type="image/webp">
-          <img src="assets/check-in-diario.jpg" width="590" height="1280" decoding="async" alt="Tela de check-in diário do sistema, com escolha de fase, nível de energia e foco do dia.">
-        </picture>
-        <picture class="c2">
-          <source srcset="assets/painel-do-dia.webp" type="image/webp">
-          <img src="assets/painel-do-dia.jpg" width="590" height="1280" fetchpriority="high" decoding="async" alt="Painel do sistema mostrando o dia atual, a fase e os atalhos para as fases, os 28 dias, o relatório e o planner.">
-        </picture>
-        <picture class="c3">
-          <source srcset="assets/plano-do-dia.webp" type="image/webp">
-          <img src="assets/plano-do-dia.jpg" width="590" height="1280" decoding="async" alt="Plano do dia montado pelo sistema, dividido em manhã e tarde, com horário e duração de cada tarefa.">
-        </picture>
-      </div>
+    <div class="colagem">
+      <figure class="artefato f1">
+        <div class="quadro">
+          <picture>
+            <source srcset="assets/check-in-diario.webp" type="image/webp">
+            <img src="assets/check-in-diario.jpg" width="590" height="1280" decoding="async" alt="Check-in do dia, com escolha de fase e nível de energia.">
+          </picture>
+        </div>
+      </figure>
+      <figure class="artefato f2">
+        <div class="quadro">
+          <picture>
+            <source srcset="assets/painel-do-dia.webp" type="image/webp">
+            <img src="assets/painel-do-dia.jpg" width="590" height="1280" fetchpriority="high" decoding="async" alt="Painel do dia, com a fase atual e o progresso dos 28 dias.">
+          </picture>
+        </div>
+      </figure>
+      <figure class="artefato f3">
+        <div class="quadro">
+          <picture>
+            <source srcset="assets/plano-do-dia.webp" type="image/webp">
+            <img src="assets/plano-do-dia.jpg" width="590" height="1280" decoding="async" alt="Plano do dia, com as tarefas distribuídas por período.">
+          </picture>
+        </div>
+      </figure>
     </div>
 
   </div>
 </section>
 
 <!-- ============================ 2. O PROBLEMA ============================ -->
-<section id="problema" class="problema fundo-neblina r128" aria-labelledby="t-problema">
-  <div class="envelope">
-    <div class="interno">
+<section id="problema" class="problema nevoa r-lg" aria-labelledby="t-problema">
+  <div class="env duo">
+    <div class="lado-texto">
       <h2 id="t-problema" class="revelar">Você já viveu esse ciclo?</h2>
-
+      <p class="fecho serif" style="font-size:clamp(21px,2.2vw,26px);line-height:1.3;letter-spacing:-.015em;max-width:24ch">Se isso parece familiar, talvez o problema nunca tenha sido a sua disciplina.</p>
+    </div>
+    <div class="lado-visual">
       <ol class="ciclo">
         <li>Você começa uma rotina nova, cheia de vontade.</li>
         <li>Organiza a semana, baixa um aplicativo, cria um planner.</li>
@@ -745,61 +660,61 @@ src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
         <li>Vem a culpa, a sensação de ter falhado de novo.</li>
         <li>E, na segunda-feira seguinte, você tenta recomeçar.</li>
       </ol>
-
-      <p class="fecho destaque">Se isso parece familiar, talvez o problema nunca tenha sido a sua disciplina.</p>
     </div>
   </div>
 </section>
 
 <!-- ============================ 3. NOVA PERSPECTIVA ============================ -->
-<section class="tese desloca fundo-areia r160" aria-labelledby="t-perspectiva">
-  <div class="envelope">
-    <div class="interno">
+<section class="tese papel r-xl" aria-labelledby="t-perspectiva">
+  <div class="env duo">
+    <div class="lado-texto">
       <h2 id="t-perspectiva" class="revelar">Talvez o problema não seja a sua capacidade de executar</h2>
-      <div class="corpo">
-        <p>Talvez você esteja tentando executar tudo da mesma maneira, todos os dias, mesmo quando sua energia, sua disposição e sua fase de vida mudam constantemente.</p>
-        <p>A pergunta muda. Não é mais &#8220;como eu faço para ter mais disciplina&#8221;. É &#8220;como eu organizo minhas demandas considerando como eu realmente funciono&#8221;.</p>
-      </div>
+    </div>
+    <div class="lado-visual corpo">
+      <p>Talvez você esteja tentando executar tudo da mesma maneira, todos os dias, mesmo quando sua energia, sua disposição e sua fase de vida mudam constantemente.</p>
+      <p>A pergunta muda. Não é mais &#8220;como eu faço para ter mais disciplina&#8221;. É &#8220;como eu organizo minhas demandas considerando como eu realmente funciono&#8221;.</p>
     </div>
   </div>
 </section>
 
 <!-- ============================ 4. O NOVO PARADIGMA ============================ -->
-<section class="tese fundo-areia r128" aria-labelledby="t-paradigma" style="padding-top:0">
-  <div class="envelope">
-    <div class="interno">
+<section class="tese nevoa r-xl" aria-labelledby="t-paradigma">
+  <div class="env duo espelhado">
+    <div class="lado-texto">
       <h2 id="t-paradigma" class="revelar">A rotina tradicional espera que você seja igual todos os dias</h2>
-      <div class="corpo">
-        <p>Segunda igual a terça, igual a quarta, igual a quinta. Mesmas expectativas, mesma distribuição de tarefas, mesma cobrança, todos os dias.</p>
-        <p>A vida pode continuar acontecendo todos os dias. A forma de organizar e executar as suas demandas é que pode, e deve, mudar.</p>
-      </div>
+    </div>
+    <div class="lado-visual corpo">
+      <p>Segunda igual a terça, igual a quarta, igual a quinta. Mesmas expectativas, mesma distribuição de tarefas, mesma cobrança, todos os dias.</p>
+      <p>A vida pode continuar acontecendo todos os dias. A forma de organizar e executar as suas demandas é que pode, e deve, mudar.</p>
     </div>
   </div>
 </section>
 
 <!-- ============================ 5. COMO FUNCIONA ============================ -->
-<section id="como" class="como fundo-neblina r160" aria-labelledby="t-como">
-  <div class="envelope">
-    <div class="grade">
-      <div class="topo">
+<section id="como" class="como papel r-xl" aria-labelledby="t-como">
+  <div class="env">
+    <div class="duo">
+      <div class="lado-texto">
         <h2 id="t-como" class="revelar">Conheça o Ciclo da Consciência</h2>
-        <p class="intro">Um sistema de planejamento cíclico que usa inteligência artificial para transformar a sua vida real em um plano de execução personalizado de 28 dias.</p>
+        <p class="intro corpo-g">Um sistema de planejamento cíclico que usa inteligência artificial para transformar a sua vida real em um plano de execução personalizado de 28 dias.</p>
       </div>
-    </div>
-
-    <div class="moldura-video">
-      <div class="recorte-video">
-        <video
-          controls
-          preload="metadata"
-          playsinline
-          muted
-          poster="assets/video-app-poster.jpg"
-          width="576" height="1194"
-          aria-label="Vídeo silencioso mostrando o sistema por dentro: o mapeamento inicial com a inteligência artificial, o plano de 28 dias, a checklist diária, o check-in e o relatório de padrões.">
-          <source src="assets/video-app.mp4" type="video/mp4">
-          <p>Seu navegador não reproduz este vídeo. <a class="link-sutil" href="assets/video-app.mp4">Abrir o arquivo do vídeo</a>.</p>
-        </video>
+      <div class="lado-visual">
+        <figure class="artefato palco-video">
+          <div class="quadro">
+            <video
+              controls
+              preload="metadata"
+              playsinline
+              muted
+              poster="assets/video-app-poster.jpg"
+              width="576" height="1194"
+              aria-label="Vídeo silencioso mostrando o sistema por dentro: o mapeamento inicial com a inteligência artificial, o plano de 28 dias, a checklist diária, o check-in e o relatório de padrões.">
+              <source src="assets/video-app.mp4" type="video/mp4">
+              <p>Seu navegador não reproduz este vídeo. <a class="link-seta" href="assets/video-app.mp4">Abrir o arquivo do vídeo</a>.</p>
+            </video>
+          </div>
+          <figcaption>O sistema por dentro, em menos de um minuto.</figcaption>
+        </figure>
       </div>
     </div>
 
@@ -817,187 +732,141 @@ src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
     <div class="metodo">
       <h3>Método CICLO</h3>
       <ol>
-        <li><span class="letra">C</span><span class="texto">Conhecer sua realidade</span></li>
-        <li><span class="letra">I</span><span class="texto">Identificar suas demandas</span></li>
-        <li><span class="letra">C</span><span class="texto">Cruzar com o seu ciclo</span></li>
-        <li><span class="letra">L</span><span class="texto">Localizar cada ação no melhor momento</span></li>
-        <li><span class="letra">O</span><span class="texto">Observar seus padrões</span></li>
+        <li><span class="letra">C</span><span class="txt">Conhecer sua realidade</span></li>
+        <li><span class="letra">I</span><span class="txt">Identificar suas demandas</span></li>
+        <li><span class="letra">C</span><span class="txt">Cruzar com o seu ciclo</span></li>
+        <li><span class="letra">L</span><span class="txt">Localizar cada ação no melhor momento</span></li>
+        <li><span class="letra">O</span><span class="txt">Observar seus padrões</span></li>
       </ol>
     </div>
   </div>
 </section>
 
 <!-- ============================ 6. O QUE VOCE RECEBE ============================ -->
-<section class="recebe fundo-areia r160" aria-labelledby="t-recebe">
-  <div class="envelope">
+<section class="recebe nevoa r-xl" aria-labelledby="t-recebe">
+  <div class="env">
     <h2 id="t-recebe" class="revelar">O que está incluso no Desafio Ciclo da Consciência</h2>
 
-    <div class="grade-conteudo">
-      <div class="itens">
+    <div class="duo">
+      <div class="lado-texto largo7">
         <ol class="entregas">
-
-          <li>
-            <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8l8 4.6v9.2l-8 4.6-8-4.6V7.4l8-4.6Z"/><path d="M12 2.8v18.4M4 7.4l16 9.2M20 7.4l-16 9.2"/></svg></span>
-            <p><strong>Mapeamento completo da sua vida:</strong> uma entrevista estruturada para entender suas principais áreas.</p>
-          </li>
-
-          <li>
-            <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.4" y="5.2" width="17.2" height="15.4" rx="2.4"/><path d="M3.4 10h17.2M8 2.9v4.2M16 2.9v4.2"/></svg></span>
-            <p><strong>Plano de ação personalizado de 28 dias,</strong> criado a partir das suas informações.</p>
-          </li>
-
-          <li>
-            <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 6.6l1.9 1.9 3.1-3.4M3.6 13l1.9 1.9 3.1-3.4M3.6 19.4l1.9 1.9 3.1-3.4"/><path d="M12.4 6.2h8M12.4 12.6h8M12.4 19h5.4"/></svg></span>
-            <p><strong>Checklist diária</strong> com o que fazer em cada dia.</p>
-          </li>
-
-          <li>
-            <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2 5.9 5.9 0 0 0 0-17.2Z" fill="currentColor" stroke="none"/></svg></span>
-            <p><strong>Planejamento por fases,</strong> com suas demandas organizadas de acordo com o seu ciclo e suas características individuais.</p>
-          </li>
-
-          <li>
-            <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 6.6V12l3.4 2"/></svg></span>
-            <p><strong>Check-ins</strong> para acompanhar como você está durante o desafio.</p>
-          </li>
-
-          <li>
-            <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3.4v17.2h16"/><path d="M7.2 16.4l3.6-4.8 3.1 2.6 5.1-6.6"/></svg></span>
-            <p><strong>Identificação de padrões</strong> ao longo dos 28 dias.</p>
-          </li>
-
-          <li>
-            <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.8h8.6L19 7.2v14H6z"/><path d="M14.2 2.8v4.6H19"/><path d="M9 12.4h7M9 16.4h4.6"/></svg></span>
-            <p><strong>Relatório personalizado</strong> com uma leitura dos seus padrões de execução.</p>
-          </li>
-
-          <li>
-            <span class="icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 13.4A9 9 0 1 1 18.7 6.4"/><path d="M18.3 2.4l.6 4.3-4.3.6"/></svg></span>
-            <p><strong>Planner Cíclico Personalizado</strong> para continuar usando depois do desafio.</p>
-          </li>
-
+          <li><span class="num">01</span><p><strong>Mapeamento completo da sua vida:</strong> uma entrevista estruturada para entender suas principais áreas.</p></li>
+          <li><span class="num">02</span><p><strong>Plano de ação personalizado de 28 dias,</strong> criado a partir das suas informações.</p></li>
+          <li><span class="num">03</span><p><strong>Checklist diária</strong> com o que fazer em cada dia.</p></li>
+          <li><span class="num">04</span><p><strong>Planejamento por fases,</strong> com suas demandas organizadas de acordo com o seu ciclo e suas características individuais.</p></li>
+          <li><span class="num">05</span><p><strong>Check-ins</strong> para acompanhar como você está durante o desafio.</p></li>
+          <li><span class="num">06</span><p><strong>Identificação de padrões</strong> ao longo dos 28 dias.</p></li>
+          <li><span class="num">07</span><p><strong>Relatório personalizado</strong> com uma leitura dos seus padrões de execução.</p></li>
+          <li><span class="num">08</span><p><strong>Planner Cíclico Personalizado</strong> para continuar usando depois do desafio.</p></li>
         </ol>
       </div>
-
-      <div class="provas">
-        <figure>
-          <picture>
-            <source srcset="assets/mapa-da-vida.webp" type="image/webp">
-            <img class="tela" src="assets/mapa-da-vida.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Tela do mapa da vida, listando as áreas mapeadas: crescimento pessoal, profissional, família e relacionamentos, espiritual.">
-          </picture>
-          <figcaption>O mapeamento, dentro do sistema.</figcaption>
-        </figure>
-        <figure>
-          <picture>
-            <source srcset="assets/os-28-dias.webp" type="image/webp">
-            <img class="tela" src="assets/os-28-dias.jpg" width="590" height="752" loading="lazy" decoding="async" alt="Tela com os 28 dias do desafio, agrupados por fase e com o progresso de cada uma.">
-          </picture>
-          <figcaption>Os 28 dias, organizados por fase.</figcaption>
-        </figure>
+      <div class="lado-visual estreito4">
+        <div class="par-artefatos">
+          <figure class="artefato">
+            <div class="quadro">
+              <picture>
+                <source srcset="assets/mapa-da-vida.webp" type="image/webp">
+                <img src="assets/mapa-da-vida.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Mapa da vida, listando as áreas mapeadas pelo sistema.">
+              </picture>
+            </div>
+            <figcaption>O mapeamento.</figcaption>
+          </figure>
+          <figure class="artefato">
+            <div class="quadro">
+              <picture>
+                <source srcset="assets/os-28-dias.webp" type="image/webp">
+                <img src="assets/os-28-dias.jpg" width="590" height="752" loading="lazy" decoding="async" alt="Os 28 dias do desafio, agrupados por fase.">
+              </picture>
+            </div>
+            <figcaption>Os 28 dias.</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================ 7. DIFERENCIAL ============================ -->
-<section class="diferencial fundo-neblina r128" aria-labelledby="t-diferencial">
-  <div class="envelope">
-    <h2 id="t-diferencial" class="revelar">O que torna esse sistema diferente</h2>
-    <p class="intro destaque">Você não recebe uma rotina pronta. A sua rotina é construída a partir de você.</p>
-
-    <table class="comparativo">
-      <thead>
-        <tr>
-          <th scope="col">Ferramenta</th>
-          <th scope="col">O que entrega</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-rot="Ferramenta">Planner tradicional</td>
-          <td data-rot="O que entrega">Estrutura</td>
-        </tr>
-        <tr>
-          <td data-rot="Ferramenta">Aplicativo de tarefas</td>
-          <td data-rot="O que entrega">Organização</td>
-        </tr>
-        <tr>
-          <td data-rot="Ferramenta">Curso de produtividade</td>
-          <td data-rot="O que entrega">Conhecimento</td>
-        </tr>
-        <tr>
-          <td data-rot="Ferramenta">Calendário menstrual</td>
-          <td data-rot="O que entrega">Acompanhamento do ciclo</td>
-        </tr>
-        <tr>
-          <td data-rot="Ferramenta">Ciclo da Consciência</td>
-          <td data-rot="O que entrega">Estratégia personalizada de execução</td>
-        </tr>
-      </tbody>
-    </table>
+<section class="diferencial papel r-lg" aria-labelledby="t-diferencial">
+  <div class="env duo">
+    <div class="lado-texto">
+      <h2 id="t-diferencial" class="revelar">O que torna esse sistema diferente</h2>
+      <p class="intro"><span class="serif">Você não recebe uma rotina pronta. A sua rotina é construída <em>a partir de você</em>.</span></p>
+    </div>
+    <div class="lado-visual">
+      <table class="comparativo">
+        <thead>
+          <tr>
+            <th scope="col">Ferramenta</th>
+            <th scope="col">O que entrega</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-rot="Ferramenta">Planner tradicional</td><td data-rot="O que entrega">Estrutura</td></tr>
+          <tr><td data-rot="Ferramenta">Aplicativo de tarefas</td><td data-rot="O que entrega">Organização</td></tr>
+          <tr><td data-rot="Ferramenta">Curso de produtividade</td><td data-rot="O que entrega">Conhecimento</td></tr>
+          <tr><td data-rot="Ferramenta">Calendário menstrual</td><td data-rot="O que entrega">Acompanhamento do ciclo</td></tr>
+          <tr><td data-rot="Ferramenta">Ciclo da Consciência</td><td data-rot="O que entrega">Estratégia personalizada de execução</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <!-- ============================ 8. A TRANSFORMACAO ============================ -->
-<section class="transformacao fundo-areia r160" aria-labelledby="t-transformacao">
-  <div class="envelope">
+<section class="transformacao nevoa r-lg" aria-labelledby="t-transformacao">
+  <div class="env">
     <h2 id="t-transformacao" class="revelar">A transformação</h2>
 
     <div class="momentos">
       <article class="momento">
         <span class="rotulo">Antes</span>
-        <p class="destaque">&#8220;Eu nunca consigo manter uma rotina.&#8221;</p>
+        <p>&#8220;Eu nunca consigo manter uma rotina.&#8221;</p>
       </article>
       <article class="momento">
         <span class="rotulo">Durante</span>
-        <p class="destaque">&#8220;Estou entendendo por que algumas coisas funcionam melhor em determinados momentos.&#8221;</p>
+        <p>&#8220;Estou entendendo por que algumas coisas funcionam melhor em determinados momentos.&#8221;</p>
       </article>
       <article class="momento">
         <span class="rotulo">Depois</span>
-        <p class="destaque">&#8220;Agora eu sei como organizar minhas demandas de acordo com a forma como funciono.&#8221;</p>
+        <p>&#8220;Agora eu sei como organizar minhas demandas de acordo com a forma como funciono.&#8221;</p>
       </article>
     </div>
 
-    <p class="fecho">Você não vai virar uma mulher superprodutiva. Vai parar de lutar contra você mesma para conseguir executar a sua vida.</p>
+    <p class="fecho corpo-g">Você não vai virar uma mulher superprodutiva. Vai parar de lutar contra você mesma para conseguir executar a sua vida.</p>
   </div>
 </section>
 
 <!-- ============================ 9. PROVA SOCIAL ============================ -->
-<section class="prova fundo-areia r96" aria-labelledby="t-prova" style="padding-top:0">
-  <div class="envelope">
-    <div class="interno">
-      <!-- PREENCHER: o documento de copy reservou esta secao mas nao trouxe titulo
-           nem depoimentos. Confirmar o titulo abaixo com a Larissa. -->
-      <h2 id="t-prova" class="revelar">Quem já viveu o desafio</h2>
-      <div class="reservado">
-        <span>Espaço reservado</span>
-        <p>Aqui entram os depoimentos das participantes: foto ou iniciais, frase de destaque e resultado percebido. Ainda não foram enviados.</p>
-      </div>
+<section class="prova papel r-md" aria-labelledby="t-prova">
+  <div class="env">
+    <!-- PREENCHER: o documento de copy reservou esta secao mas nao trouxe titulo
+         nem depoimentos. Confirmar o titulo abaixo com a Larissa. -->
+    <h2 id="t-prova" class="revelar">Quem já viveu o desafio</h2>
+    <div class="reservado">
+      <span class="rotulo">Espaço reservado</span>
+      <p>Aqui entram os depoimentos das participantes: foto ou iniciais, frase de destaque e resultado percebido. Ainda não foram enviados.</p>
     </div>
   </div>
 </section>
 
 <!-- ============================ 10. OFERTA ============================ -->
-<section id="oferta" class="oferta fundo-neblina r128" aria-labelledby="t-oferta">
-  <div class="envelope">
-    <h2 id="t-oferta" class="revelar">Desafio Ciclo da Consciência, 28 dias</h2>
-
-    <div class="cartao">
-      <!-- PREENCHER: confirmar o valor antes de publicar. Base interna informada no
-           documento de copy: R$ 37,00, com checkout na Kiwify. -->
-      <p class="preco">R$ 37</p>
-      <p class="condicao">Pagamento único. Acesso vitalício.</p>
-
-      <div class="acao">
-        <a class="botao botao-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero começar meu desafio. Ir para o checkout.">Quero começar meu desafio</a>
-      </div>
+<section id="oferta" class="oferta papel r-xl" aria-labelledby="t-oferta" style="padding-top:0">
+  <div class="env">
+    <h2 id="t-oferta" class="revelar" style="text-align:center">Desafio Ciclo da Consciência, 28 dias</h2>
+    <!-- PREENCHER: confirmar o valor antes de publicar. Base interna informada no
+         documento de copy: R$ 37,00, com checkout na Kiwify. -->
+    <p class="preco">R$ 37</p>
+    <p class="condicao">Pagamento único. Acesso vitalício.</p>
+    <div class="acoes">
+      <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero começar meu desafio. Ir para o checkout.">Quero começar meu desafio</a>
     </div>
   </div>
 </section>
 
 <!-- ============================ 11. PERGUNTAS FREQUENTES ============================ -->
-<section class="faq fundo-areia r128" aria-labelledby="t-faq">
-  <div class="envelope-leitura">
+<section class="faq nevoa r-lg" aria-labelledby="t-faq">
+  <div class="env-leitura">
     <h2 id="t-faq" class="revelar">Perguntas frequentes</h2>
 
     <details open>
@@ -1037,12 +906,14 @@ src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
 </section>
 
 <!-- ============================ 12. CHAMADA FINAL ============================ -->
-<section class="final fundo-neblina r128" aria-labelledby="t-final">
-  <div class="envelope-leitura">
-    <h2 id="t-final" class="revelar">Você não precisa recomeçar</h2>
-    <p>Precisa de um plano que acompanhe você. O Ciclo da Consciência usa inteligência artificial para transformar a sua vida real em uma estratégia de execução personalizada para os próximos 28 dias.</p>
+<section class="final papel r-xl" aria-labelledby="t-final">
+  <div class="env">
+    <h2 id="t-final" class="revelar">Você não precisa <em>recomeçar</em></h2>
+    <div class="corpo">
+      <p class="corpo-g" style="margin-inline:auto">Precisa de um plano que acompanhe você. O Ciclo da Consciência usa inteligência artificial para transformar a sua vida real em uma estratégia de execução personalizada para os próximos 28 dias.</p>
+    </div>
     <div class="acoes">
-      <a class="botao" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero montar meu plano agora. Ir para o checkout.">Quero montar meu plano agora</a>
+      <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero montar meu plano agora. Ir para o checkout.">Quero montar meu plano agora</a>
     </div>
   </div>
 </section>
@@ -1050,13 +921,13 @@ src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
 </main>
 
 <!-- ============================ RODAPE ============================ -->
-<footer class="rodape">
-  <div class="envelope">
+<footer class="rodape papel">
+  <div class="env">
     <p>&copy; 2026 <!-- PREENCHER: nome da marca, se quiser exibir aqui -->&middot; Todos os direitos reservados</p>
     <p class="links">
-      <!-- PREENCHER: link da política de privacidade --><a class="link-sutil" href="#">Política de Privacidade</a> &middot;
-      <!-- PREENCHER: link dos termos de uso --><a class="link-sutil" href="#">Termos de Uso</a> &middot;
-      <!-- PREENCHER: e-mail de contato --><a class="link-sutil" href="#">Contato</a>
+      <!-- PREENCHER: link da política de privacidade --><a href="#">Política de Privacidade</a> &middot;
+      <!-- PREENCHER: link dos termos de uso --><a href="#">Termos de Uso</a> &middot;
+      <!-- PREENCHER: e-mail de contato --><a href="#">Contato</a>
     </p>
     <p class="aviso">Este produto não realiza diagnóstico e não substitui acompanhamento psicológico, psiquiátrico ou médico.</p>
   </div>
@@ -1064,14 +935,13 @@ src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
 
 <!-- ============================ BARRA FIXA (MOBILE) ============================ -->
 <div class="barra-fixa" id="barraFixa">
-  <a class="botao botao-largo" href="#oferta" aria-label="Quero começar meu desafio. Ir para a seção da oferta.">Quero começar meu desafio</a>
+  <a class="pill pill-cheio pill-largo" href="#oferta" aria-label="Quero começar meu desafio. Ir para a seção da oferta.">Quero começar meu desafio</a>
 </div>
 
 <script>
 (function () {
   var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Uma única animação: títulos de seção entram com 8px de deslocamento. */
   var titulos = document.querySelectorAll('.revelar');
   if (reduz || !('IntersectionObserver' in window)) {
     titulos.forEach(function (t) { t.classList.add('aparece'); });
@@ -1084,7 +954,6 @@ src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
     titulos.forEach(function (t) { obs.observe(t); });
   }
 
-  /* Barra fixa do mobile: aparece depois da primeira dobra. */
   var barra = document.getElementById('barraFixa');
   var limite = function () { return window.innerHeight * 0.9; };
   var pendente = false;
