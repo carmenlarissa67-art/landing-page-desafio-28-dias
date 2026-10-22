@@ -1,0 +1,80 @@
+[
+  {
+    "width": 320,
+    "overflow": [],
+    "ctaTop": 624,
+    "ctaBottom": 695
+  },
+  {
+    "width": 360,
+    "overflow": [],
+    "ctaTop": 559,
+    "ctaBottom": 630
+  },
+  {
+    "width": 390,
+    "overflow": [],
+    "ctaTop": 499,
+    "ctaBottom": 550
+  },
+  {
+    "width": 430,
+    "overflow": [],
+    "ctaTop": 499,
+    "ctaBottom": 550
+  },
+  {
+    "width": 600,
+    "overflow": [],
+    "ctaTop": 383,
+    "ctaBottom": 437
+  },
+  {
+    "width": 768,
+    "overflow": [],
+    "ctaTop": 376,
+    "ctaBottom": 430
+  },
+  {
+    "width": 800,
+    "overflow": [],
+    "ctaTop": 414,
+    "ctaBottom": 468
+  },
+  {
+    "width": 960,
+    "overflow": [],
+    "ctaTop": 446,
+    "ctaBottom": 500
+  },
+  {
+    "width": 980,
+    "overflow": [],
+    "ctaTop": 664,
+    "ctaBottom": 718
+  },
+  {
+    "width": 1024,
+    "overflow": [],
+    "ctaTop": 668,
+    "ctaBottom": 722
+  },
+  {
+    "width": 1366,
+    "overflow": [],
+    "ctaTop": 646,
+    "ctaBottom": 700
+  },
+  {
+    "width": 1440,
+    "overflow": [],
+    "ctaTop": 646,
+    "ctaBottom": 700
+  },
+  {
+    "width": 1920,
+    "overflow": [],
+    "ctaTop": 646,
+    "ctaBottom": 700
+  }
+]

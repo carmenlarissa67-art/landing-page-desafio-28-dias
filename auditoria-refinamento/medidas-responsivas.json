@@ -1,0 +1,223 @@
+[
+  {
+    "width": 320,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 71,
+      "padding": "15px 20px",
+      "selector": "pill pill-cheio",
+      "w": 257,
+      "x": 24,
+      "y": 585
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "256.8px"
+  },
+  {
+    "width": 360,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 71,
+      "padding": "15px 20px",
+      "selector": "pill pill-cheio",
+      "w": 297,
+      "x": 24,
+      "y": 526
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "296.8px"
+  },
+  {
+    "width": 390,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 51,
+      "padding": "15px 20px",
+      "selector": "pill pill-cheio",
+      "w": 327,
+      "x": 24,
+      "y": 499
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "327.2px"
+  },
+  {
+    "width": 430,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 51,
+      "padding": "15px 20px",
+      "selector": "pill pill-cheio",
+      "w": 367,
+      "x": 24,
+      "y": 460
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "367.2px"
+  },
+  {
+    "width": 600,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 24,
+      "y": 382
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "260.4px 260.4px"
+  },
+  {
+    "width": 768,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 24,
+      "y": 376
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "344.4px 344.4px"
+  },
+  {
+    "width": 800,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 40,
+      "y": 413
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "344.4px 344.4px"
+  },
+  {
+    "width": 960,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 40,
+      "y": 445
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "424.4px 424.4px"
+  },
+  {
+    "width": 980,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 40,
+      "y": 632
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "434.4px 434.4px"
+  },
+  {
+    "width": 1024,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 40,
+      "y": 620
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "220.2px 220.2px 220.2px 220.2px"
+  },
+  {
+    "width": 1366,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 126,
+      "y": 645
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "263px 263px 263px 263px"
+  },
+  {
+    "width": 1440,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 162,
+      "y": 645
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "263px 263px 263px 263px"
+  },
+  {
+    "width": 1920,
+    "overflow": [],
+    "firstCTA": {
+      "columns": "none",
+      "gap": "normal",
+      "h": 54,
+      "padding": "16px 32px",
+      "selector": "pill pill-cheio",
+      "w": 357,
+      "x": 402,
+      "y": 645
+    },
+    "stepPadding": "28px 24px",
+    "stepGap": "28px",
+    "phaseColumns": "263px 263px 263px 263px"
+  }
+]

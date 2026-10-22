@@ -2,704 +2,1950 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>Desafio 28 Dias: Meu Ritmo com IA</title>
-<meta name="description" content="Um sistema com IA que organiza suas metas, hábitos e projetos em um plano de 28 dias adaptado ao seu ciclo. Pare de recomeçar, comece a sustentar.">
+<title>Meu Ritmo | Desafio 28 Dias — Organização Pessoal com IA</title>
+<meta name="description" content="O Meu Ritmo é um aplicativo com inteligência artificial que transforma suas responsabilidades, metas e prioridades em um plano personalizado de 28 dias adaptado ao seu ciclo.">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
-<meta property="og:title" content="Desafio 28 Dias: Meu Ritmo com IA">
-<meta property="og:description" content="Um sistema com IA que organiza suas metas, hábitos e projetos em um plano de 28 dias adaptado ao seu ciclo. Pare de recomeçar, comece a sustentar.">
-<!-- Trocar o dominio abaixo se um dominio proprio for ligado ao projeto -->
+<meta property="og:title" content="Meu Ritmo | Desafio 28 Dias — Organização Pessoal com IA">
+<meta property="og:description" content="O Meu Ritmo é um aplicativo com inteligência artificial que transforma suas responsabilidades, metas e prioridades em um plano personalizado de 28 dias adaptado ao seu ciclo.">
 <link rel="canonical" href="https://landing-page-desafio-28-dias.vercel.app/">
 <meta property="og:url" content="https://landing-page-desafio-28-dias.vercel.app/">
 <meta property="og:image" content="https://landing-page-desafio-28-dias.vercel.app/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Três telas do sistema: check-in diário, painel do dia e plano do dia.">
+<meta property="og:image:alt" content="Meu Ritmo — Organização pessoal com inteligência artificial adaptada à sua rotina e ciclo.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Desafio 28 Dias: Meu Ritmo com IA">
-<meta name="twitter:description" content="Um sistema com IA que organiza suas metas, hábitos e projetos em um plano de 28 dias adaptado ao seu ciclo.">
+<meta name="twitter:title" content="Meu Ritmo | Desafio 28 Dias — Organização Pessoal com IA">
+<meta name="twitter:description" content="O Meu Ritmo é um aplicativo com inteligência artificial que transforma suas responsabilidades, metas e prioridades em um plano personalizado de 28 dias.">
 <meta name="twitter:image" content="https://landing-page-desafio-28-dias.vercel.app/assets/og-image.jpg">
 
-<meta name="theme-color" content="#F7F3EE">
+<meta name="theme-color" content="#F7F3ED">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
+<!-- Tipografia Meu Ritmo: Fahkwang nos títulos e Livvic na leitura e nos controles; pesos 400 e 500. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fahkwang:ital,wght@0,400;0,500;1,400;1,500&family=Livvic:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 
 <style>
 /* ===============================================================
-   FUSAO DAS TRES REFERENCIAS
-
-   Steep  : tipografia (serifada de display em peso 400 + sans de
-            meio-peso), artefatos de produto flutuantes, o par de
-            pills, o acento pessego usado uma unica vez, base 4px.
-   Monad  : a tela morna de papel, o fio de 1px, a contencao.
-   Dala   : a escala monumental, o tracking muito negativo, o ritmo
-            de duas colunas em zigue-zague, uma unica cor de acao,
-            e a densidade baixissima: um ou dois elementos por tela.
+   MEU RITMO — DESIGN SYSTEM OFICIAL REFINADO
+   Conceito: Produto digital premium, clareza mental e acolhimento
+   Paleta: Base (#F7F3ED), Secundária Lavanda (#DCD5E9),
+           Complementar Sálvia (#A8B6A3), Texto Ameixa (#53465C),
+           Ação Roxo (#846A94)
+   Tipografia: Fahkwang + Livvic (regular e médio)
    =============================================================== */
-:root{
-  /* Superficies, do nivel 0 ao 4 */
-  --papel:#F7F3EE;        /* 0 canvas morno */
-  --nevoa:#FBF9F6;        /* 1 banda alternada, o mais claro */
-  --bruma:#EFEAE4;        /* 2 cartao neutro */
-  --pessego:#FBE1D1;      /* 3 acento editorial, uma vez na pagina */
-  --alto:#FFFDFB;         /* 4 artefato flutuante */
+:root {
+  /* Paleta Oficial */
+  --base: #F7F3ED;             /* Creme suave - Fundo predominante */
+  --secundaria: #DCD5E9;       /* Lavanda - Destaques e cartões especiais */
+  --complementar: #A8B6A3;     /* Verde sálvia - Fases e benefícios */
+  --texto: #53465C;            /* Ameixa acinzentada - Texto principal */
+  --acao: #846A94;             /* Roxo sofisticado - Botões e links de ação */
 
-  /* Tinta */
-  --tinta:#1F1B18;
-  --grafite:#544B44;
-  --ardosia:#6E645B;
-  --cinza:#8C8279;
-  --sienna:#5D2A1A;       /* acao primaria e tinta sobre o pessego */
-  --terracota:#C08466;
-  --fio:#E4DDD5;
+  /* Variações de contraste para as superfícies usadas nesta página */
+  --base-pura: #FFFDFB;        /* Superfície de artefatos e cards */
+  --secundaria-suave: #F3EEF9; /* Fundo alternativo suave */
+  --secundaria-borda: #CEC3DF; /* Bordas suaves em lavanda */
+  --complementar-suave: #EEF3ED; /* Sálvia suave */
+  --complementar-escuro: #43543E; /* Sálvia contrastante para texto em fundo claro */
+  --texto-forte: #322538;      /* Ameixa escura para títulos */
+  --texto-suave: #64566E;      /* Ameixa média para parágrafos secundários */
+  --texto-legenda: #6E5F78;    /* Contraste para legendas sobre creme e lavanda */
+  --acao-texto: #6E537D;       /* Variante escura para links e rótulos pequenos */
+  --acao-hover: #6E537D;
+  --acao-active: #5B4169;
+  --fio: #E4DCEB;              /* Divisórias sutis */
 
-  /* Familias */
-  --serif:'Instrument Serif','Source Serif 4',Georgia,'Times New Roman',serif;
-  --sans:'Archivo','Sohne',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;
+  /* Tipografia */
+  --titulo: 'Fahkwang', 'Segoe UI', sans-serif;
+  --sans: 'Livvic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Base 4px */
-  --e4:4px;   --e8:8px;   --e12:12px; --e16:16px; --e20:20px;
-  --e24:24px; --e32:32px; --e40:40px; --e64:64px; --e80:80px;
-  --e96:96px; --e128:128px; --e160:160px;
+  /* Espaçamentos e Medidas */
+  --e4: 4px;   --e8: 8px;   --e12: 12px; --e16: 16px; --e20: 20px;
+  --e24: 24px; --e28: 28px; --e32: 32px; --e36: 36px;
+  --e40: 40px; --e48: 48px; --e64: 64px;
+  --e80: 80px; --e96: 96px; --e120: 120px;
 
-  /* Formato */
-  --r-pill:9999px;
-  --r-cartao:24px;
-  --r-alto:20px;
-  --r-pequeno:16px;
-  --r-img:12px;
+  /* Formas e Raios */
+  --r-pill: 9999px;
+  --r-cartao: 24px;
+  --r-alto: 20px;
+  --r-img: 14px;
 
-  --largo:1200px;
-  --leitura:660px;
+  /* Dimensões */
+  --largo: 1180px;
+  --leitura: 680px;
 
-  /* So o artefato flutuante tem sombra */
-  --flutua:0 0 0 1px rgba(31,27,24,.05), 0 20px 25px -5px rgba(31,27,24,.10), 0 8px 10px -6px rgba(31,27,24,.10);
+  /* Sombras sutis e modernas de aplicativo */
+  --flutua: 0 4px 20px -2px rgba(83, 70, 92, 0.07), 0 1px 3px rgba(83, 70, 92, 0.04);
+  --flutua-forte: 0 16px 36px -6px rgba(83, 70, 92, 0.12), 0 2px 6px rgba(83, 70, 92, 0.06);
 }
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-
-body{
-  font-family:var(--sans);
-  font-weight:400;
-  font-size:17px;
-  line-height:1.55;
-  color:var(--grafite);
-  background:var(--papel);
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* ---------------------------------------------------------------
-   TIPOGRAFIA  (Steep)
-   A serifada fica em peso 400 em todos os tamanhos. A hierarquia
-   vem da escala e do tracking negativo, nunca do peso.
-   --------------------------------------------------------------- */
-h1,h2,h3,.serif{
-  font-family:var(--serif);
-  font-weight:400;
-  color:var(--tinta);
-  font-style:normal;
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
-h1{
-  font-size:clamp(40px,8.2vw,90px);
-  line-height:1.06;
-  letter-spacing:-.025em;
-  max-width:14ch;
-}
-h2{
-  font-size:clamp(34px,5.6vw,64px);
-  line-height:1.12;
-  letter-spacing:-.02em;
-  max-width:17ch;
-}
-h3{
-  font-size:clamp(24px,3vw,32px);
-  line-height:1.18;
-  letter-spacing:-.015em;
-}
-h1 em,h2 em,h3 em,.serif em{font-style:italic}
-
-p{max-width:62ch}
-p + p{margin-top:1.1em}
-
-strong{font-weight:500;color:var(--tinta)}
-em,i{font-style:italic}
-a{color:inherit}
-
-.corpo-g{font-size:clamp(18px,1.6vw,20px);line-height:1.5;color:var(--ardosia)}
-.rotulo{
-  display:block;
-  font-family:var(--sans);
-  font-size:13px;
-  font-weight:500;
-  letter-spacing:.11em;
-  text-transform:uppercase;
-  color:var(--sienna);
-}
-.legenda{font-size:15px;line-height:1.5;color:var(--cinza);max-width:52ch}
-
-/* ---------------------------------------------------------------
-   ESTRUTURA  (Dala: baixissima densidade, zigue-zague)
-   --------------------------------------------------------------- */
-.env{width:100%;max-width:var(--largo);margin:0 auto;padding:0 var(--e24)}
-.env-leitura{width:100%;max-width:var(--leitura);margin:0 auto;padding:0 var(--e24)}
-@media(min-width:769px){.env{padding:0 var(--e40)}.env-leitura{padding:0 var(--e40)}}
-
-.papel{background:var(--papel)}
-.nevoa{background:var(--nevoa)}
-
-.r-md{padding-block:var(--e80)}
-.r-lg{padding-block:var(--e96)}
-.r-xl{padding-block:var(--e96)}
-@media(min-width:769px){
-  .r-md{padding-block:var(--e96)}
-  .r-lg{padding-block:var(--e128)}
-  .r-xl{padding-block:var(--e160)}
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--texto);
+  background-color: var(--base);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* duas colunas assimetricas, alternando o lado */
-.duo{display:grid;grid-template-columns:1fr;gap:var(--e40)}
-@media(min-width:940px){
-  .duo{grid-template-columns:repeat(12,1fr);gap:var(--e40);align-items:center}
-  .duo > .lado-texto{grid-column:1 / span 6}
-  .duo > .lado-visual{grid-column:8 / span 5}
-  .duo.espelhado > .lado-texto{grid-column:7 / span 6}
-  .duo.espelhado > .lado-visual{grid-column:1 / span 5;grid-row:1}
+/* Link de Pular Navegação (Acessibilidade WCAG 2.2) */
+.pular-navegacao {
+  position: absolute;
+  top: -60px;
+  left: 20px;
+  z-index: 1000;
+  background: var(--acao-hover);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: var(--r-pill);
+  font-weight: 500;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.pular-navegacao:focus {
+  top: 16px;
 }
 
-.risco{border:0;border-top:1px solid var(--fio);width:64px;margin:0}
-
-/* ---------------------------------------------------------------
-   BOTOES  (Steep: pill cheio + pill fantasma, sempre em par)
-   --------------------------------------------------------------- */
-.acoes{display:flex;flex-wrap:wrap;gap:var(--e12);align-items:center}
-
-.pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  max-width:100%;
-  font-family:var(--sans);
-  font-size:16px;
-  font-weight:450;
-  letter-spacing:-.004em;
-  line-height:1.3;
-  text-decoration:none;
-  padding:15px var(--e24);
-  border-radius:var(--r-pill);
-  border:1px solid transparent;
-  transition:background-color .16s ease,border-color .16s ease,color .16s ease;
-}
-.pill-cheio{background:var(--sienna);color:#FFFDFB;border-color:var(--sienna)}
-.pill-cheio:hover,.pill-cheio:focus-visible{background:#4A2015;border-color:#4A2015}
-.pill-fantasma{background:transparent;color:var(--tinta);border-color:var(--tinta)}
-.pill-fantasma:hover,.pill-fantasma:focus-visible{background:transparent;border-color:var(--sienna);color:var(--sienna)}
-.pill-largo{display:flex;width:100%}
-@media(min-width:769px){.pill{font-size:17px;padding:16px var(--e32)}}
-
-.link-seta{
-  display:inline-block;
-  font-size:16px;
-  color:var(--tinta);
-  text-decoration:none;
-  border-bottom:1px solid transparent;
-  transition:border-color .16s ease;
-}
-.link-seta:hover,.link-seta:focus-visible{border-bottom-color:var(--tinta)}
-
-.pendente{color:var(--cinza);border-bottom:1px dashed var(--fio)}
-:focus-visible{outline:2px solid var(--sienna);outline-offset:3px;border-radius:4px}
-
-/* ---------------------------------------------------------------
-   ARTEFATO FLUTUANTE  (Steep)
-   O unico elemento com sombra. Recorta a tela do app como
-   fragmento de interface, nao como celular inteiro.
-   --------------------------------------------------------------- */
-.artefato{
-  background:var(--alto);
-  border-radius:var(--r-alto);
-  box-shadow:var(--flutua);
-  padding:var(--e12);
-  overflow:hidden;
-}
-.artefato .quadro{
-  border-radius:var(--r-img);
-  overflow:hidden;
-  background:var(--bruma);
-  line-height:0;
-}
-.artefato .quadro img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.artefato figcaption{
-  font-size:13px;
-  line-height:1.4;
-  color:var(--cinza);
-  padding:var(--e12) var(--e4) var(--e4);
+/* Tipografia */
+h1, h2, h3, h4, .serif {
+  font-family: var(--titulo);
+  font-weight: 500;
+  color: var(--texto-forte);
+  font-style: normal;
 }
 
-/* cartao neutro, sem sombra (Steep) */
-.cartao-neutro{
-  background:var(--bruma);
-  border-radius:var(--r-cartao);
-  padding:var(--e32) var(--e24);
-}
-@media(min-width:769px){.cartao-neutro{padding:var(--e40) var(--e32)}}
-
-/* ---------------------------------------------------------------
-   1. HERO  (Steep: manchete gigante + colagem de artefatos)
-   --------------------------------------------------------------- */
-.hero{padding-top:var(--e64);padding-bottom:var(--e96)}
-@media(min-width:769px){.hero{padding-top:var(--e96);padding-bottom:var(--e160)}}
-
-.hero .grade{display:grid;grid-template-columns:1fr;gap:var(--e64)}
-@media(min-width:1000px){
-  .hero .grade{grid-template-columns:repeat(12,1fr);gap:var(--e40);align-items:center}
-  .hero .texto{grid-column:1 / span 6}
-  .hero .colagem{grid-column:7 / span 6}
-}
-.hero h1{margin-bottom:var(--e24)}
-.hero .sub{max-width:46ch}
-.hero .acoes{margin-top:var(--e32)}
-.hero .apoio{margin-top:var(--e20);font-size:15px;color:var(--cinza);max-width:none}
-
-/* colagem: tres fragmentos flutuando em offsets diferentes */
-.colagem{position:relative;width:100%;aspect-ratio:1/.94;max-width:620px;margin-inline:auto}
-.colagem .artefato{position:absolute}
-.colagem .f1{width:47%;left:0;top:4%;transform:rotate(-3deg);z-index:1}
-.colagem .f2{width:50%;right:1%;top:0;transform:rotate(2.2deg);z-index:3}
-.colagem .f3{width:52%;left:12%;bottom:0;transform:rotate(1.2deg);z-index:2}
-.colagem .f1 .quadro{aspect-ratio:1/1}
-.colagem .f2 .quadro{aspect-ratio:4/3}
-.colagem .f3 .quadro{aspect-ratio:5/3}
-@media(max-width:520px){
-  .colagem{aspect-ratio:1/1.02}
-  .colagem .f1{width:52%}
-  .colagem .f2{width:54%}
-  .colagem .f3{width:58%;left:8%}
+h1 {
+  font-size: clamp(34px, 5.2vw, 58px);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
 }
 
-/* ---------------------------------------------------------------
-   2. O PROBLEMA
-   --------------------------------------------------------------- */
-.problema h2{margin-bottom:var(--e40)}
-.ciclo{list-style:none;counter-reset:passo;max-width:640px}
-.ciclo li{
-  counter-increment:passo;
-  display:grid;
-  grid-template-columns:44px 1fr;
-  gap:var(--e16);
-  padding:var(--e20) 0;
-  border-bottom:1px solid var(--fio);
-  font-size:clamp(17px,1.8vw,19px);
-  line-height:1.45;
-  color:var(--grafite);
+h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.18;
+  letter-spacing: -0.018em;
 }
-.ciclo li:first-child{border-top:1px solid var(--fio)}
-.ciclo li::before{
-  content:counter(passo,decimal-leading-zero);
-  font-family:var(--serif);
-  font-size:20px;
-  line-height:1.45;
-  color:var(--cinza);
+
+h3 {
+  font-size: clamp(21px, 2.4vw, 28px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
-.problema .fecho{margin-top:var(--e40)}
 
-/* ---------------------------------------------------------------
-   3 e 4. TESES  (Dala: um bloco por tela, muito ar)
-   --------------------------------------------------------------- */
-.tese h2{margin-bottom:var(--e32)}
-.tese .corpo{max-width:58ch}
-.tese .corpo p{font-size:clamp(18px,1.6vw,20px);line-height:1.5;color:var(--ardosia)}
-
-/* ---------------------------------------------------------------
-   5. COMO FUNCIONA
-   --------------------------------------------------------------- */
-.como h2{margin-bottom:var(--e24)}
-.como .intro{max-width:52ch}
-
-.palco-video{width:100%;max-width:380px;margin-inline:auto}
-@media(min-width:940px){.palco-video{margin-inline:0}}
-.palco-video .quadro{aspect-ratio:auto}
-.palco-video video{display:block;width:100%;height:auto}
-
-.passos{list-style:none;counter-reset:etapa;display:grid;grid-template-columns:1fr;gap:var(--e16);margin-top:var(--e96)}
-@media(min-width:700px){.passos{grid-template-columns:1fr 1fr;gap:var(--e20)}}
-@media(min-width:1100px){.passos{grid-template-columns:repeat(4,1fr)}}
-.passos li{
-  counter-increment:etapa;
-  background:var(--bruma);
-  border-radius:var(--r-cartao);
-  padding:var(--e24) var(--e20) var(--e32);
+h1 em, h2 em, h3 em, .serif em {
+  font-style: italic;
+  font-weight: 400;
 }
-.passos li::before{
-  content:counter(etapa,decimal-leading-zero);
-  display:block;
-  font-family:var(--serif);
-  font-size:40px;
-  line-height:1;
-  letter-spacing:-.02em;
-  color:var(--cinza);
-  margin-bottom:var(--e16);
-}
-.passos li p{font-size:16px;line-height:1.5;max-width:none}
 
-/* O UNICO cartao pessego da pagina (Steep) */
-.metodo{
-  background:var(--pessego);
-  color:var(--sienna);
-  border-radius:var(--r-cartao);
-  padding:var(--e32) var(--e24);
-  margin-top:var(--e64);
+p {
+  max-width: 62ch;
 }
-@media(min-width:769px){.metodo{padding:var(--e64) var(--e40)}}
-.metodo h3{color:var(--sienna);margin-bottom:var(--e32)}
-.metodo ol{list-style:none;display:grid;gap:var(--e24)}
-@media(min-width:860px){.metodo ol{grid-template-columns:repeat(5,1fr);gap:var(--e20)}}
-.metodo li{display:flex;gap:var(--e16);align-items:baseline}
-@media(min-width:860px){.metodo li{flex-direction:column;gap:var(--e8);align-items:flex-start}}
-.metodo .letra{font-family:var(--serif);font-size:44px;line-height:.9;letter-spacing:-.02em;color:var(--sienna);flex:0 0 auto}
-.metodo .txt{font-size:16px;line-height:1.4;color:var(--sienna)}
 
-/* ---------------------------------------------------------------
-   6. O QUE VOCE RECEBE
-   --------------------------------------------------------------- */
-.recebe h2{margin-bottom:var(--e64)}
-.entregas{list-style:none;display:grid;grid-template-columns:1fr;gap:var(--e32)}
-@media(min-width:640px){.entregas{grid-template-columns:1fr 1fr;gap:var(--e40) var(--e32)}}
-.entregas li{border-top:1px solid var(--fio);padding-top:var(--e20)}
-.entregas .num{
-  display:block;
-  font-family:var(--sans);
-  font-size:13px;
-  font-weight:500;
-  letter-spacing:.11em;
-  color:var(--cinza);
-  margin-bottom:var(--e12);
+p + p {
+  margin-top: 1.15em;
 }
-.entregas p{font-size:17px;line-height:1.5;max-width:none}
 
-.par-artefatos{display:grid;grid-template-columns:1fr 1fr;gap:var(--e20);margin-top:var(--e64)}
-@media(min-width:940px){
-  .duo > .largo7{grid-column:1 / span 7}
-  .duo > .estreito4{grid-column:9 / span 4}
-  .par-artefatos{grid-template-columns:1fr;gap:var(--e32);margin-top:0}
-  .par-artefatos figure:last-child{margin-left:16%}
+strong {
+  font-weight: 500;
+  color: var(--texto-forte);
 }
-.par-artefatos .quadro{aspect-ratio:3/4}
 
-/* ---------------------------------------------------------------
-   7. DIFERENCIAL
-   --------------------------------------------------------------- */
-.diferencial h2{margin-bottom:var(--e24)}
-.diferencial .intro{margin-bottom:var(--e64);max-width:26ch}
-.diferencial .intro .serif{font-size:clamp(22px,2.4vw,30px);line-height:1.25;letter-spacing:-.015em;display:block;max-width:22ch}
+a {
+  color: inherit;
+}
 
-.comparativo{width:100%;border-collapse:collapse;text-align:left}
-.comparativo th{
-  font-family:var(--sans);
-  font-weight:500;
-  font-size:13px;
-  letter-spacing:.11em;
-  text-transform:uppercase;
-  color:var(--cinza);
-  padding:0 var(--e24) var(--e12) 0;
-  border-bottom:1px solid var(--fio);
-  vertical-align:bottom;
-  width:50%;
+.corpo-g {
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.55;
+  color: var(--texto-suave);
 }
-.comparativo th:last-child{padding-right:0;padding-left:var(--e24)}
-.comparativo td{
-  padding:var(--e24) var(--e24) var(--e24) 0;
-  border-bottom:1px solid var(--fio);
-  vertical-align:top;
-  font-size:clamp(17px,1.7vw,19px);
-  line-height:1.4;
-  width:50%;
+
+.rotulo {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--acao-texto);
+  margin-bottom: var(--e12);
 }
-.comparativo td:last-child{padding-right:0;padding-left:var(--e24)}
-.comparativo tr:last-child td{color:var(--tinta)}
-.comparativo tr:last-child td:last-child{font-family:var(--serif);font-size:clamp(20px,2.2vw,26px);letter-spacing:-.015em;line-height:1.2}
-.comparativo td::before{display:none}
-@media(max-width:700px){
-  .comparativo,.comparativo tbody,.comparativo tr,.comparativo td{display:block;width:100%}
-  .comparativo thead{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);border:0}
-  .comparativo tr{border-bottom:1px solid var(--fio);padding:var(--e24) 0}
-  .comparativo tr:first-child{border-top:1px solid var(--fio)}
-  .comparativo td{border:0;padding:0}
-  .comparativo td:last-child{padding-left:0;margin-top:var(--e8)}
-  .comparativo td::before{
-    display:block;content:attr(data-rot);
-    font-size:12px;letter-spacing:.11em;text-transform:uppercase;
-    color:var(--cinza);margin-bottom:var(--e4);
+
+.legenda {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--texto-legenda);
+}
+
+/* Containers e Seções */
+.env {
+  width: 100%;
+  max-width: var(--largo);
+  margin: 0 auto;
+  padding: 0 var(--e24);
+}
+
+.env-leitura {
+  width: 100%;
+  max-width: var(--leitura);
+  margin: 0 auto;
+  padding: 0 var(--e24);
+}
+
+@media (min-width: 769px) {
+  .env {
+    padding: 0 var(--e40);
+  }
+  .env-leitura {
+    padding: 0 var(--e40);
   }
 }
 
-/* ---------------------------------------------------------------
-   8. A TRANSFORMACAO
-   --------------------------------------------------------------- */
-.transformacao h2{margin-bottom:var(--e64)}
-.momentos{display:grid;grid-template-columns:1fr;gap:var(--e20)}
-@media(min-width:860px){.momentos{grid-template-columns:repeat(3,1fr);gap:var(--e24)}}
-.momento{background:var(--bruma);border-radius:var(--r-cartao);padding:var(--e32) var(--e24)}
-@media(min-width:769px){.momento{padding:var(--e40) var(--e32)}}
-.momento .rotulo{margin-bottom:var(--e20);color:var(--cinza)}
-.momento p{
-  font-family:var(--serif);
-  font-size:clamp(21px,2.2vw,26px);
-  line-height:1.25;
-  letter-spacing:-.015em;
-  color:var(--tinta);
-  max-width:none;
+.fundo-base { background-color: var(--base); }
+.fundo-alt { background-color: var(--secundaria-suave); }
+
+.r-sm { padding-block: var(--e48); }
+.r-md { padding-block: var(--e64); }
+.r-lg { padding-block: var(--e80); }
+.r-xl { padding-block: var(--e96); }
+
+@media (min-width: 769px) {
+  .r-sm { padding-block: var(--e64); }
+  .r-md { padding-block: var(--e80); }
+  .r-lg { padding-block: var(--e96); }
+  .r-xl { padding-block: var(--e120); }
 }
-.transformacao .fecho{margin-top:var(--e64);max-width:56ch}
 
-/* ---------------------------------------------------------------
-   9. PROVA SOCIAL
-   --------------------------------------------------------------- */
-.prova h2{margin-bottom:var(--e32)}
-.reservado{
-  border:1px dashed var(--fio);
-  border-radius:var(--r-cartao);
-  padding:var(--e40) var(--e32);
-  min-height:180px;
-  display:flex;flex-direction:column;justify-content:center;gap:var(--e8);
-  max-width:640px;
+/* Grid de duas colunas */
+.duo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e40);
 }
-.reservado .rotulo{color:var(--cinza)}
-.reservado p{font-size:15px;line-height:1.5;color:var(--cinza);max-width:44ch}
 
-/* ---------------------------------------------------------------
-   10. OFERTA
-   --------------------------------------------------------------- */
-.oferta{text-align:center}
-.oferta h2{margin:0 auto var(--e40);max-width:15ch}
-.preco{
-  font-family:var(--serif);
-  font-size:clamp(72px,15vw,140px);
-  line-height:.92;
-  letter-spacing:-.035em;
-  color:var(--tinta);
-  max-width:none;
+@media (min-width: 960px) {
+  .duo {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--e48);
+    align-items: center;
+  }
+  .duo > .lado-texto {
+    grid-column: 1 / span 6;
+  }
+  .duo > .lado-visual {
+    grid-column: 7 / span 6;
+  }
+  .duo.espelhado > .lado-texto {
+    grid-column: 7 / span 6;
+  }
+  .duo.espelhado > .lado-visual {
+    grid-column: 1 / span 6;
+    grid-row: 1;
+  }
 }
-.oferta .condicao{margin-top:var(--e20);font-size:clamp(18px,1.8vw,22px);color:var(--ardosia);max-width:none}
-.oferta .acoes{margin-top:var(--e40);justify-content:center}
 
-/* ---------------------------------------------------------------
-   11. FAQ
-   --------------------------------------------------------------- */
-.faq h2{margin-bottom:var(--e40)}
-.faq details{border-bottom:1px solid var(--fio)}
-.faq details:first-of-type{border-top:1px solid var(--fio)}
-.faq summary{
-  list-style:none;cursor:pointer;position:relative;
-  padding:var(--e24) var(--e40) var(--e24) 0;
-  font-family:var(--serif);font-weight:400;
-  font-size:clamp(21px,2.6vw,28px);
-  line-height:1.2;letter-spacing:-.015em;color:var(--tinta);
+/* Botões do Sistema de Design */
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e12);
+  align-items: center;
 }
-@media(min-width:769px){.faq summary{padding-top:var(--e32);padding-bottom:var(--e32)}}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{
-  content:"";position:absolute;right:2px;top:calc(var(--e24) + .32em);
-  width:20px;height:20px;background-repeat:no-repeat;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M4 7.5l6 5.5 6-5.5' fill='none' stroke='%231F1B18' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  transition:transform .16s ease;
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 100%;
+  min-height: 50px;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  text-decoration: none;
+  padding: 16px var(--e32);
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
-@media(min-width:769px){.faq summary::after{top:calc(var(--e32) + .32em)}}
-.faq details[open] summary::after{transform:rotate(180deg)}
-.faq .resposta{padding:0 0 var(--e32)}
-.faq .resposta p{max-width:58ch;font-size:17px;line-height:1.6;color:var(--ardosia)}
 
-/* ---------------------------------------------------------------
-   12. CHAMADA FINAL
-   --------------------------------------------------------------- */
-.final{text-align:center}
-.final h2{margin:0 auto var(--e24);max-width:13ch;font-size:clamp(40px,7.4vw,80px);letter-spacing:-.025em}
-.final .corpo{margin:0 auto;max-width:52ch}
-.final .acoes{margin-top:var(--e40);justify-content:center}
-
-/* ---------------------------------------------------------------
-   RODAPE
-   --------------------------------------------------------------- */
-.rodape{border-top:1px solid var(--fio);padding:var(--e64) 0 var(--e40)}
-.rodape p{font-size:14px;line-height:1.6;color:var(--cinza);max-width:70ch}
-.rodape .links{margin-top:var(--e8)}
-.rodape .links a{color:var(--ardosia);text-decoration:none;border-bottom:1px solid var(--fio)}
-.rodape .links a:hover,.rodape .links a:focus-visible{border-bottom-color:var(--sienna)}
-.rodape .aviso{margin-top:var(--e24);padding-top:var(--e24);border-top:1px solid var(--fio);font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ardosia);max-width:62ch}
-@media(max-width:768px){.rodape{padding-bottom:108px}}
-
-/* ---------------------------------------------------------------
-   BARRA FIXA (SO MOBILE)
-   --------------------------------------------------------------- */
-.barra-fixa{
-  position:fixed;left:0;right:0;bottom:0;z-index:50;
-  background:rgba(247,243,238,.94);
-  backdrop-filter:saturate(1.2) blur(10px);
-  border-top:1px solid var(--fio);
-  padding:var(--e12) var(--e16) calc(var(--e12) + env(safe-area-inset-bottom,0px));
-  transform:translateY(115%);
-  transition:transform .26s ease;
+.pill-cheio {
+  background-color: var(--acao-texto);
+  color: #FFFDFB;
+  border-color: var(--acao);
+  box-shadow: 0 4px 12px rgba(132, 106, 148, 0.25);
 }
-.barra-fixa.visivel{transform:none}
-.barra-fixa .pill{font-size:15px;padding:14px var(--e20)}
-@media(min-width:769px){.barra-fixa{display:none}}
 
-/* ---------------------------------------------------------------
-   MOVIMENTO
-   --------------------------------------------------------------- */
-.revelar{opacity:0;transform:translateY(10px)}
-.revelar.aparece{opacity:1;transform:none;transition:opacity .6s ease-out,transform .6s ease-out}
+.pill-cheio:hover {
+  background-color: var(--acao-hover);
+  border-color: var(--acao-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(132, 106, 148, 0.32);
+}
 
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-  html{scroll-behavior:auto}
-  .revelar{opacity:1;transform:none}
-  .barra-fixa{transition:none}
+.pill-cheio:active {
+  background-color: var(--acao-active);
+  transform: translateY(0);
+}
+
+.pill-fantasma {
+  background-color: transparent;
+  color: var(--texto-forte);
+  border-color: var(--secundaria-borda);
+}
+
+.pill-fantasma:hover,
+.pill-fantasma:focus-visible {
+  border-color: var(--acao);
+  color: var(--acao-texto);
+  background-color: rgba(220, 213, 233, 0.25);
+}
+
+.pill-largo {
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .pill {
+    width: 100%;
+    padding: 15px var(--e20);
+    font-size: 15px;
+  }
+}
+
+.link-seta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--acao-texto);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+
+.link-seta:hover,
+.link-seta:focus-visible {
+  color: var(--acao-hover);
+  border-bottom-color: var(--acao-hover);
+}
+
+/* Indicador de Foco de Alta Visibilidade (Acessibilidade WCAG 2.2) */
+:focus-visible {
+  outline: 3px solid var(--acao);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Molduras de Artefato Real do App */
+.artefato {
+  background: var(--base-pura);
+  border-radius: var(--r-alto);
+  box-shadow: var(--flutua);
+  padding: var(--e12);
+  overflow: hidden;
+  border: 1px solid var(--fio);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.artefato .quadro {
+  border-radius: var(--r-img);
+  overflow: hidden;
+  background: var(--secundaria-suave);
+  line-height: 0;
+}
+
+.artefato .quadro img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.artefato figcaption {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--texto-legenda);
+  padding: var(--e12) var(--e4) var(--e4);
+}
+
+/* ===============================================================
+   SEÇÃO 1. PRIMEIRA DOBRA (HERO)
+   =============================================================== */
+.hero {
+  padding-top: var(--e48);
+  padding-bottom: var(--e80);
+}
+
+@media (min-width: 769px) {
+  .hero {
+    padding-top: var(--e80);
+    padding-bottom: var(--e120);
+  }
+}
+
+.hero .grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e48);
+}
+
+@media (min-width: 980px) {
+  .hero .grade {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--e40);
+    align-items: center;
+  }
+  .hero .texto {
+    grid-column: 1 / span 6;
+  }
+  .hero .colagem-wrap {
+    grid-column: 7 / span 6;
+  }
+}
+
+.hero h1 {
+  margin-bottom: var(--e24);
+}
+
+.hero .bloco-sub {
+  margin-bottom: var(--e28);
+}
+
+.hero .complemento {
+  margin-top: var(--e24);
+}
+
+.hero .complemento p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--texto-suave);
+}
+
+.hero .bloco-sub p {
+  margin-bottom: var(--e16);
+}
+
+.hero .slogan-ritmo {
+  font-family: var(--titulo);
+  font-size: clamp(21px, 2.4vw, 26px);
+  color: var(--texto-forte);
+  letter-spacing: -0.01em;
+  margin-top: var(--e16);
+}
+
+.hero .apoio-preco {
+  margin-top: var(--e16);
+  font-size: 14px;
+  color: var(--texto-suave);
+  font-weight: 500;
+}
+
+/* Colagem de telas flutuantes da Primeira Dobra */
+.colagem-wrap {
+  width: 100%;
+}
+
+.colagem {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  aspect-ratio: 1 / 0.98;
+  margin: 0 auto;
+}
+
+.colagem .artefato {
+  position: absolute;
+}
+
+.colagem .f1 {
+  width: 48%;
+  left: 0;
+  top: 8%;
+  transform: rotate(-2.5deg);
+  z-index: 1;
+}
+
+.colagem .f2 {
+  width: 53%;
+  right: 0;
+  top: 0;
+  transform: rotate(2deg);
+  z-index: 3;
+}
+
+.colagem .f3 {
+  width: 52%;
+  left: 12%;
+  bottom: 0;
+  transform: rotate(1deg);
+  z-index: 2;
+}
+
+@media (max-width: 600px) {
+  .colagem-wrap {
+    margin-top: var(--e32);
+    padding-top: var(--e16);
+  }
+  .colagem {
+    aspect-ratio: 1 / 1.12;
+  }
+  .colagem .f1 { width: 52%; left: -2%; top: 12%; }
+  .colagem .f2 { width: 56%; right: -2%; top: 4%; }
+  .colagem .f3 { width: 56%; left: 8%; bottom: 0; }
+}
+
+/* ===============================================================
+   SEÇÃO 2. IDENTIFICAÇÃO COM A DOR
+   =============================================================== */
+.dor-bloco {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.dor-bloco h2 {
+  margin-bottom: var(--e32);
+}
+
+.dor-historia {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--texto);
+}
+
+.dor-destaque {
+  margin: var(--e40) 0;
+  padding: var(--e32) var(--e24);
+  background: var(--base-pura);
+  border-left: 4px solid var(--acao);
+  border-radius: 0 var(--r-cartao) var(--r-cartao) 0;
+  box-shadow: var(--flutua);
+}
+
+.dor-destaque p {
+  font-family: var(--titulo);
+  font-size: clamp(22px, 2.6vw, 29px);
+  line-height: 1.35;
+  color: var(--texto-forte);
+  letter-spacing: -0.015em;
+  max-width: 38ch;
+}
+
+.dor-conclusao {
+  font-size: 18px;
+  color: var(--texto-suave);
+  padding-top: var(--e16);
+}
+
+/* ===============================================================
+   SEÇÃO 3. POR QUE OS PLANNERS TRADICIONAIS NÃO FUNCIONARAM
+   =============================================================== */
+.secao3-header {
+  max-width: 760px;
+  margin-bottom: var(--e48);
+}
+
+.secao3-header h2 {
+  margin-bottom: var(--e20);
+}
+
+.duo-conceito {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e24);
+  margin-bottom: var(--e40);
+}
+
+@media (min-width: 769px) {
+  .duo-conceito {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--e32);
+  }
+}
+
+.card-conceito {
+  border-radius: var(--r-cartao);
+  padding: var(--e32) var(--e28);
+}
+
+.card-tradicional {
+  background: var(--base-pura);
+  border: 1px solid var(--fio);
+}
+
+.card-ritmo {
+  background: var(--secundaria-suave);
+  border: 1px solid var(--secundaria-borda);
+}
+
+.card-conceito h3 {
+  font-size: 24px;
+  margin-bottom: var(--e20);
+}
+
+.card-tradicional h3 {
+  color: var(--texto-suave);
+}
+
+.card-ritmo h3 {
+  color: var(--texto-forte);
+}
+
+.lista-conceito {
+  list-style: none;
+  display: grid;
+  gap: var(--e16);
+}
+
+.lista-conceito li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e12);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.lista-conceito .bullet-x {
+  color: var(--texto-legenda);
+  font-weight: 500;
+  line-height: 1;
+  margin-top: 3px;
+}
+
+.lista-conceito .bullet-check {
+  color: var(--acao-texto);
+  font-weight: 500;
+  line-height: 1;
+  margin-top: 3px;
+}
+
+.fecho-secao3 {
+  max-width: 620px;
+  font-family: var(--titulo);
+  font-size: clamp(21px, 2.2vw, 26px);
+  color: var(--texto-forte);
+  letter-spacing: -0.01em;
+  margin-top: var(--e32);
+}
+
+/* ===============================================================
+   SEÇÃO 4. APRESENTAÇÃO DO PRODUTO (VÍDEO REAL)
+   =============================================================== */
+.produto-texto h2 {
+  margin-bottom: var(--e24);
+}
+
+.produto-texto .lead {
+  font-size: 18px;
+  color: var(--texto-suave);
+  margin-bottom: var(--e20);
+}
+
+.produto-texto .negacao-card {
+  background: var(--base-pura);
+  border: 1px dashed var(--secundaria-borda);
+  border-radius: var(--r-cartao);
+  padding: var(--e20) var(--e24);
+  margin: var(--e24) 0;
+  font-size: 15px;
+  color: var(--texto-forte);
+}
+
+.produto-video-box {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.produto-video-box .quadro {
+  border-radius: var(--r-alto);
+  box-shadow: var(--flutua);
+  background: var(--secundaria-suave);
+  overflow: hidden;
+}
+
+.produto-video-box video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-alto);
+}
+
+/* ===============================================================
+   SEÇÃO 5. COMO FUNCIONA (3 ETAPAS)
+   =============================================================== */
+.como-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--e48);
+}
+
+.grade-etapas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e28);
+}
+
+@media (min-width: 900px) {
+  .grade-etapas {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--e28);
+  }
+}
+
+.card-etapa {
+  background: var(--base-pura);
+  border: 1px solid var(--fio);
+  border-radius: var(--r-cartao);
+  padding: var(--e28) var(--e24);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--flutua);
+}
+
+.etapa-num {
+  font-family: var(--titulo);
+  font-size: 40px;
+  line-height: 1;
+  color: var(--acao-texto);
+  margin-bottom: var(--e16);
+  display: block;
+}
+
+.card-etapa h3 {
+  font-size: 21px;
+  margin-bottom: var(--e16);
+}
+
+.card-etapa p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--texto);
+  margin-bottom: var(--e16);
+}
+
+.card-etapa .destaque-etapa {
+  font-weight: 500;
+  color: var(--texto-forte);
+  font-size: 15px;
+  margin-top: auto;
+  padding-top: var(--e12);
+  border-top: 1px solid var(--fio);
+}
+
+.card-etapa .miniatura-etapa {
+  border-radius: var(--r-img);
+  overflow: hidden;
+  margin-bottom: var(--e20);
+  background: var(--secundaria-suave);
+  border: 1px solid var(--fio);
+  padding: var(--e8);
+}
+
+.card-etapa .miniatura-etapa img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 8px;
+  display: block;
+}
+
+.fecho-etapas {
+  text-align: center;
+  max-width: 640px;
+  margin: var(--e48) auto 0;
+  padding: var(--e24);
+  background: var(--secundaria-suave);
+  border: 1px solid var(--secundaria-borda);
+  border-radius: var(--r-cartao);
+}
+
+.fecho-etapas p {
+  font-family: var(--titulo);
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.35;
+  color: var(--texto-forte);
+  margin: 0 auto;
+}
+
+/* ===============================================================
+   SEÇÃO 6. O QUE VOCÊ RECEBE (8 ENTREGAS)
+   =============================================================== */
+.recebe-header {
+  max-width: 760px;
+  margin-bottom: var(--e48);
+}
+
+.grade-entregas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e20);
+  margin-bottom: var(--e48);
+}
+
+@media (min-width: 680px) {
+  .grade-entregas {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--e24);
+  }
+}
+
+.card-entrega {
+  background: var(--base-pura);
+  border: 1px solid var(--fio);
+  border-radius: var(--r-cartao);
+  padding: var(--e24) var(--e20);
+  box-shadow: var(--flutua);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card-entrega:hover {
+  border-color: var(--secundaria-borda);
+  transform: translateY(-2px);
+}
+
+.card-entrega.protagonista {
+  background: var(--base-pura);
+  border-color: var(--acao);
+  position: relative;
+}
+
+.card-entrega.protagonista::before {
+  content: "Destaque Principal";
+  position: absolute;
+  top: -10px;
+  right: var(--e20);
+  background: var(--acao);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
+}
+
+.entrega-tag {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--texto-legenda);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: var(--e8);
+}
+
+.card-entrega h3 {
+  font-size: 19px;
+  margin-bottom: var(--e8);
+}
+
+.card-entrega p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--texto);
+}
+
+.destaque-visual-entrega {
+  background: var(--secundaria-suave);
+  border: 1px solid var(--secundaria-borda);
+  border-radius: var(--r-cartao);
+  padding: var(--e32) var(--e24);
+  margin: var(--e40) 0;
+  color: var(--texto-forte);
+}
+
+@media (min-width: 769px) {
+  .destaque-visual-entrega {
+    padding: var(--e40) var(--e36);
+  }
+}
+
+.destaque-visual-entrega .duo {
+  align-items: center;
+}
+
+.destaque-visual-entrega h3 {
+  color: var(--texto-forte);
+  font-size: clamp(24px, 2.8vw, 32px);
+  margin-bottom: var(--e16);
+}
+
+.destaque-visual-entrega p {
+  font-size: 16px;
+  color: var(--texto);
+}
+
+/* ===============================================================
+   SEÇÃO 7. RESPEITAR SEU RITMO É PARTE DO PLANO (4 FASES)
+   =============================================================== */
+.fases-header {
+  max-width: 760px;
+  margin-bottom: var(--e40);
+}
+
+.fases-grade {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e16);
+  margin: var(--e32) 0;
+}
+
+@media (min-width: 600px) {
+  .fases-grade {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .fases-grade {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--e16);
+  }
+}
+
+.card-fase {
+  background: var(--base-pura);
+  border: 1px solid var(--fio);
+  border-radius: var(--r-cartao);
+  padding: var(--e24) var(--e20);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--flutua);
+}
+
+.card-fase .fase-lua {
+  font-size: 24px;
+  margin-bottom: var(--e8);
+}
+
+.card-fase h4 {
+  font-family: var(--titulo);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--texto-forte);
+  margin-bottom: var(--e8);
+}
+
+.card-fase .fase-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--texto);
+}
+
+/* ===============================================================
+   SEÇÃO 8. O DIFERENCIAL DO MEU RITMO
+   =============================================================== */
+.diferencial-header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto var(--e48);
+}
+
+.tabela-diferencial {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e24);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 769px) {
+  .tabela-diferencial {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--e32);
+  }
+}
+
+.col-diferencial {
+  border-radius: var(--r-cartao);
+  padding: var(--e36) var(--e28);
+}
+
+.col-tradicional {
+  background: var(--base-pura);
+  border: 1px solid var(--fio);
+  box-shadow: var(--flutua);
+}
+
+.col-ritmo {
+  background: var(--secundaria-suave);
+  border: 2px solid var(--acao);
+  position: relative;
+  box-shadow: var(--flutua-forte);
+}
+
+.col-ritmo::before {
+  content: "Abordagem Inteligente";
+  position: absolute;
+  top: -12px;
+  left: var(--e24);
+  background: var(--acao);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 12px;
+  border-radius: var(--r-pill);
+}
+
+.col-diferencial h3 {
+  font-size: 24px;
+  margin-bottom: var(--e24);
+}
+
+.col-ritmo h3 {
+  margin-top: var(--e8);
+}
+
+.col-diferencial ul {
+  list-style: none;
+  display: grid;
+  gap: var(--e16);
+}
+
+.col-diferencial li {
+  font-size: 16px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--e12);
+}
+
+.col-diferencial .ico {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.fecho-diferenca {
+  text-align: center;
+  max-width: 640px;
+  margin: var(--e48) auto 0;
+  font-family: var(--titulo);
+  font-size: clamp(21px, 2.4vw, 27px);
+  line-height: 1.35;
+  color: var(--texto-forte);
+}
+
+/* ===============================================================
+   SEÇÃO 9. DEMONSTRAÇÃO E CONFIANÇA (GALERIA EDITORIAL)
+   =============================================================== */
+.galeria-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--e48);
+}
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--e24);
+  margin-bottom: var(--e48);
+}
+
+@media (min-width: 600px) {
+  .galeria-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--e24);
+  }
+}
+
+@media (min-width: 960px) {
+  .galeria-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--e24);
+  }
+}
+
+.galeria-card {
+  background: var(--base-pura);
+  border-radius: var(--r-alto);
+  box-shadow: var(--flutua);
+  border: 1px solid var(--fio);
+  overflow: hidden;
+  padding: var(--e12);
+  display: flex;
+  flex-direction: column;
+}
+
+.galeria-card .quadro {
+  border-radius: var(--r-img);
+  overflow: hidden;
+  background: var(--secundaria-suave);
+  aspect-ratio: 9 / 16;
+}
+
+.galeria-card .quadro img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.galeria-card figcaption {
+  padding: var(--e12) var(--e4) var(--e4);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--texto-forte);
+}
+
+.galeria-card p {
+  font-size: 12px;
+  color: var(--texto-legenda);
+  padding: 0 var(--e4) var(--e8);
+}
+
+.observacao-importante {
+  background: var(--base-pura);
+  border: 1px solid var(--secundaria-borda);
+  border-radius: var(--r-cartao);
+  padding: var(--e36) var(--e28);
+  max-width: 760px;
+  margin: var(--e48) auto 0;
+  box-shadow: var(--flutua);
+}
+
+.observacao-importante h3 {
+  font-size: 22px;
+  color: var(--texto-forte);
+  margin-bottom: var(--e16);
+}
+
+.observacao-importante p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--texto);
+}
+
+.observacao-importante .fecho-obs {
+  margin-top: var(--e16);
+  font-weight: 500;
+  color: var(--texto-forte);
+}
+
+/* ===============================================================
+   SEÇÃO 10. APRESENTAÇÃO DA OFERTA
+   =============================================================== */
+.bloco-oferta {
+  background: var(--base-pura);
+  border: 1px solid var(--secundaria-borda);
+  border-radius: var(--r-cartao);
+  box-shadow: var(--flutua-forte);
+  padding: var(--e48) var(--e24);
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+@media (min-width: 769px) {
+  .bloco-oferta {
+    padding: var(--e64) var(--e48);
+  }
+}
+
+.bloco-oferta h2 {
+  font-size: clamp(30px, 4vw, 44px);
+  margin-bottom: var(--e12);
+}
+
+.bloco-oferta .sub-oferta {
+  font-family: var(--titulo);
+  font-size: 24px;
+  color: var(--acao-texto);
+  margin-bottom: var(--e24);
+}
+
+.bloco-oferta .lead-oferta {
+  font-size: 16px;
+  color: var(--texto-suave);
+  margin-bottom: var(--e32);
+}
+
+.lista-oferta {
+  text-align: left;
+  list-style: none;
+  display: grid;
+  gap: var(--e12);
+  margin: 0 auto var(--e40);
+  max-width: 480px;
+  padding: var(--e24);
+  background: var(--secundaria-suave);
+  border-radius: var(--r-cartao);
+  border: 1px solid var(--fio);
+}
+
+.lista-oferta li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e12);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--texto);
+}
+
+.lista-oferta .check-oferta {
+  color: var(--acao-texto);
+  font-weight: 500;
+}
+
+.preco-tag {
+  font-size: 18px;
+  color: var(--texto-suave);
+  margin-bottom: var(--e8);
+}
+
+.preco-grande {
+  font-family: var(--titulo);
+  font-size: clamp(64px, 12vw, 108px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--texto-forte);
+}
+
+.condicao-oferta {
+  font-size: 16px;
+  color: var(--texto-suave);
+  margin-top: var(--e12);
+  margin-bottom: var(--e32);
+}
+
+.bloco-oferta .acoes {
+  justify-content: center;
+}
+
+.selo-kiwify {
+  font-size: 13px;
+  color: var(--texto-legenda);
+  margin-top: var(--e16);
+}
+
+/* ===============================================================
+   SEÇÃO 11. PERGUNTAS FREQUENTES (FAQ)
+   =============================================================== */
+.faq h2 {
+  margin-bottom: var(--e40);
+  text-align: center;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--fio);
+}
+
+.faq details:first-of-type {
+  border-top: 1px solid var(--fio);
+}
+
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  padding: var(--e24) var(--e40) var(--e24) 0;
+  font-family: var(--titulo);
+  font-size: clamp(20px, 2.4vw, 25px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--texto-forte);
+  transition: color 0.16s ease;
+}
+
+.faq summary:hover {
+  color: var(--acao-texto);
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  top: calc(var(--e24) + 4px);
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M4 7.5l6 5.5 6-5.5' fill='none' stroke='%2353465C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  transition: transform 0.2s ease;
+}
+
+.faq details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.faq .resposta {
+  padding: 0 0 var(--e28);
+}
+
+.faq .resposta p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--texto-suave);
+}
+
+/* ===============================================================
+   SEÇÃO 12. CHAMADA FINAL
+   =============================================================== */
+.chamada-final {
+  text-align: center;
+}
+
+.chamada-final h2 {
+  margin: 0 auto var(--e32);
+  max-width: 18ch;
+  font-size: clamp(34px, 5.5vw, 68px);
+}
+
+.chamada-corpo {
+  max-width: 600px;
+  margin: 0 auto var(--e40);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.chamada-corpo p {
+  margin-inline: auto;
+}
+
+.chamada-destaque-frase {
+  font-family: var(--titulo);
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--texto-forte);
+  margin: var(--e32) auto var(--e8);
+  display: block;
+}
+
+.chamada-sub {
+  font-size: 14px;
+  color: var(--texto-legenda);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--e8);
+}
+
+.chamada-preco {
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--acao-texto);
+  margin-bottom: var(--e32);
+}
+
+.chamada-final .acoes {
+  justify-content: center;
+}
+
+/* ===============================================================
+   RODAPÉ
+   =============================================================== */
+.rodape {
+  border-top: 1px solid var(--fio);
+  padding: var(--e48) 0 var(--e32);
+  text-align: center;
+}
+
+.rodape p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--texto-legenda);
+  margin-inline: auto;
+}
+
+.rodape .marca-rodape {
+  font-weight: 500;
+  color: var(--texto-forte);
+  margin-bottom: var(--e8);
+}
+
+.rodape .empresa-dados {
+  margin: var(--e8) auto;
+  font-size: 12px;
+  color: var(--texto-legenda);
+}
+
+.rodape .links {
+  margin: var(--e12) 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--e4) var(--e12);
+}
+
+.rodape .links a,
+.rodape .links button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--texto-suave);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.16s ease, color 0.16s ease;
+  margin: 0 6px;
+  padding: 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rodape .links a:hover,
+.rodape .links a:focus-visible,
+.rodape .links button:hover,
+.rodape .links button:focus-visible {
+  color: var(--acao-texto);
+  border-bottom-color: var(--acao-texto);
+}
+
+.rodape .aviso {
+  margin-top: var(--e20);
+  padding-top: var(--e16);
+  border-top: 1px solid var(--fio);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--texto-legenda);
+  max-width: 62ch;
+}
+
+@media (max-width: 768px) {
+  .rodape {
+    padding-bottom: 110px; /* Espaço para a barra fixa mobile */
+  }
+}
+
+/* ===============================================================
+   BARRA FIXA (SOMENTE MOBILE)
+   =============================================================== */
+.barra-fixa {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background: rgba(247, 243, 237, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--secundaria-borda);
+  padding: var(--e12) var(--e16) calc(var(--e12) + env(safe-area-inset-bottom, 0px));
+  transform: translateY(115%);
+  transition: transform 0.28s ease;
+  display: flex;
+  justify-content: center;
+}
+
+.barra-fixa.visivel {
+  transform: translateY(0);
+}
+
+.barra-fixa .pill {
+  width: 100%;
+  font-size: 15px;
+  padding: 14px var(--e20);
+}
+
+@media (min-width: 769px) {
+  .barra-fixa {
+    display: none;
+  }
+}
+
+/* ===============================================================
+   AVISO DE COOKIES LGPD (MECANISMO DE CONSENTIMENTO FUNCIONAL)
+   =============================================================== */
+.banner-cookies {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  background: var(--base-pura);
+  border-top: 1px solid var(--secundaria-borda);
+  box-shadow: 0 -8px 24px rgba(83, 70, 92, 0.08);
+  padding: var(--e20) var(--e24) calc(var(--e20) + env(safe-area-inset-bottom, 0px));
+  display: none;
+}
+
+.banner-cookies.ativo {
+  display: block;
+}
+
+.banner-cookies-conteudo {
+  max-width: var(--largo);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--e16);
+}
+
+@media (min-width: 860px) {
+  .banner-cookies-conteudo {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.banner-cookies-texto {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--texto);
+  max-width: 740px;
+}
+
+.banner-cookies-titulo {
+  font-size: 15px;
+  color: var(--texto-forte);
+  margin-bottom: var(--e4);
+}
+
+.banner-cookies-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e8);
+  align-items: center;
+}
+
+.btn-cookie {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  min-height: 44px;
+  border: 1px solid transparent;
+  transition: all 0.16s ease;
+}
+
+.btn-cookie-primario {
+  background: var(--acao);
+  color: #fff;
+  border-color: var(--acao);
+}
+
+.btn-cookie-primario:hover {
+  background: var(--acao-hover);
+}
+
+.btn-cookie-secundario {
+  background: transparent;
+  color: var(--texto-forte);
+  border-color: var(--secundaria-borda);
+}
+
+.btn-cookie-secundario:hover {
+  background: var(--secundaria-suave);
+}
+
+.btn-cookie-detalhes {
+  background: transparent;
+  color: var(--texto-legenda);
+  text-decoration: underline;
+  padding-inline: 10px;
+}
+
+.btn-cookie-detalhes:hover {
+  color: var(--acao-texto);
+}
+
+/* ===============================================================
+   MODAIS LEGAIS (POLÍTICA, TERMOS, REEMBOLSO E PREFERÊNCIAS)
+   =============================================================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(50, 37, 56, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: var(--e20);
+}
+
+.modal-overlay.aberto {
+  display: flex;
+}
+
+.modal-conteudo {
+  background: var(--base);
+  border-radius: var(--r-cartao);
+  max-width: 640px;
+  width: 100%;
+  min-width: 0;
+  max-height: 85vh;
+  max-height: min(85dvh, 900px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  overflow-wrap: anywhere;
+  padding: var(--e36) var(--e28);
+  position: relative;
+  box-shadow: var(--flutua-forte);
+  border: 1px solid var(--secundaria-borda);
+}
+
+.modal-conteudo h3 {
+  font-size: 26px;
+  margin-bottom: var(--e16);
+  color: var(--texto-forte);
+  padding-right: var(--e40);
+}
+
+.modal-conteudo h4 {
+  font-size: 17px;
+  margin-top: var(--e20);
+  margin-bottom: var(--e8);
+  color: var(--texto-forte);
+}
+
+.modal-conteudo p,
+.modal-conteudo li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--texto-suave);
+  margin-bottom: var(--e12);
+}
+
+.modal-conteudo ul {
+  padding-left: 20px;
+  margin-bottom: var(--e12);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: var(--e16);
+  right: var(--e16);
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--texto-legenda);
+  line-height: 1;
+  padding: 4px;
+  border-radius: 4px;
+  width: 44px;
+  height: 44px;
+}
+
+.modal-fechar:hover,
+.modal-fechar:focus-visible {
+  color: var(--acao-texto);
+}
+
+.categoria-cookie-item {
+  background: var(--base-pura);
+  border: 1px solid var(--fio);
+  border-radius: var(--r-alto);
+  padding: var(--e16);
+  margin-bottom: var(--e16);
+}
+
+.categoria-cookie-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--e8);
+  gap: var(--e12);
+  flex-wrap: wrap;
+}
+
+.categoria-cookie-topo h5 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--texto-forte);
+}
+
+.cookie-status-fixo {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--complementar-escuro);
+  background: var(--complementar-suave);
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+}
+
+body.modal-aberto {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+}
+
+.modal-conteudo a {
+  color: var(--acao-texto);
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .modal-overlay { padding: var(--e12); }
+  .modal-conteudo { padding: var(--e28) var(--e20); }
+  .modal-conteudo h3 { font-size: 24px; }
+  .modal-fechar { top: var(--e12); right: var(--e12); }
+  .modal-conteudo .acoes { flex-direction: column; align-items: stretch; }
+  .banner-cookies { padding: var(--e16); padding-bottom: calc(var(--e16) + env(safe-area-inset-bottom, 0px)); }
+  .banner-cookies-texto { font-size: 13px; }
+  .banner-cookies-acoes .btn-cookie { flex: 1 1 auto; }
+}
+
+/* Visibilidade Garantida para SEO e Acessibilidade */
+.revelar {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .barra-fixa {
+    transition: none;
+  }
 }
 </style>
-<!-- Meta Pixel Code -->
+
+<!-- Script de Controle do Meta Pixel (Executado apenas mediante Consentimento LGPD) -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '735853032032044');
-fbq('track', 'PageView');
+// Declaração segura do Meta Pixel conforme exigência técnica (ID: 735853032032044)
+var PIXEL_ID = '735853032032044';
+var pixelAtivo = false;
+var consentimentoMarketing = false;
+var consentimentoAtual = null;
+
+function lerConsentimento() {
+  try {
+    var valor = localStorage.getItem('meuritmo_cookie_consent');
+    return valor === 'all' || valor === 'necessary' ? valor : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function carregarMetaPixel() {
+  if (!consentimentoMarketing) return;
+  if (pixelAtivo) {
+    fbq('consent', 'grant');
+    return;
+  }
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('consent', 'grant');
+  fbq('init', PIXEL_ID);
+  fbq('track', 'PageView');
+  pixelAtivo = true;
+}
+
+// Disparo do evento InitiateCheckout respeitando o rastreamento
+function dispararInitiateCheckout() {
+  if (consentimentoMarketing && pixelAtivo && typeof fbq === 'function') {
+    fbq('track', 'InitiateCheckout');
+  }
+}
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 
 <body>
 
-<main>
+<a href="#conteudo-principal" class="pular-navegacao">Pular para o conteúdo principal</a>
 
-<!-- ============================ 1. HERO ============================ -->
-<section class="hero papel" aria-labelledby="titulo-principal">
+<main id="conteudo-principal" tabindex="-1">
+
+<!-- ===============================================================
+     SEÇÃO 1. PRIMEIRA DOBRA (HERO)
+     =============================================================== -->
+<section class="hero fundo-base" aria-labelledby="titulo-principal">
   <div class="env grade">
 
     <div class="texto">
-      <!-- Headline em uso: opcao 1 das tres do documento de copy.
-           Alternativas para teste A/B:
-           "O plano se adapta à sua fase. Não você ao plano."
-           "Pare de recomeçar. Comece a sustentar." -->
-      <h1 id="titulo-principal">Você não precisa de mais uma rotina. Precisa de um plano <em>que acompanhe você</em>.</h1>
+      <span class="rotulo">MEU RITMO &middot; Organização pessoal com IA | Desafio 28 Dias</span>
 
-      <div class="sub">
-        <p class="corpo-g">Em 28 dias, uma inteligência artificial transforma sua vida real, suas metas, projetos, hábitos e responsabilidades em um plano de execução organizado de acordo com o seu ciclo e com a forma como você funciona.</p>
+      <h1 id="titulo-principal">Sua cabeça está cheia, sua rotina não para e você já não sabe por onde começar?</h1>
+
+      <div class="bloco-sub">
+        <p class="corpo-g">O Meu Ritmo é um aplicativo com inteligência artificial que transforma suas responsabilidades, metas e prioridades em um plano personalizado de 28 dias.</p>
+        <p class="slogan-ritmo"><em>Sua vida. Seu plano. Seu ritmo.</em></p>
       </div>
 
       <div class="acoes">
-        <a class="pill pill-cheio" href="#problema" aria-label="Quero montar meu plano de 28 dias. Continuar para a próxima seção.">Quero montar meu plano de 28 dias</a>
-        <a class="pill pill-fantasma" href="#como" aria-label="Entender como funciona. Ir para a seção Como funciona.">Entender como funciona</a>
+        <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">QUERO MEU PLANO PERSONALIZADO</a>
       </div>
 
-      <p class="apoio">Desafio Meu Ritmo. Pagamento único. Acesso vitalício.</p>
+      <p class="apoio-preco">R$ 37, pagamento único. Acesso vitalício ao aplicativo.</p>
+      <div class="complemento">
+        <p>Você não precisa de mais um planner que exige que você dê conta de tudo, todos os dias. <strong>Precisa de um plano que seja feito para a sua vida, e não de uma rotina à qual você precise se adaptar.</strong></p>
+        <p>Você recebe orientações diárias, acompanha seu progresso e, ao final, ganha um relatório dos seus padrões de organização e um planner criado especialmente para você.</p>
+      </div>
     </div>
 
-    <div class="colagem">
-      <figure class="artefato f1">
-        <div class="quadro">
-          <picture>
-            <source srcset="assets/check-in-diario.webp" type="image/webp">
-            <img src="assets/check-in-diario.jpg" width="590" height="1280" decoding="async" alt="Check-in do dia, com escolha de fase e nível de energia.">
-          </picture>
-        </div>
-      </figure>
-      <figure class="artefato f2">
-        <div class="quadro">
-          <picture>
-            <source srcset="assets/painel-do-dia.webp" type="image/webp">
-            <img src="assets/painel-do-dia.jpg" width="590" height="1280" fetchpriority="high" decoding="async" alt="Painel do dia, com a fase atual e o progresso dos 28 dias.">
-          </picture>
-        </div>
-      </figure>
-      <figure class="artefato f3">
-        <div class="quadro">
-          <picture>
-            <source srcset="assets/plano-do-dia.webp" type="image/webp">
-            <img src="assets/plano-do-dia.jpg" width="590" height="1280" decoding="async" alt="Plano do dia, com as tarefas distribuídas por período.">
-          </picture>
-        </div>
-      </figure>
+    <div class="colagem-wrap">
+      <div class="colagem" aria-label="Capturas reais do aplicativo Meu Ritmo: check-in diário de energia, painel do dia e tarefas por período.">
+        <figure class="artefato f1">
+          <div class="quadro">
+            <picture>
+              <source srcset="assets/check-in-diario.webp" type="image/webp">
+              <img src="assets/check-in-diario.jpg" width="590" height="1280" decoding="async" alt="Captura de tela real do app Meu Ritmo: tela de check-in diário com seleção de fase do ciclo, nível de energia e estado de presença.">
+            </picture>
+          </div>
+          <figcaption>Check-in diário de energia</figcaption>
+        </figure>
+        <figure class="artefato f2">
+          <div class="quadro">
+            <picture>
+              <source srcset="assets/painel-do-dia.webp" type="image/webp">
+              <img src="assets/painel-do-dia.jpg" width="590" height="1280" fetchpriority="high" decoding="async" alt="Captura de tela real do app Meu Ritmo: painel inicial com fase atual, progresso da jornada e acesso ao plano, relatório e planner.">
+            </picture>
+          </div>
+          <figcaption>Painel do dia e acompanhamento</figcaption>
+        </figure>
+        <figure class="artefato f3">
+          <div class="quadro">
+            <picture>
+              <source srcset="assets/plano-do-dia.webp" type="image/webp">
+              <img src="assets/plano-do-dia.jpg" width="590" height="1280" decoding="async" alt="Captura de tela real do app Meu Ritmo: plano diário com lista de tarefas distribuídas por períodos (manhã e tarde) com prioridades inegociáveis.">
+            </picture>
+          </div>
+          <figcaption>Plano e tarefas por período</figcaption>
+        </figure>
+      </div>
     </div>
 
   </div>
 </section>
 
-<!-- ============================ 2. O PROBLEMA ============================ -->
-<section id="problema" class="problema nevoa r-lg" aria-labelledby="t-problema">
-  <div class="env duo">
-    <div class="lado-texto">
-      <h2 id="t-problema" class="revelar">Você já viveu esse ciclo?</h2>
-      <p class="fecho serif" style="font-size:clamp(21px,2.2vw,26px);line-height:1.3;letter-spacing:-.015em;max-width:24ch">Se isso parece familiar, talvez o problema nunca tenha sido a sua disciplina.</p>
+<!-- ===============================================================
+     SEÇÃO 2. IDENTIFICAÇÃO COM A DOR
+     =============================================================== -->
+<section id="dor" class="fundo-alt r-lg" aria-labelledby="titulo-dor">
+  <div class="env-leitura dor-bloco">
+    <span class="rotulo">Identificação com a dor</span>
+    <h2 id="titulo-dor" class="revelar">Você passa o dia inteiro ocupada, mas sente que não avança no que realmente importa?</h2>
+
+    <div class="dor-historia">
+      <p>Você acorda pensando em tudo o que precisa resolver.</p>
+      <p>São as responsabilidades da casa, do trabalho, os compromissos, os objetivos pessoais e aquelas tarefas que você vive deixando para depois.</p>
+      <p>Você tenta se organizar.</p>
+      <p>Compra um planner. Baixa um aplicativo. Faz uma lista. Monta uma rotina.</p>
+      <p>Por alguns dias, parece que finalmente encontrou uma solução.</p>
+      <p>Mas a vida acontece.</p>
+      <p>Surge um imprevisto. A energia muda. As prioridades se acumulam. O planejamento começa a atrasar.</p>
+      <p>E, quando percebe, você está novamente tentando descobrir por onde começar.</p>
     </div>
-    <div class="lado-visual">
-      <ol class="ciclo">
-        <li>Você começa uma rotina nova, cheia de vontade.</li>
-        <li>Organiza a semana, baixa um aplicativo, cria um planner.</li>
-        <li>Fica extremamente produtiva por alguns dias.</li>
-        <li>Depois, sem motivo aparente, a energia muda.</li>
-        <li>As tarefas começam a atrasar.</li>
-        <li>A rotina para de funcionar.</li>
-        <li>Vem a culpa, a sensação de ter falhado de novo.</li>
-        <li>E, na segunda-feira seguinte, você tenta recomeçar.</li>
-      </ol>
+
+    <div class="dor-destaque revelar">
+      <p>O mais cansativo não é apenas ter tanta coisa para fazer. É sentir que precisa organizar tudo sozinha, o tempo inteiro.</p>
+    </div>
+
+    <div class="dor-conclusao">
+      <p>Talvez você não precise de mais disciplina.</p>
+      <p>Talvez precise de uma forma de se organizar que considere a vida que você realmente tem.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================ 3. NOVA PERSPECTIVA ============================ -->
-<section class="tese papel r-xl" aria-labelledby="t-perspectiva">
-  <div class="env duo">
-    <div class="lado-texto">
-      <h2 id="t-perspectiva" class="revelar">Talvez o problema não seja a sua capacidade de executar</h2>
-    </div>
-    <div class="lado-visual corpo">
-      <p>Talvez você esteja tentando executar tudo da mesma maneira, todos os dias, mesmo quando sua energia, sua disposição e sua fase de vida mudam constantemente.</p>
-      <p>A pergunta muda. Não é mais &#8220;como eu faço para ter mais disciplina&#8221;. É &#8220;como eu organizo minhas demandas considerando como eu realmente funciono&#8221;.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ 4. O NOVO PARADIGMA ============================ -->
-<section class="tese nevoa r-xl" aria-labelledby="t-paradigma">
-  <div class="env duo espelhado">
-    <div class="lado-texto">
-      <h2 id="t-paradigma" class="revelar">A rotina tradicional espera que você seja igual todos os dias</h2>
-    </div>
-    <div class="lado-visual corpo">
-      <p>Segunda igual a terça, igual a quarta, igual a quinta. Mesmas expectativas, mesma distribuição de tarefas, mesma cobrança, todos os dias.</p>
-      <p>A vida pode continuar acontecendo todos os dias. A forma de organizar e executar as suas demandas é que pode, e deve, mudar.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ 5. COMO FUNCIONA ============================ -->
-<section id="como" class="como papel r-xl" aria-labelledby="t-como">
+<!-- ===============================================================
+     SEÇÃO 3. POR QUE OS PLANNERS TRADICIONAIS NÃO FUNCIONARAM
+     =============================================================== -->
+<section id="metodos" class="fundo-base r-xl" aria-labelledby="titulo-metodos">
   <div class="env">
-    <div class="duo">
-      <div class="lado-texto">
-        <h2 id="t-como" class="revelar">Conheça Meu Ritmo</h2>
-        <p class="intro corpo-g">Um sistema de planejamento cíclico que usa inteligência artificial para transformar a sua vida real em um plano de execução personalizado de 28 dias.</p>
+    <div class="secao3-header">
+      <span class="rotulo">Por que os métodos tradicionais falham</span>
+      <h2 id="titulo-metodos" class="revelar">O problema de muitos métodos de organização é que eles esperam que você se adapte a eles.</h2>
+      <p class="corpo-g">Uma rotina pronta não conhece suas responsabilidades. Um planner tradicional não sabe quais são suas prioridades. Uma lista de tarefas não considera necessariamente como sua energia varia de um dia para o outro.</p>
+      <p class="corpo-g" style="margin-top:var(--e12)">E, quando tudo depende de você decidir o que fazer, em que ordem e em qual momento, organizar-se acaba virando mais uma tarefa.</p>
+    </div>
+
+    <div class="duo-conceito">
+      <div class="card-conceito card-tradicional">
+        <h3>Planejamento tradicional</h3>
+        <ul class="lista-conceito">
+          <li><span class="bullet-x">&times;</span><span>Exige adaptação da usuária.</span></li>
+          <li><span class="bullet-x">&times;</span><span>Depende da organização manual.</span></li>
+          <li><span class="bullet-x">&times;</span><span>Não conhece a vida individual.</span></li>
+          <li><span class="bullet-x">&times;</span><span>Exige o mesmo ritmo todos os dias.</span></li>
+        </ul>
       </div>
-      <div class="lado-visual">
-        <figure class="artefato palco-video">
+
+      <div class="card-conceito card-ritmo">
+        <h3>O Meu Ritmo propõe inverter essa lógica</h3>
+        <ul class="lista-conceito">
+          <li><span class="bullet-check">&#10003;</span><span>Em vez de entregar um planejamento igual para todas as mulheres, ele usa as suas informações para construir um plano de ação personalizado.</span></li>
+          <li><span class="bullet-check">&#10003;</span><span>Em vez de exigir o mesmo ritmo todos os dias, considera suas fases de energia e suas demandas reais.</span></li>
+          <li><span class="bullet-check">&#10003;</span><span>Em vez de deixar você sozinha diante de uma lista enorme, apresenta orientações para cada dia.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="fecho-secao3">Porque sua organização precisa acompanhar sua vida. Não o contrário.</p>
+  </div>
+</section>
+
+<!-- ===============================================================
+     SEÇÃO 4. APRESENTAÇÃO DO PRODUTO (COM VÍDEO REAL)
+     =============================================================== -->
+<section id="produto" class="fundo-alt r-xl" aria-labelledby="titulo-produto">
+  <div class="env duo">
+    <div class="lado-texto produto-texto">
+      <span class="rotulo">Conheça o Meu Ritmo</span>
+      <h2 id="titulo-produto" class="revelar">Um plano de 28 dias que só existe para você.</h2>
+
+      <p class="lead">O Meu Ritmo é um aplicativo de organização pessoal com inteligência artificial, criado para mulheres que desejam ter mais clareza sobre suas prioridades e construir uma rotina que respeite seu próprio ritmo.</p>
+
+      <div class="negacao-card">
+        <p><strong>Não é um ebook. Não é um planner pronto. Não é um desafio em que todas recebem as mesmas tarefas.</strong></p>
+      </div>
+
+      <p>É um sistema que constrói seu planejamento a partir da sua vida.</p>
+      <p>Você informa suas responsabilidades, metas, compromissos e características da sua rotina.</p>
+      <p>A inteligência artificial usa essas informações para montar um plano personalizado de 28 dias e orientar suas atividades ao longo desse período.</p>
+      <p>Conforme você realiza seus check-ins, o sistema reúne informações sobre seus padrões de organização e rotina.</p>
+      <p>E, ao final, entrega um relatório e um planner personalizados para ajudar você a continuar se organizando.</p>
+      <p style="margin-top:var(--e16)"><strong>Você não precisa montar tudo do zero. O Meu Ritmo prepara seu plano com você.</strong></p>
+
+      <div class="acoes" style="margin-top:var(--e32)">
+        <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero começar meus 28 dias. Ir para o checkout Kiwify.">QUERO COMEÇAR MEUS 28 DIAS</a>
+      </div>
+    </div>
+
+    <div class="lado-visual">
+      <div class="produto-video-box">
+        <figure class="artefato">
           <div class="quadro">
             <video
               controls
@@ -707,265 +1953,772 @@ src="https://www.facebook.com/tr?id=735853032032044&ev=PageView&noscript=1"
               playsinline
               muted
               poster="assets/video-app-poster.jpg"
-              width="576" height="1194"
-              aria-label="Vídeo silencioso mostrando o sistema por dentro: o mapeamento inicial com a inteligência artificial, o plano de 28 dias, a checklist diária, o check-in e o relatório de padrões.">
+              width="576"
+              height="1194"
+              aria-label="Vídeo demonstrativo mostrando o aplicativo Meu Ritmo por dentro: mapeamento com inteligência artificial, plano de 28 dias, checklist diária e check-ins.">
               <source src="assets/video-app.mp4" type="video/mp4">
-              <p>Seu navegador não reproduz este vídeo. <a class="link-seta" href="assets/video-app.mp4">Abrir o arquivo do vídeo</a>.</p>
+              <p>Seu navegador não suporta reprodução de vídeo. <a class="link-seta" href="assets/video-app.mp4">Assistir ao vídeo diretamente</a>.</p>
             </video>
           </div>
-          <figcaption>O sistema por dentro, em menos de um minuto.</figcaption>
+          <figcaption>Demonstração real do aplicativo Meu Ritmo por dentro.</figcaption>
         </figure>
       </div>
-    </div>
-
-    <ol class="passos">
-      <li><p><strong>Mapeamento:</strong> você conta para o sistema como é a sua vida hoje, suas metas, projetos, hábitos, tarefas fixas, trabalho, casa, relacionamento e também informações sobre o seu ciclo.</p></li>
-      <li><p><strong>Inteligência artificial:</strong> a IA organiza essas informações, identifica prioridades e entende o que cada tarefa exige de você.</p></li>
-      <li><p><strong>Plano de 28 dias:</strong> você recebe um plano de execução distribuído ao longo dos 28 dias, considerando sua energia e suas fases.</p></li>
-      <li><p><strong>Execução diária:</strong> uma checklist simples mostra o que fazer a cada dia, sem excesso de tarefas.</p></li>
-      <li><p><strong>Check-in:</strong> ao final do dia, você registra rapidamente como foi sua energia e sua execução.</p></li>
-      <li><p><strong>Padrões:</strong> ao longo do desafio, o sistema observa como você funciona de verdade.</p></li>
-      <li><p><strong>Relatório:</strong> no final dos 28 dias, você recebe um relatório com os seus padrões de execução.</p></li>
-      <li><p><strong>Planner cíclico:</strong> e um planner personalizado para continuar organizando sua vida depois do desafio.</p></li>
-    </ol>
-
-    <div class="metodo">
-      <h3>Método CICLO</h3>
-      <ol>
-        <li><span class="letra">C</span><span class="txt">Conhecer sua realidade</span></li>
-        <li><span class="letra">I</span><span class="txt">Identificar suas demandas</span></li>
-        <li><span class="letra">C</span><span class="txt">Cruzar com o seu ciclo</span></li>
-        <li><span class="letra">L</span><span class="txt">Localizar cada ação no melhor momento</span></li>
-        <li><span class="letra">O</span><span class="txt">Observar seus padrões</span></li>
-      </ol>
     </div>
   </div>
 </section>
 
-<!-- ============================ 6. O QUE VOCE RECEBE ============================ -->
-<section class="recebe nevoa r-xl" aria-labelledby="t-recebe">
+<!-- ===============================================================
+     SEÇÃO 5. COMO FUNCIONA (3 ETAPAS)
+     =============================================================== -->
+<section id="como-funciona" class="fundo-base r-xl" aria-labelledby="titulo-como">
   <div class="env">
-    <h2 id="t-recebe" class="revelar">O que está incluso no Desafio Meu Ritmo</h2>
+    <div class="como-header">
+      <span class="rotulo">Simplicidade de uso</span>
+      <h2 id="titulo-como" class="revelar">Como funciona o seu plano personalizado?</h2>
+    </div>
 
-    <div class="duo">
-      <div class="lado-texto largo7">
-        <ol class="entregas">
-          <li><span class="num">01</span><p><strong>Mapeamento completo da sua vida:</strong> uma entrevista estruturada para entender suas principais áreas.</p></li>
-          <li><span class="num">02</span><p><strong>Plano de ação personalizado de 28 dias,</strong> criado a partir das suas informações.</p></li>
-          <li><span class="num">03</span><p><strong>Checklist diária</strong> com o que fazer em cada dia.</p></li>
-          <li><span class="num">04</span><p><strong>Planejamento por fases,</strong> com suas demandas organizadas de acordo com o seu ciclo e suas características individuais.</p></li>
-          <li><span class="num">05</span><p><strong>Check-ins</strong> para acompanhar como você está durante o desafio.</p></li>
-          <li><span class="num">06</span><p><strong>Identificação de padrões</strong> ao longo dos 28 dias.</p></li>
-          <li><span class="num">07</span><p><strong>Relatório personalizado</strong> com uma leitura dos seus padrões de execução.</p></li>
-          <li><span class="num">08</span><p><strong>Planner Cíclico Personalizado</strong> para continuar usando depois do desafio.</p></li>
-        </ol>
+    <div class="grade-etapas">
+      <!-- Etapa 1 -->
+      <article class="card-etapa">
+        <div>
+          <div class="miniatura-etapa">
+            <picture>
+              <source srcset="assets/entrevista-ia.webp" type="image/webp">
+              <img src="assets/entrevista-ia.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: etapa de mapeamento inicial guiada por inteligência artificial para registrar áreas da vida e rotina.">
+            </picture>
+          </div>
+          <span class="etapa-num">01</span>
+          <h3>1. Conte como é a sua vida</h3>
+          <p>O primeiro passo é um mapeamento da sua realidade.</p>
+          <p>Você informa suas responsabilidades, metas, objetivos, compromissos, demandas e aspectos importantes da sua rotina.</p>
+          <p>O sistema utiliza essas informações como ponto de partida.</p>
+        </div>
+        <p class="destaque-etapa">Você não começa com um planejamento pronto. Começa contando como é a sua vida.</p>
+      </article>
+
+      <!-- Etapa 2 -->
+      <article class="card-etapa">
+        <div>
+          <div class="miniatura-etapa">
+            <picture>
+              <source srcset="assets/os-28-dias.webp" type="image/webp">
+              <img src="assets/os-28-dias.jpg" width="590" height="752" alt="Captura de tela do aplicativo Meu Ritmo: visualização da jornada de 28 dias dividida nas 4 fases com progresso diário.">
+            </picture>
+          </div>
+          <span class="etapa-num">02</span>
+          <h3>2. Receba seu plano de 28 dias criado pela IA</h3>
+          <p>A inteligência artificial organiza suas informações e constrói um plano de ação personalizado.</p>
+          <p>Suas prioridades são distribuídas ao longo dos 28 dias, considerando sua rotina, suas demandas e suas fases.</p>
+        </div>
+        <p class="destaque-etapa">Em vez de decidir sozinha como organizar tudo, você recebe um caminho para seguir.</p>
+      </article>
+
+      <!-- Etapa 3 -->
+      <article class="card-etapa">
+        <div>
+          <div class="miniatura-etapa">
+            <picture>
+              <source srcset="assets/check-in-diario.webp" type="image/webp">
+              <img src="assets/check-in-diario.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: registro de execução e check-in diário para identificar padrões pessoais.">
+            </picture>
+          </div>
+          <span class="etapa-num">03</span>
+          <h3>3. Saiba o que fazer a cada dia</h3>
+          <p>A cada dia, você acompanha as atividades planejadas e registra como foi sua execução por meio de check-ins.</p>
+          <p>Esses registros ajudam o sistema a identificar seus padrões de organização e rotina.</p>
+        </div>
+        <p class="destaque-etapa">Você acompanha seu plano enquanto o sistema reúne informações sobre o que funciona para você.</p>
+      </article>
+    </div>
+
+    <div class="fecho-etapas revelar">
+      <p>E o melhor: os 28 dias não são o fim da sua organização. Eles são a base para construir uma forma mais personalizada de continuar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===============================================================
+     SEÇÃO 6. O QUE VOCÊ RECEBE (8 ENTREGAS)
+     =============================================================== -->
+<section id="o-que-recebe" class="fundo-alt r-xl" aria-labelledby="titulo-recebe">
+  <div class="env">
+    <div class="recebe-header">
+      <span class="rotulo">Entregas concretas</span>
+      <h2 id="titulo-recebe" class="revelar">Muito mais do que uma lista de tarefas para 28 dias</h2>
+      <p class="corpo-g">Ao entrar no Meu Ritmo, você terá acesso a:</p>
+    </div>
+
+    <div class="grade-entregas">
+      <div class="card-entrega">
+        <span class="entrega-tag">01 &middot; Diagnóstico</span>
+        <h3>Seu mapeamento pessoal</h3>
+        <p>Um processo para reunir suas principais responsabilidades, objetivos e áreas da vida em um só lugar.</p>
       </div>
-      <div class="lado-visual estreito4">
-        <div class="par-artefatos">
+
+      <div class="card-entrega protagonista">
+        <span class="entrega-tag">02 &middot; Plano de Ação</span>
+        <h3>Seu plano de ação personalizado de 28 dias</h3>
+        <p>Um planejamento criado pela inteligência artificial a partir das informações que você compartilha.</p>
+      </div>
+
+      <div class="card-entrega">
+        <span class="entrega-tag">03 &middot; Rotina</span>
+        <h3>Orientações e tarefas diárias</h3>
+        <p>Atividades organizadas para que você saiba quais ações estão previstas a cada dia.</p>
+      </div>
+
+      <div class="card-entrega">
+        <span class="entrega-tag">04 &middot; Ciclicidade</span>
+        <h3>Planejamento que considera seu ritmo</h3>
+        <p>Uma organização que leva em conta suas fases, seu ciclo e suas características individuais.</p>
+      </div>
+
+      <div class="card-entrega">
+        <span class="entrega-tag">05 &middot; Registro</span>
+        <h3>Check-ins diários</h3>
+        <p>Registros simples para acompanhar sua execução e reunir informações sobre sua rotina.</p>
+      </div>
+
+      <div class="card-entrega protagonista">
+        <span class="entrega-tag">06 &middot; Conclusão do Desafio</span>
+        <h3>Relatório personalizado ao final dos 28 dias</h3>
+        <p>Uma análise dos padrões de organização e rotina identificados a partir das suas informações e dos seus registros.</p>
+      </div>
+
+      <div class="card-entrega protagonista">
+        <span class="entrega-tag">07 &middot; Continuidade</span>
+        <h3>Seu planner personalizado</h3>
+        <p>Um planner construído com base no que foi identificado durante os 28 dias, para você continuar se organizando depois do desafio.</p>
+      </div>
+
+      <div class="card-entrega">
+        <span class="entrega-tag">08 &middot; Plataforma</span>
+        <h3>Acesso vitalício ao aplicativo</h3>
+        <p>Tudo isso com um único pagamento, sem mensalidade de acesso.</p>
+      </div>
+    </div>
+
+    <!-- Composição especial de destaque com imagem real do app -->
+    <div class="destaque-visual-entrega">
+      <div class="duo">
+        <div class="lado-texto">
+          <span class="rotulo">Continuidade Real</span>
+          <h3>Plano de Ação, Relatório Final e Planner Personalizado</h3>
+          <p>Não é apenas um planejamento para começar. É um processo para descobrir uma forma de organização que faça sentido para você.</p>
+          <p style="margin-top:var(--e12)">Ao concluir a jornada de 28 dias, o aplicativo consolida seus aprendizados de ritmo e gera seu relatório e planner definitivos.</p>
+        </div>
+        <div class="lado-visual" style="max-width:340px; margin:0 auto">
           <figure class="artefato">
             <div class="quadro">
               <picture>
-                <source srcset="assets/mapa-da-vida.webp" type="image/webp">
-                <img src="assets/mapa-da-vida.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Mapa da vida, listando as áreas mapeadas pelo sistema.">
+                <img src="assets/IMG_4719.PNG" width="590" height="1200" alt="Captura de tela do aplicativo Meu Ritmo: painel de navegação destacando o acesso ao Relatório Personalizado e ao Planner Cíclico gerados ao final dos 28 dias.">
               </picture>
             </div>
-            <figcaption>O mapeamento.</figcaption>
-          </figure>
-          <figure class="artefato">
-            <div class="quadro">
-              <picture>
-                <source srcset="assets/os-28-dias.webp" type="image/webp">
-                <img src="assets/os-28-dias.jpg" width="590" height="752" loading="lazy" decoding="async" alt="Os 28 dias do desafio, agrupados por fase.">
-              </picture>
-            </div>
-            <figcaption>Os 28 dias.</figcaption>
+            <figcaption>O aplicativo acompanha cada etapa e entrega seu relatório e planner ao final.</figcaption>
           </figure>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ============================ 7. DIFERENCIAL ============================ -->
-<section class="diferencial papel r-lg" aria-labelledby="t-diferencial">
-  <div class="env duo">
-    <div class="lado-texto">
-      <h2 id="t-diferencial" class="revelar">O que torna esse sistema diferente</h2>
-      <p class="intro"><span class="serif">Você não recebe uma rotina pronta. A sua rotina é construída <em>a partir de você</em>.</span></p>
-    </div>
-    <div class="lado-visual">
-      <table class="comparativo">
-        <thead>
-          <tr>
-            <th scope="col">Ferramenta</th>
-            <th scope="col">O que entrega</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td data-rot="Ferramenta">Planner tradicional</td><td data-rot="O que entrega">Estrutura</td></tr>
-          <tr><td data-rot="Ferramenta">Aplicativo de tarefas</td><td data-rot="O que entrega">Organização</td></tr>
-          <tr><td data-rot="Ferramenta">Curso de produtividade</td><td data-rot="O que entrega">Conhecimento</td></tr>
-          <tr><td data-rot="Ferramenta">Calendário menstrual</td><td data-rot="O que entrega">Acompanhamento do ciclo</td></tr>
-          <tr><td data-rot="Ferramenta">Meu Ritmo</td><td data-rot="O que entrega">Estratégia personalizada de execução</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ 8. A TRANSFORMACAO ============================ -->
-<section class="transformacao nevoa r-lg" aria-labelledby="t-transformacao">
+<!-- ===============================================================
+     SEÇÃO 7. RESPEITAR SEU RITMO É PARTE DO PLANO (AS 4 FASES)
+     =============================================================== -->
+<section id="fases" class="fundo-base r-xl" aria-labelledby="titulo-fases">
   <div class="env">
-    <h2 id="t-transformacao" class="revelar">A transformação</h2>
-
-    <div class="momentos">
-      <article class="momento">
-        <span class="rotulo">Antes</span>
-        <p>&#8220;Eu nunca consigo manter uma rotina.&#8221;</p>
-      </article>
-      <article class="momento">
-        <span class="rotulo">Durante</span>
-        <p>&#8220;Estou entendendo por que algumas coisas funcionam melhor em determinados momentos.&#8221;</p>
-      </article>
-      <article class="momento">
-        <span class="rotulo">Depois</span>
-        <p>&#8220;Agora eu sei como organizar minhas demandas de acordo com a forma como funciono.&#8221;</p>
-      </article>
+    <div class="fases-header">
+      <span class="rotulo">Respeito ao seu tempo</span>
+      <h2 id="titulo-fases" class="revelar">Você não tem a mesma energia todos os dias. Seu planejamento não precisa ignorar isso.</h2>
+      <p class="corpo-g">Existem dias em que você se sente mais disposta. Em outros, precisa lidar com mais cansaço, menos concentração ou diferentes responsabilidades.</p>
+      <p class="corpo-g" style="margin-top:var(--e12)">Mesmo assim, muitos métodos de produtividade esperam que você mantenha sempre o mesmo desempenho. O Meu Ritmo considera essas variações na forma de organizar suas demandas.</p>
+      <p class="corpo-g" style="margin-top:var(--e12)">Seu plano de 28 dias é estruturado em quatro fases:</p>
     </div>
 
-    <p class="fecho corpo-g">Você não vai virar uma mulher superprodutiva. Vai parar de lutar contra você mesma para conseguir executar a sua vida.</p>
+    <div class="fases-grade">
+      <div class="card-fase" style="border-top: 4px solid var(--secundaria-borda)">
+        <span class="fase-lua">🌑</span>
+        <h4>Reflexiva</h4>
+        <p class="fase-desc">Um momento para observar sua realidade e olhar para suas prioridades.</p>
+      </div>
+
+      <div class="card-fase" style="border-top: 4px solid var(--complementar)">
+        <span class="fase-lua">🌓</span>
+        <h4>Dinâmica</h4>
+        <p class="fase-desc">Uma fase orientada à movimentação e à execução de atividades.</p>
+      </div>
+
+      <div class="card-fase" style="border-top: 4px solid var(--complementar-escuro)">
+        <span class="fase-lua">🌕</span>
+        <h4>Expressiva</h4>
+        <p class="fase-desc">Uma fase voltada à expressão e ao andamento das suas demandas.</p>
+      </div>
+
+      <div class="card-fase" style="border-top: 4px solid var(--acao)">
+        <span class="fase-lua">🌘</span>
+        <h4>Criativa</h4>
+        <p class="fase-desc">Uma fase para explorar possibilidades e organizar novas ideias.</p>
+      </div>
+    </div>
+
+    <div class="duo" style="margin-top:var(--e40); align-items:center">
+      <div class="lado-texto">
+        <p>Essas fases integram o método de organização do Meu Ritmo. O plano considera as informações que você compartilha sobre seu ciclo, sua rotina e suas características individuais.</p>
+        <p style="margin-top:var(--e16)"><strong>A proposta não é fazer menos ou mais em determinada fase. É organizar suas responsabilidades de uma maneira que considere suas variações e necessidades.</strong></p>
+      </div>
+      <div class="lado-visual" style="max-width:380px; margin:0 auto">
+        <figure class="artefato">
+          <div class="quadro">
+            <picture>
+              <source srcset="assets/as-quatro-fases.webp" type="image/webp">
+              <img src="assets/as-quatro-fases.jpg" width="590" height="980" alt="Captura de tela do aplicativo Meu Ritmo: visualização detalhada das 4 fases (Reflexiva, Dinâmica, Expressiva e Criativa) associadas aos ciclos e energias.">
+            </picture>
+          </div>
+          <figcaption>Tela real do app: As 4 fases explicadas na prática.</figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============================ 9. PROVA SOCIAL ============================ -->
-<section class="prova papel r-md" aria-labelledby="t-prova">
+<!-- ===============================================================
+     SEÇÃO 8. O DIFERENCIAL DO MEU RITMO
+     =============================================================== -->
+<section id="diferencial" class="fundo-alt r-xl" aria-labelledby="titulo-diferencial">
   <div class="env">
-    <!-- PREENCHER: o documento de copy reservou esta secao mas nao trouxe titulo
-         nem depoimentos. Confirmar o titulo abaixo com a Larissa. -->
-    <h2 id="t-prova" class="revelar">Quem já viveu o desafio</h2>
-    <div class="reservado">
-      <span class="rotulo">Espaço reservado</span>
-      <p>Aqui entram os depoimentos das participantes: foto ou iniciais, frase de destaque e resultado percebido. Ainda não foram enviados.</p>
+    <div class="diferencial-header">
+      <span class="rotulo">Comparação direta</span>
+      <h2 id="titulo-diferencial" class="revelar">O que torna o Meu Ritmo diferente de um planner comum?</h2>
     </div>
+
+    <div class="tabela-diferencial">
+      <!-- Coluna Planner Tradicional -->
+      <div class="col-diferencial col-tradicional">
+        <h3>Planner tradicional</h3>
+        <ul>
+          <li><span class="ico" style="color:var(--texto-legenda)">&times;</span><span>Oferece uma estrutura que você precisa preencher.</span></li>
+          <li><span class="ico" style="color:var(--texto-legenda)">&times;</span><span>Depende de você decidir suas tarefas e prioridades.</span></li>
+          <li><span class="ico" style="color:var(--texto-legenda)">&times;</span><span>Normalmente exige que você mantenha o planejamento por conta própria.</span></li>
+          <li><span class="ico" style="color:var(--texto-legenda)">&times;</span><span>Entrega páginas ou ferramentas de organização.</span></li>
+        </ul>
+      </div>
+
+      <!-- Coluna Meu Ritmo -->
+      <div class="col-diferencial col-ritmo">
+        <h3>Meu Ritmo</h3>
+        <ul>
+          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Cria um plano de ação a partir da sua vida.</span></li>
+          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Usa IA para organizar suas informações e prioridades.</span></li>
+          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Oferece orientação e check-ins diários.</span></li>
+          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Considera suas fases e seu ritmo.</span></li>
+          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Entrega um relatório e um planner personalizados ao final.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="fecho-diferenca revelar">A grande diferença é simples: você não precisa adaptar sua vida a um planejamento genérico. O planejamento é construído a partir de você.</p>
   </div>
 </section>
 
-<!-- ============================ 10. OFERTA ============================ -->
-<section id="oferta" class="oferta papel r-xl" aria-labelledby="t-oferta" style="padding-top:0">
+<!-- ===============================================================
+     SEÇÃO 9. DEMONSTRAÇÃO E CONFIANÇA (GALERIA EDITORIAL)
+     =============================================================== -->
+<section id="demonstracao" class="fundo-base r-xl" aria-labelledby="titulo-demo">
   <div class="env">
-    <h2 id="t-oferta" class="revelar" style="text-align:center">Desafio Meu Ritmo, 28 dias</h2>
-    <!-- PREENCHER: confirmar o valor antes de publicar. Base interna informada no
-         documento de copy: R$ 37,00, com checkout na Kiwify. -->
-    <p class="preco">R$ 37</p>
-    <p class="condicao">Pagamento único. Acesso vitalício.</p>
-    <div class="acoes">
-      <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero começar meu desafio. Ir para o checkout.">Quero começar meu desafio</a>
+    <div class="galeria-header">
+      <span class="rotulo">Telas reais do aplicativo</span>
+      <h2 id="titulo-demo" class="revelar">Veja como o Meu Ritmo funciona na prática</h2>
+      <p class="corpo-g">Antes de começar, você pode conhecer as principais etapas do sistema. Veja como suas informações são organizadas, como o plano de 28 dias é apresentado e como funciona o acompanhamento diário.</p>
+      <p class="corpo-g" style="margin-top:var(--e8)">Do primeiro mapeamento ao planner personalizado, cada etapa tem uma função na sua organização.</p>
+    </div>
+
+    <div class="galeria-grid">
+      <!-- Mapa da vida -->
+      <figure class="galeria-card">
+        <div class="quadro">
+          <picture>
+            <source srcset="assets/mapa-da-vida.webp" type="image/webp">
+            <img src="assets/mapa-da-vida.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: Mapa da Vida categorizando crescimento pessoal, profissional, família e relacionamentos, e espiritual.">
+          </picture>
+        </div>
+        <figcaption>Mapa da vida</figcaption>
+        <p>Mapeamento das áreas, metas e responsabilidades.</p>
+      </figure>
+
+      <!-- Plano diário -->
+      <figure class="galeria-card">
+        <div class="quadro">
+          <picture>
+            <source srcset="assets/plano-do-dia.webp" type="image/webp">
+            <img src="assets/plano-do-dia.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: visualização das tarefas do dia organizadas por blocos de tempo e limites saudáveis.">
+          </picture>
+        </div>
+        <figcaption>Plano diário</figcaption>
+        <p>Tarefas claras por período sem sobrecarga.</p>
+      </figure>
+
+      <!-- Acompanhamento dos 28 dias -->
+      <figure class="galeria-card">
+        <div class="quadro">
+          <picture>
+            <img src="assets/IMG_4720.PNG" width="590" height="1200" alt="Captura de tela do aplicativo Meu Ritmo: acompanhamento detalhado dos 28 dias organizados por ciclo e fases lunares.">
+          </picture>
+        </div>
+        <figcaption>Os 28 dias</figcaption>
+        <p>Acompanhamento de progresso distribuído nas 4 fases.</p>
+      </figure>
+
+      <!-- Matriz de priorização -->
+      <figure class="galeria-card">
+        <div class="quadro">
+          <picture>
+            <img src="assets/IMG_4722.PNG" width="590" height="1200" alt="Captura de tela do aplicativo Meu Ritmo: ferramenta de matriz de priorização dividida nos quadrantes Fazer, Planejar, Delegar e Eliminar.">
+          </picture>
+        </div>
+        <figcaption>Matriz de priorização</figcaption>
+        <p>Fazer, planejar, delegar ou eliminar.</p>
+      </figure>
+    </div>
+
+    <!-- Observação importante ética e transparente -->
+    <div class="observacao-importante revelar">
+      <h3>Uma observação importante</h3>
+      <p>O Meu Ritmo não promete mudar sua vida em 28 dias nem garantir que você alcance todas as suas metas.</p>
+      <p style="margin-top:var(--e8)">Ele oferece um processo personalizado de planejamento e acompanhamento.</p>
+      <p style="margin-top:var(--e8)">A identificação dos seus padrões depende das informações que você compartilha e dos check-ins que realiza ao longo dos 28 dias.</p>
+      <p class="fecho-obs">O que você recebe é um sistema para organizar suas prioridades, acompanhar sua rotina e construir um planejamento mais alinhado à sua realidade.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================ 11. PERGUNTAS FREQUENTES ============================ -->
-<section class="faq nevoa r-lg" aria-labelledby="t-faq">
-  <div class="env-leitura">
-    <h2 id="t-faq" class="revelar">Perguntas frequentes</h2>
+<!-- ===============================================================
+     SEÇÃO 10. APRESENTAÇÃO DA OFERTA
+     =============================================================== -->
+<section id="oferta" class="fundo-alt r-xl" aria-labelledby="titulo-oferta">
+  <div class="env">
+    <div class="bloco-oferta">
+      <span class="rotulo">Acesso Imediato</span>
+      <h2 id="titulo-oferta" class="revelar">Sua vida não precisa de mais um planejamento igual ao de todo mundo.</h2>
+      <p class="sub-oferta">Precisa de um plano criado para você.</p>
+      <p class="lead-oferta">Entre no Meu Ritmo e tenha acesso ao Desafio 28 Dias com inteligência artificial.</p>
+
+      <ul class="lista-oferta">
+        <li><span class="check-oferta">&#10003;</span><span>Mapeamento da sua rotina e das suas prioridades.</span></li>
+        <li><span class="check-oferta">&#10003;</span><span>Plano de ação personalizado de 28 dias.</span></li>
+        <li><span class="check-oferta">&#10003;</span><span>Orientação e acompanhamento diário.</span></li>
+        <li><span class="check-oferta">&#10003;</span><span>Organização considerando suas fases e seu ritmo.</span></li>
+        <li><span class="check-oferta">&#10003;</span><span>Check-ins para registrar sua execução.</span></li>
+        <li><span class="check-oferta">&#10003;</span><span>Relatório personalizado ao final.</span></li>
+        <li><span class="check-oferta">&#10003;</span><span>Planner personalizado para continuar sua organização.</span></li>
+        <li><span class="check-oferta">&#10003;</span><span>Acesso vitalício ao aplicativo.</span></li>
+      </ul>
+
+      <p class="preco-tag">Tudo isso por</p>
+      <p class="preco-grande">R$ 37</p>
+      <p class="condicao-oferta">Pagamento único. Sem mensalidade de acesso.</p>
+
+      <div class="acoes">
+        <a class="pill pill-cheio pill-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">QUERO MEU PLANO PERSONALIZADO</a>
+      </div>
+
+      <p class="selo-kiwify">Compra realizada pela Kiwify &middot; Ambiente seguro &middot; Garantia de 7 dias</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===============================================================
+     SEÇÃO 11. PERGUNTAS FREQUENTES
+     =============================================================== -->
+<section id="faq" class="fundo-base r-lg" aria-labelledby="titulo-faq">
+  <div class="env-leitura faq">
+    <span class="rotulo" style="display:block; text-align:center">Tire suas dúvidas</span>
+    <h2 id="titulo-faq" class="revelar">Perguntas Frequentes</h2>
 
     <details open>
-      <summary>Todo ciclo dura 28 dias?</summary>
-      <div class="resposta"><p>Não necessariamente. O desafio usa 28 dias como período de acompanhamento e implementação. A organização das suas fases é personalizada de acordo com as informações que você compartilha sobre o seu próprio ciclo.</p></div>
+      <summary>O Meu Ritmo é um planner digital?</summary>
+      <div class="resposta"><p>Não. O Meu Ritmo é um aplicativo com inteligência artificial que monta um plano de ação personalizado de 28 dias a partir das suas informações, orienta suas atividades diárias e entrega um relatório e um planner personalizados ao final.</p></div>
     </details>
 
     <details>
-      <summary>Funciona se meu ciclo for irregular?</summary>
-      <div class="resposta"><p>Sim. Durante o mapeamento, você informa a duração habitual do seu ciclo, sintomas e padrões percebidos, e o sistema trabalha com essas informações.</p></div>
+      <summary>Todas as mulheres recebem as mesmas tarefas?</summary>
+      <div class="resposta"><p>Não. O plano é construído a partir das informações fornecidas por cada usuária, considerando sua rotina, objetivos, responsabilidades e características individuais.</p></div>
     </details>
 
     <details>
-      <summary>Preciso ter disciplina para participar?</summary>
-      <div class="resposta"><p>Não. O sistema foi criado para quem sente que já tentou de tudo e não conseguiu sustentar uma rotina. A proposta é organizar sua vida de um jeito diferente, não exigir mais disciplina.</p></div>
+      <summary>Preciso já ser organizada para usar?</summary>
+      <div class="resposta"><p>Não. O Meu Ritmo foi criado especialmente para mulheres que sentem dificuldade de organizar suas demandas, definir prioridades e manter uma rotina.</p></div>
     </details>
 
     <details>
-      <summary>Quanto tempo preciso dedicar por dia?</summary>
-      <div class="resposta"><p>O plano é construído considerando sua realidade e sua disponibilidade, com uma prioridade principal por dia e tarefas organizadas por nível de energia.</p></div>
+      <summary>Preciso ter uma rotina fixa?</summary>
+      <div class="resposta"><p>Não. Você informa como é sua realidade, incluindo responsabilidades, compromissos e disponibilidade. O planejamento é montado considerando essas informações.</p></div>
     </details>
 
     <details>
-      <summary>Meu Ritmo substitui acompanhamento médico ou psicológico?</summary>
-      <div class="resposta"><p>Não. O sistema organiza comportamentos e compromissos que você mesma define. Ele não realiza diagnóstico nem substitui orientação médica ou terapêutica.</p></div>
+      <summary>O Desafio 28 Dias é igual a um ciclo menstrual de 28 dias?</summary>
+      <div class="resposta"><p>Não. Os 28 dias representam o período de planejamento e acompanhamento. Isso não significa que todos os ciclos menstruais tenham essa duração. O aplicativo utiliza as informações que você compartilha sobre seu ciclo e suas características individuais para compor o planejamento.</p></div>
     </details>
 
     <details>
-      <summary>Como recebo o acesso?</summary>
-      <!-- PREENCHER: o documento de copy deixou esta resposta em aberto. Sugestao do
-           proprio documento: acesso via desafio28dias.app apos a confirmacao do
-           pagamento na Kiwify. Confirmar o fluxo exato antes de publicar. -->
-      <div class="resposta"><p><span class="pendente">[preencher: fluxo de acesso, a confirmar]</span></p></div>
+      <summary>E se meu ciclo menstrual for irregular?</summary>
+      <div class="resposta"><p>Durante o mapeamento, você informa os dados que conhece sobre seu ciclo e os padrões que percebe. O sistema utiliza essas informações para construir o planejamento personalizado.</p></div>
+    </details>
+
+    <details>
+      <summary>Preciso dedicar muito tempo por dia?</summary>
+      <div class="resposta"><p>O plano considera a rotina e a disponibilidade que você informa no mapeamento. Você acompanha as orientações do dia e realiza check-ins para registrar sua execução.</p></div>
+    </details>
+
+    <details>
+      <summary>O que acontece depois dos 28 dias?</summary>
+      <div class="resposta"><p>Você recebe um relatório sobre os padrões de organização e rotina identificados ao longo do acompanhamento e um planner personalizado, construído para ajudar você a continuar se organizando.</p></div>
+    </details>
+
+    <details>
+      <summary>O aplicativo usa inteligência artificial de verdade?</summary>
+      <div class="resposta"><p>Sim. A inteligência artificial utiliza as informações fornecidas no mapeamento para criar o plano de ação personalizado e os registros da jornada para identificar padrões de organização e rotina.</p></div>
+    </details>
+
+    <details>
+      <summary>O Meu Ritmo substitui terapia ou acompanhamento médico?</summary>
+      <div class="resposta"><p>Não. O Meu Ritmo é uma ferramenta de organização pessoal. Não realiza diagnósticos, não oferece tratamento e não substitui acompanhamento médico ou psicológico.</p></div>
+    </details>
+
+    <details>
+      <summary>O pagamento é mensal?</summary>
+      <div class="resposta"><p>Não. O valor é de R$ 37, em pagamento único, com acesso vitalício ao aplicativo.</p></div>
+    </details>
+
+    <details>
+      <summary>Como recebo meu acesso?</summary>
+      <div class="resposta"><p>Logo após a confirmação do pagamento pela Kiwify, você recebe imediatamente no seu e-mail de compra os dados de acesso e as orientações para entrar no aplicativo em <strong>desafio28dias.app</strong>.</p></div>
     </details>
 
   </div>
 </section>
 
-<!-- ============================ 12. CHAMADA FINAL ============================ -->
-<section class="final papel r-xl" aria-labelledby="t-final">
+<!-- ===============================================================
+     SEÇÃO 12. CHAMADA FINAL
+     =============================================================== -->
+<section class="chamada-final fundo-alt r-xl" aria-labelledby="titulo-final">
   <div class="env">
-    <h2 id="t-final" class="revelar">Você não precisa <em>recomeçar</em></h2>
-    <div class="corpo">
-      <p class="corpo-g" style="margin-inline:auto">Precisa de um plano que acompanhe você. Meu Ritmo usa inteligência artificial para transformar a sua vida real em uma estratégia de execução personalizada para os próximos 28 dias.</p>
+    <h2 id="titulo-final" class="revelar">Você não precisa continuar tentando encaixar sua vida em uma rotina pronta.</h2>
+
+    <div class="chamada-corpo">
+      <p>Suas responsabilidades são suas.</p>
+      <p>Suas prioridades são suas.</p>
+      <p>Seu ritmo também.</p>
+      <p style="margin-top:var(--e16)">Então por que seu planejamento deveria ser igual ao de todo mundo?</p>
+      <p style="margin-top:var(--e16)">Com o Meu Ritmo, você conta como é sua vida e recebe um plano personalizado de 28 dias, criado por inteligência artificial para acompanhar sua realidade.</p>
+      <p style="margin-top:var(--e16)">Você terá orientações diárias e, ao final, um relatório e um planner personalizados para continuar sua organização.</p>
+
+      <span class="chamada-destaque-frase">Comece com a vida que você tem hoje.</span>
+      <p class="chamada-sub">Desafio 28 Dias | Meu Ritmo</p>
+      <p class="chamada-preco">R$ 37, pagamento único e acesso vitalício.</p>
     </div>
+
     <div class="acoes">
-      <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="fbq('track', 'InitiateCheckout');" aria-label="Quero montar meu plano agora. Ir para o checkout.">Quero montar meu plano agora</a>
+      <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero começar meus 28 dias. Ir para o checkout Kiwify.">QUERO COMEÇAR MEUS 28 DIAS</a>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- ============================ RODAPE ============================ -->
-<footer class="rodape papel">
+<!-- ===============================================================
+     RODAPÉ
+     =============================================================== -->
+<footer class="rodape fundo-base">
   <div class="env">
-    <p>&copy; 2026 <!-- PREENCHER: nome da marca, se quiser exibir aqui -->&middot; Todos os direitos reservados</p>
+    <p class="marca-rodape">Meu Ritmo &middot; Organização pessoal com inteligência artificial.</p>
+    <p class="empresa-dados">Atendimento ao cliente: <a href="mailto:suporte@desafio28dias.app" style="color:var(--acao-texto); text-decoration:none">suporte@desafio28dias.app</a> &middot; Horário: Segunda a sexta, das 09h às 18h</p>
     <p class="links">
-      <!-- PREENCHER: link da política de privacidade --><a href="#">Política de Privacidade</a> &middot;
-      <!-- PREENCHER: link dos termos de uso --><a href="#">Termos de Uso</a> &middot;
-      <!-- PREENCHER: e-mail de contato --><a href="#">Contato</a>
+      <button type="button" aria-haspopup="dialog" aria-controls="modal-privacidade" onclick="abrirModal('modal-privacidade');">Política de Privacidade</button>
+      <button type="button" aria-haspopup="dialog" aria-controls="modal-termos" onclick="abrirModal('modal-termos');">Termos de Uso</button>
+      <button type="button" aria-haspopup="dialog" aria-controls="modal-reembolso" onclick="abrirModal('modal-reembolso');">Garantia e Reembolso</button>
+      <button type="button" aria-haspopup="dialog" aria-controls="modal-cookies" onclick="abrirModal('modal-cookies');">Preferências de Cookies</button>
+      <a href="mailto:suporte@desafio28dias.app">Contato</a>
     </p>
-    <p class="aviso">Este produto não realiza diagnóstico e não substitui acompanhamento psicológico, psiquiátrico ou médico.</p>
+    <p>&copy; 2026 Meu Ritmo. Todos os direitos reservados.</p>
+    <p class="aviso">O Meu Ritmo é uma ferramenta de organização pessoal. Não realiza diagnósticos e não substitui acompanhamento médico ou psicológico.</p>
   </div>
 </footer>
 
-<!-- ============================ BARRA FIXA (MOBILE) ============================ -->
-<div class="barra-fixa" id="barraFixa">
-  <a class="pill pill-cheio pill-largo" href="#oferta" aria-label="Quero começar meu desafio. Ir para a seção da oferta.">Quero começar meu desafio</a>
+<!-- ===============================================================
+     BARRA FIXA (SOMENTE MOBILE)
+     =============================================================== -->
+<div class="barra-fixa" id="barraFixa" inert aria-hidden="true">
+  <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">QUERO MEU PLANO PERSONALIZADO</a>
+</div>
+
+<!-- ===============================================================
+     BANNER DE COOKIES LGPD
+     =============================================================== -->
+<aside id="bannerCookies" class="banner-cookies" aria-label="Gerenciamento de privacidade e cookies" role="region">
+  <div class="banner-cookies-conteudo">
+    <div class="banner-cookies-texto">
+      <p class="banner-cookies-titulo"><strong>Sua privacidade é prioridade</strong></p>
+      <p>Guardamos sua escolha de privacidade neste navegador. O Meta Pixel só é ativado com sua autorização para medir visitas e cliques de compra. Você pode mudar sua escolha em Preferências de Cookies no rodapé.</p>
+    </div>
+    <div class="banner-cookies-acoes">
+      <button type="button" class="btn-cookie btn-cookie-secundario" onclick="recusarCookies()">Apenas necessários</button>
+      <button type="button" class="btn-cookie btn-cookie-detalhes" onclick="abrirModal('modal-cookies')">Personalizar preferências</button>
+      <button type="button" class="btn-cookie btn-cookie-primario" onclick="aceitarTodosCookies()">Aceitar todos</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ===============================================================
+     MODAIS LEGAIS (POLÍTICA, TERMOS, REEMBOLSO E COOKIES)
+     =============================================================== -->
+<div id="modal-privacidade" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tit-privacidade">
+  <div class="modal-conteudo">
+    <button type="button" class="modal-fechar" onclick="fecharModal('modal-privacidade')" aria-label="Fechar janela de política de privacidade">&times;</button>
+    <h3 id="tit-privacidade">Política de Privacidade</h3>
+    <p>Esta Política de Privacidade esclarece como o Meu Ritmo trata dados pessoais de acordo com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 - LGPD).</p>
+
+    <h4>1. Dados Coletados no Site vs. no Aplicativo</h4>
+    <p><strong>Nesta página:</strong> Não há formulário de cadastro nem coleta de informações sobre seu ciclo ou sua rotina. Sua escolha de privacidade é salva neste navegador. Com sua autorização, o Meta Pixel registra visitas e cliques nos botões de compra. O checkout acontece no site da Kiwify.</p>
+    <p><strong>No aplicativo Meu Ritmo:</strong> As informações sobre rotina, metas, prioridades e ciclo são fornecidas dentro do aplicativo, após o acesso à conta, para personalizar o planejamento. Dados relativos à saúde são dados pessoais sensíveis e exigem proteção específica. Esta página de apresentação não recebe essas informações.</p>
+
+    <h4>2. Uso de Inteligência Artificial</h4>
+    <p>A inteligência artificial do Meu Ritmo atua unicamente como assistente de organização pessoal, estruturando suas tarefas com base nas regras e dados fornecidos por você. Não realizamos tomadas de decisão automatizadas que produzam efeitos jurídicos ou que afetem negativamente seus interesses (LGPD, art. 20).</p>
+
+    <h4>3. Compartilhamento e Operadores de Dados</h4>
+    <p>Não comercializamos seus dados em nenhuma hipótese. Os pagamentos e transações são processados com isolamento e segurança pela Kiwify (operadora de checkout e pagamento). Se você autorizar o marketing, o Meta Pixel pode transmitir à Meta identificadores de navegador, informações técnicas e eventos de navegação e cliques para mensuração de campanhas. Esses dados não devem ser considerados anônimos.</p>
+
+    <h4>4. Direitos do Titular (Art. 18 da LGPD)</h4>
+    <p>Você pode a qualquer momento confirmar a existência de tratamento, acessar seus dados, corrigir informações incompletas ou inexatas, solicitar anonimização, bloqueio ou eliminação de dados desnecessários e revogar consentimentos concedidos.</p>
+
+    <h4>5. Contato sobre Privacidade</h4>
+    <p>Para exercer seus direitos ou tirar dúvidas de privacidade, entre em contato pelo e-mail <a href="mailto:suporte@desafio28dias.app">suporte@desafio28dias.app</a>, descrevendo sua solicitação. Evite enviar dados sensíveis que não sejam necessários ao atendimento.</p>
+    <h4>6. Suas Preferências neste Navegador</h4>
+    <p>Você pode aceitar, recusar ou retirar a autorização de marketing em <strong>Preferências de Cookies</strong>, no rodapé. Sua escolha permanece neste navegador até ser alterada ou até que seus dados de navegação sejam apagados. Ao retirar a autorização, os novos eventos de marketing desta página são interrompidos; isso não elimina automaticamente dados já enviados à Meta. Para outras solicitações de privacidade, use o canal de contato acima.</p>
+  </div>
+</div>
+
+<div id="modal-termos" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tit-termos">
+  <div class="modal-conteudo">
+    <button type="button" class="modal-fechar" onclick="fecharModal('modal-termos')" aria-label="Fechar janela de termos de uso">&times;</button>
+    <h3 id="tit-termos">Termos de Uso</h3>
+    <p>Ao adquirir o acesso ao <strong>Meu Ritmo | Desafio 28 Dias</strong>, você concorda com as seguintes condições de uso:</p>
+
+    <h4>1. Objeto e Natureza do Serviço</h4>
+    <p>O Meu Ritmo é uma aplicação web e metodologia de organização pessoal e planejamento cíclico com inteligência artificial. O produto oferece mapeamento de rotina, plano de ação estruturado de 28 dias, orientações diárias, check-ins de acompanhamento, relatório de padrões e planner personalizado para continuidade.</p>
+
+    <h4>2. Condições de Acesso e Pagamento</h4>
+    <p>O acesso ao aplicativo é vitalício para a compradora, com pagamento único no valor de R$ 37, sem mensalidades ou taxas ocultas de recorrência.</p>
+
+    <h4>3. Limitações do Produto e Isenção de Responsabilidade</h4>
+    <p><strong>Aviso Importante:</strong> O Meu Ritmo não é um serviço médico, psicológico, psiquiátrico ou de terapia. O aplicativo não fornece diagnósticos de saúde, prescrições de medicamentos ou tratamentos clínicos. Seu objetivo é exclusivamente a facilitação da gestão de rotina, metas e hábitos.</p>
+
+    <h4>4. Propriedade Intelectual</h4>
+    <p>Todos os elementos da plataforma, textos, metodologia, marcas e interfaces são protegidos pela legislação de propriedade intelectual e direitos autorais. O acesso é individual e intransferível.</p>
+  </div>
+</div>
+
+<div id="modal-reembolso" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tit-reembolso">
+  <div class="modal-conteudo">
+    <button type="button" class="modal-fechar" onclick="fecharModal('modal-reembolso')" aria-label="Fechar janela de garantia e reembolso">&times;</button>
+    <h3 id="tit-reembolso">Garantia e Política de Reembolso</h3>
+    <p>Sua compra é protegida pela legislação brasileira e pela política de satisfação do Meu Ritmo.</p>
+
+    <h4>1. Direito de Arrependimento (Artigo 49 do CDC)</h4>
+    <p>A compra tem garantia de <strong>7 (sete) dias corridos</strong> para solicitar o reembolso, sem necessidade de justificar a desistência. Aplica-se o direito de arrependimento do Art. 49 do Código de Defesa do Consumidor, contado da assinatura ou do recebimento do produto ou serviço, conforme o caso.</p>
+
+    <h4>2. Como Solicitar o Reembolso</h4>
+    <p>Acesse o <a href="https://reembolso.kiwify.com.br" target="_blank" rel="noopener">portal de reembolso da Kiwify</a> e informe o mesmo e-mail utilizado na compra. Você também pode solicitar pelo e-mail <a href="mailto:suporte@desafio28dias.app">suporte@desafio28dias.app</a>, informando o e-mail da compra e o número do pedido, se disponível. O reembolso corresponde ao valor integral pago.</p>
+    <h4>3. Recebimento do Valor</h4>
+    <p>O prazo de recebimento depende da forma de pagamento e da instituição financeira. No cartão, o crédito é processado pela administradora; no Pix, a devolução é processada pela plataforma. Para boleto, a Kiwify pode solicitar uma conta bancária de mesma titularidade da compra. Consulte os <a href="https://ajuda.kiwify.com.br/pt-br/article/como-faco-para-pedir-o-reembolso-de-um-produto-que-comprei-1kfom3h/" target="_blank" rel="noopener">procedimentos atualizados da Kiwify</a> e acompanhe a confirmação do pedido.</p>
+  </div>
+</div>
+
+<div id="modal-cookies" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tit-cookies">
+  <div class="modal-conteudo">
+    <button type="button" class="modal-fechar" onclick="fecharModal('modal-cookies')" aria-label="Fechar janela de preferências de cookies">&times;</button>
+    <h3 id="tit-cookies">Preferências de Cookies</h3>
+    <p>Gerencie como utilizamos cookies e tecnologias de rastreamento neste site de acordo com a LGPD.</p>
+
+    <div class="categoria-cookie-item">
+      <div class="categoria-cookie-topo">
+        <h5>Armazenamento necessário</h5>
+        <span class="cookie-status-fixo">Sempre Ativos</span>
+      </div>
+      <p>Salva sua escolha de privacidade neste navegador para lembrar sua preferência nas próximas visitas. Não é usado para publicidade.</p>
+    </div>
+
+    <div class="categoria-cookie-item">
+      <div class="categoria-cookie-topo">
+        <h5>Marketing e Desempenho (Meta Pixel)</h5>
+        <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:14px; font-weight:500; color:var(--texto-forte)">
+          <input type="checkbox" id="checkMarketingCookies" style="width:18px; height:18px; accent-color:var(--acao)">
+          Autorizar
+        </label>
+      </div>
+      <p>Com sua autorização, o Meta Pixel registra visitas a esta página e cliques nos botões de compra para medir campanhas. Você pode retirar essa autorização a qualquer momento.</p>
+    </div>
+
+    <div class="acoes" style="justify-content:flex-end; margin-top:var(--e24)">
+      <button type="button" class="btn-cookie btn-cookie-secundario" onclick="salvarPreferenciasCookies(false)">Apenas necessários</button>
+      <button type="button" class="btn-cookie btn-cookie-primario" onclick="salvarPreferenciasCookies()">Salvar preferências</button>
+    </div>
+  </div>
 </div>
 
 <script>
 (function () {
-  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var titulos = document.querySelectorAll('.revelar');
-  if (reduz || !('IntersectionObserver' in window)) {
-    titulos.forEach(function (t) { t.classList.add('aparece'); });
-  } else {
-    var obs = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('aparece'); obs.unobserve(e.target); }
-      });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.1 });
-    titulos.forEach(function (t) { obs.observe(t); });
-  }
-
+  // Barra fixa no mobile após rolar a primeira dobra
   var barra = document.getElementById('barraFixa');
-  var limite = function () { return window.innerHeight * 0.9; };
+  var limite = function () { return window.innerHeight * 0.8; };
   var pendente = false;
-  function avalia() {
-    barra.classList.toggle('visivel', window.scrollY > limite());
+
+  function avaliaScroll() {
+    if (barra) {
+      var visivel = window.scrollY > limite();
+      barra.classList.toggle('visivel', visivel);
+      barra.inert = !visivel || !!modalAtual;
+      barra.setAttribute('aria-hidden', String(!visivel));
+    }
     pendente = false;
   }
+
   window.addEventListener('scroll', function () {
-    if (!pendente) { pendente = true; window.requestAnimationFrame(avalia); }
+    if (!pendente) {
+      pendente = true;
+      window.requestAnimationFrame(avaliaScroll);
+    }
   }, { passive: true });
-  avalia();
+
+  avaliaScroll();
 })();
+
+// Diálogos: foco contido, Escape, retorno ao acionador e fundo inerte.
+var modalAtual = null;
+var focoAnterior = null;
+var scrollAntesModal = 0;
+var topAntesModal = '';
+var elementosInertes = [];
+
+function abrirModal(id) {
+  var m = document.getElementById(id);
+  if (!m || m === modalAtual) return;
+  if (modalAtual) fecharModal(modalAtual.id);
+  focoAnterior = document.activeElement;
+  scrollAntesModal = window.scrollY;
+  topAntesModal = document.body.style.top;
+  modalAtual = m;
+  if (id === 'modal-cookies') {
+    document.getElementById('checkMarketingCookies').checked = consentimentoMarketing;
+  }
+  elementosInertes = Array.from(document.body.children)
+    .filter(function(el) { return el !== m && el.tagName !== 'SCRIPT'; })
+    .map(function(el) {
+      var estado = { elemento: el, inert: el.inert };
+      el.inert = true;
+      return estado;
+    });
+  document.body.style.top = '-' + scrollAntesModal + 'px';
+  document.body.classList.add('modal-aberto');
+  m.classList.add('aberto');
+  m.querySelector('.modal-conteudo').scrollTop = 0;
+  m.querySelector('.modal-fechar').focus({ preventScroll: true });
+}
+
+function fecharModal(id) {
+  var m = document.getElementById(id);
+  if (!m || m !== modalAtual) return;
+  m.classList.remove('aberto');
+  modalAtual = null;
+  elementosInertes.forEach(function(estado) { estado.elemento.inert = estado.inert; });
+  elementosInertes = [];
+  document.body.classList.remove('modal-aberto');
+  document.body.style.top = topAntesModal;
+  window.scrollTo({ top: scrollAntesModal, behavior: 'instant' });
+  var destino = focoAnterior;
+  if (!destino || !destino.isConnected || !destino.getClientRects().length) {
+    destino = document.getElementById('conteudo-principal');
+  }
+  if (destino) destino.focus({ preventScroll: true });
+  focoAnterior = null;
+}
+
+window.addEventListener('click', function(e) {
+  if (e.target === modalAtual) fecharModal(modalAtual.id);
+});
+
+window.addEventListener('keydown', function(e) {
+  if (!modalAtual) return;
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    fecharModal(modalAtual.id);
+    return;
+  }
+  if (e.key !== 'Tab') return;
+  var focaveis = Array.from(modalAtual.querySelectorAll('a[href], button, input, select, textarea, [tabindex="0"]'))
+    .filter(function(el) { return !el.disabled && el.getClientRects().length > 0; });
+  var primeiro = focaveis[0];
+  var ultimo = focaveis[focaveis.length - 1];
+  if (e.shiftKey && (document.activeElement === primeiro || !modalAtual.contains(document.activeElement))) {
+    e.preventDefault();
+    ultimo.focus();
+  } else if (!e.shiftKey && (document.activeElement === ultimo || !modalAtual.contains(document.activeElement))) {
+    e.preventDefault();
+    primeiro.focus();
+  }
+});
+
+function removerCookiesMarketing() {
+  var dominios = [''];
+  var partes = location.hostname.split('.');
+  for (var i = 0; i < partes.length - 1; i++) {
+    dominios.push('; domain=' + partes.slice(i).join('.'));
+  }
+  ['_fbp', '_fbc'].forEach(function(nome) {
+    dominios.forEach(function(dominio) {
+      document.cookie = nome + '=; Max-Age=0; path=/' + dominio;
+    });
+  });
+}
+
+function aplicarConsentimento(valor, salvar) {
+  consentimentoAtual = valor;
+  consentimentoMarketing = valor === 'all';
+  if (salvar) {
+    try { localStorage.setItem('meuritmo_cookie_consent', valor); } catch (e) {
+      // A escolha continua válida nesta visita mesmo se o navegador bloquear o armazenamento.
+    }
+  }
+  var banner = document.getElementById('bannerCookies');
+  banner.classList.toggle('ativo', !valor);
+  document.getElementById('checkMarketingCookies').checked = consentimentoMarketing;
+  if (consentimentoMarketing) {
+    carregarMetaPixel();
+  } else {
+    if (pixelAtivo && typeof fbq === 'function') fbq('consent', 'revoke');
+    removerCookiesMarketing();
+  }
+}
+
+function aceitarTodosCookies() { aplicarConsentimento('all', true); }
+function recusarCookies() { aplicarConsentimento('necessary', true); }
+
+function salvarPreferenciasCookies(autorizouMarketing) {
+  var autorizou = typeof autorizouMarketing === 'boolean'
+    ? autorizouMarketing
+    : document.getElementById('checkMarketingCookies').checked;
+  aplicarConsentimento(autorizou ? 'all' : 'necessary', true);
+  fecharModal('modal-cookies');
+}
+
+// Reflete também a retirada de consentimento realizada em outra aba.
+window.addEventListener('storage', function(e) {
+  if (e.key === 'meuritmo_cookie_consent' || e.key === null) {
+    aplicarConsentimento(lerConsentimento(), false);
+  }
+});
+
+aplicarConsentimento(lerConsentimento(), false);
 </script>
 
 </body>

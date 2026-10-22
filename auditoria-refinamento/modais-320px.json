@@ -1,0 +1,38 @@
+[
+  {
+    "focusInside": true,
+    "height": 627,
+    "id": "modal-privacidade",
+    "padding": "28px 20px",
+    "scrollHeight": 2375,
+    "scrollWidth": 279,
+    "width": 279
+  },
+  {
+    "focusInside": true,
+    "height": 627,
+    "id": "modal-termos",
+    "padding": "28px 20px",
+    "scrollHeight": 1178,
+    "scrollWidth": 279,
+    "width": 279
+  },
+  {
+    "focusInside": true,
+    "height": 627,
+    "id": "modal-reembolso",
+    "padding": "28px 20px",
+    "scrollHeight": 1133,
+    "scrollWidth": 279,
+    "width": 279
+  },
+  {
+    "focusInside": true,
+    "height": 627,
+    "id": "modal-cookies",
+    "padding": "28px 20px",
+    "scrollHeight": 869,
+    "scrollWidth": 279,
+    "width": 279
+  }
+]
