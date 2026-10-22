@@ -5,6 +5,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const { execFileSync } = require('node:child_process');
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
@@ -120,6 +121,14 @@ test('all CSS variables resolve and every referenced local media file exists', (
     assert.ok(fs.existsSync(path.join(root, m[1])), m[1]);
   }
   for (const m of html.matchAll(/<img\b[^>]+>/g)) assert.match(m[0], /alt="[^"\s][^"]+"/);
+});
+
+test('every referenced local asset is included in Git with matching filename case', () => {
+  const tracked = new Set(execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' }).split('\0'));
+  const referenced = [...html.matchAll(/(?:src|srcset|poster|href)="(assets\/[^" ]+)/g)].map(m => m[1]);
+  assert.ok(referenced.length > 0);
+  const missing = [...new Set(referenced)].filter(asset => !tracked.has(asset));
+  assert.deepEqual(missing, [], `Assets missing from Git: ${missing.join(', ')}`);
 });
 
 test('all five purchase links preserve checkout and one inline tracking handler', () => {

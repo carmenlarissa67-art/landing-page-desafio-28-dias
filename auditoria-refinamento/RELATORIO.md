@@ -59,7 +59,7 @@ O procedimento de reembolso foi ajustado a partir das páginas oficiais [solicit
 
 - A página tem **cinco** CTAs de compra: abertura, apresentação do produto, oferta, chamada final e barra móvel. Todos apontam para `https://pay.kiwify.com.br/NXZ0sjz` e têm um acionamento explícito do evento. A barra móvel anteriormente apontava apenas para `#oferta`; foi alinhada ao checkout conforme o relatório.
 - Não havia fallback de Pixel em `noscript` na versão recebida. Não foi adicionado um rastreador sem JavaScript, que dispararia sem passar pelas escolhas de consentimento.
-- As capturas efetivamente usadas são as versões JPG/WebP existentes. Os arquivos `IMG_4719.PNG` a `IMG_4723.PNG` não eram referenciados pelo HTML. Eles foram preservados.
+- Correção da auditoria após a publicação: além das versões JPG/WebP, o HTML referencia `IMG_4719.PNG`, `IMG_4720.PNG` e `IMG_4722.PNG`. Esses três arquivos existiam localmente, mas ficaram fora do commit inicial, causando imagens quebradas na hospedagem. Foram incluídos no Git na correção. `IMG_4721.PNG` e `IMG_4723.PNG` não são referenciados e continuam preservados apenas localmente.
 - Não há dupla associação de evento por listener e onclick. O acionamento explícito permanece somente nos atributos onclick dos cinco CTAs.
 - A aplicação de `main`, `section`, `footer` e diálogos foi conferida; a ausência de um `header` separado não foi tratada como falha por si só.
 
@@ -69,7 +69,7 @@ O procedimento de reembolso foi ajustado a partir das páginas oficiais [solicit
 
 **Interação:** primeira visita exibe aviso; caixa de marketing começa desmarcada; salvar desmarcada fecha a janela e mantém zero scripts da Meta no DOM; preferência recusada permanece após recarregar. Tab/Shift+Tab, Escape, retorno de foco, fundo inerte, FAQ e atalho de navegação verificados. Nenhum erro de console observado na aba final.
 
-**Testes automatizados:** `node --test tests/landing-regression.cjs` — 9 testes aprovados. Cobrem ausência de rastreamento sem autorização, handler real de salvar preferências, inicialização única, revogação, renovação, armazenamento indisponível, sincronização entre abas, variáveis CSS, mídia, checkout e contraste. `git diff --check` aprovado.
+**Testes automatizados:** `node --test tests/landing-regression.cjs` — 10 testes aprovados após a correção das imagens. Cobrem ausência de rastreamento sem autorização, handler real de salvar preferências, inicialização única, revogação, renovação, armazenamento indisponível, sincronização entre abas, variáveis CSS, mídia, checkout e contraste. A nova verificação exige que os recursos locais referenciados também estejam no índice do Git, com maiúsculas/minúsculas correspondentes; ela detectou os três PNGs ausentes antes da inclusão. `git diff --check` aprovado.
 
 Os testes de aceite e revogação executam os scripts reais da página com DOM/armazenamento e fila do SDK simulados, sem transmitir eventos de teste à conta Meta. A recepção de eventos no Gerenciador de Eventos e o comportamento do SDK externo não foram validados nesta sessão. O teste no navegador confirmou o fluxo de recusa e a ausência do carregamento do SDK nesse fluxo.
 
