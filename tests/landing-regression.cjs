@@ -120,7 +120,10 @@ test('all CSS variables resolve and every referenced local media file exists', (
   for (const m of html.matchAll(/(?:src|srcset|poster)="(assets\/[^" ]+)/g)) {
     assert.ok(fs.existsSync(path.join(root, m[1])), m[1]);
   }
-  for (const m of html.matchAll(/<img\b[^>]+>/g)) assert.match(m[0], /alt="[^"\s][^"]+"/);
+  for (const m of html.matchAll(/<img\b[^>]+>/g)) {
+    if (/aria-hidden="true"/.test(m[0])) assert.match(m[0], /alt=""/);
+    else assert.match(m[0], /alt="[^"\s][^"]+"/);
+  }
 });
 
 test('every referenced local asset is included in Git with matching filename case', () => {
@@ -131,12 +134,28 @@ test('every referenced local asset is included in Git with matching filename cas
   assert.deepEqual(missing, [], `Assets missing from Git: ${missing.join(', ')}`);
 });
 
-test('all five purchase links preserve checkout and one inline tracking handler', () => {
+test('only the offer button opens checkout and triggers checkout tracking', () => {
   const links = [...html.matchAll(/<a\b[^>]+href="https:\/\/pay\.kiwify\.com\.br\/NXZ0sjz"[^>]*>/g)];
-  assert.equal(links.length, 5);
+  assert.equal(links.length, 1);
   links.forEach(([tag]) => assert.match(tag, /onclick="dispararInitiateCheckout\(\);"/));
+  const offer = html.match(/<section id="oferta"[\s\S]*?<\/section>/)[0];
+  assert.match(offer, /href="https:\/\/pay\.kiwify\.com\.br\/NXZ0sjz"/);
+  assert.equal([...html.matchAll(/onclick="dispararInitiateCheckout\(\);"/g)].length, 1);
   assert.doesNotMatch(html, /<noscript>[\s\S]*facebook/);
   assert.doesNotMatch(html, /<form\b/);
+});
+
+test('other CTAs advance to the next section and there is no fixed purchase bar', () => {
+  const sections = [...html.matchAll(/<section\b[^>]*>[\s\S]*?<\/section>/g)].map(m => m[0]);
+  const otherCtas = [...html.matchAll(/<a class="pill[^>]+href="#([^"]+)"[^>]*>/g)];
+  assert.deepEqual(otherCtas.map(m => m[1]), ['dor', 'como-funciona', 'contato']);
+  for (const [tag, target] of otherCtas) {
+    assert.doesNotMatch(tag, /onclick=|target=/);
+    const index = sections.findIndex(section => section.includes(tag));
+    const next = sections[index + 1] ?? html.match(/<footer\b[^>]*>/)[0];
+    assert.match(next, new RegExp(`^<(?:section|footer)[^>]*id="${target}"`));
+  }
+  assert.doesNotMatch(html, /barra-fixa|barraFixa/);
 });
 
 function luminance(hex) {

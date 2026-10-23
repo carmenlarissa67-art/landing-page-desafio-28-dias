@@ -31,14 +31,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Fahkwang:ital,wght@0,400;0,500;1,400;1,500&family=Livvic:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 
 <style>
-/* ===============================================================
-   MEU RITMO — DESIGN SYSTEM OFICIAL REFINADO
-   Conceito: Produto digital premium, clareza mental e acolhimento
-   Paleta: Base (#F7F3ED), Secundária Lavanda (#DCD5E9),
-           Complementar Sálvia (#A8B6A3), Texto Ameixa (#53465C),
-           Ação Roxo (#846A94)
-   Tipografia: Fahkwang + Livvic (regular e médio)
-   =============================================================== */
 :root {
   /* Paleta Oficial */
   --base: #F7F3ED;             /* Creme suave - Fundo predominante */
@@ -86,1409 +78,295 @@
   --flutua-forte: 0 16px 36px -6px rgba(83, 70, 92, 0.12), 0 2px 6px rgba(83, 70, 92, 0.06);
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Brand-preserving editorial refinement. This source is inlined in index.html. */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --tempo-press: 140ms;
+  --largo: 1280px;
+  --leitura: 760px;
+  --gutter: clamp(20px, 4vw, 64px);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; color-scheme: light; scroll-padding-bottom: 110px; }
+body { font: 400 18px/1.6 var(--sans); color: var(--texto); background: var(--base); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--secundaria); color: var(--texto-forte); }
+[hidden] { display: none !important; }
+img, video { display: block; max-width: 100%; height: auto; }
+picture { display: block; }
+a { color: var(--acao-texto); text-underline-offset: .25em; }
+button, input { font: inherit; accent-color: var(--acao-texto); }
+button, a, summary { touch-action: manipulation; }
+button, summary, .pill { cursor: pointer; -webkit-user-select: none; user-select: none; }
+:focus-visible { outline: 3px solid var(--acao-texto); outline-offset: 5px; }
+:target { scroll-margin-top: 32px; }
+h1,h2,h3,h4,h5 { font-family: var(--titulo); font-weight: 500; color: var(--texto-forte); text-wrap: balance; letter-spacing: -.025em; }
+h1 { font-size: clamp(44px, 6vw, 88px); line-height: 1.06; max-width: 10ch; }
+h2 { font-size: clamp(32px, 4vw, 52px); line-height: 1.12; margin-bottom: 32px; }
+h3 { font-size: 24px; line-height: 1.3; margin-bottom: 16px; }
+p { text-wrap: pretty; }
+p + p { margin-top: 16px; }
+strong { font-weight: 500; }
+.corpo-g, .lead { font-size: 20px; line-height: 1.6; }
+.env, .env-leitura { width: min(100% - var(--gutter) * 2, var(--largo)); margin-inline: auto; }
+.env-leitura { max-width: var(--leitura); }
+.r-sm,.r-md,.r-lg,.r-xl { padding-block: clamp(72px, 9vw, 140px); }
+.fundo-base { background: var(--base); }
+.fundo-alt { background: var(--secundaria-suave); }
+.duo { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: 8%; align-items: center; }
+.duo > * { min-width: 0; }
+.lado-texto p { max-width: 65ch; }
+.pular-navegacao { position: fixed; left: 20px; top: 16px; transform: translateY(-200%); z-index: 300; background: var(--texto-forte); color: var(--base-pura); padding: 12px 20px; }
+.pular-navegacao:focus { transform: none; }
+.site-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 24px; }
+.wordmark { display: inline-flex; align-items: center; gap: 10px; font: 500 26px/1.3 var(--titulo); text-decoration: none; color: var(--texto-forte); min-height: 44px; }
+.site-header nav { display: flex; gap: 28px; }
+.site-header nav a { display: flex; align-items: center; min-height: 44px; font-size: 16px; color: var(--texto); text-decoration: none; }
+.acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-top: 32px; }
+.pill { display: inline-flex; align-items: center; justify-content: center; min-height: 56px; padding: 16px 28px; border: none; border-radius: var(--r-pill); text-decoration: none; font-size: 16px; font-weight: 500; line-height: 1.4; text-align: center; transition: transform var(--tempo-press) var(--ease-out); }
+.pill-cheio { background: var(--acao-texto); color: var(--base-pura); }
+.pill-fantasma { background: var(--secundaria); color: var(--texto-forte); }
+.pill:active, button:active { transform: scale(.97); }
+.link-seta { display: inline-block; padding-block: 12px; }
+@media (hover: hover) and (pointer: fine) {
+  .pill-cheio:hover { background: var(--acao-active); }
+  .pill-fantasma:hover { background: var(--secundaria-borda); }
+  .site-header nav a:hover, .rodape a:hover { text-decoration: underline; }
+  .gallery-controls button:hover { background: var(--secundaria); }
+  .faq summary:hover { color: var(--acao-texto); }
+}
+.hero { padding-top: 36px; }
+.hero .grade { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: center; gap: 5%; }
+.hero .bloco-sub { margin-top: 32px; max-width: 47ch; }
+.hero .slogan-ritmo { font-size: 18px; font-weight: 500; margin-top: 20px; }
+.hero .apoio-preco { margin-top: 16px; font-size: 16px; }
+.hero-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; padding-block: 56px 80px; }
+.hero-notes p { margin: 0; max-width: 62ch; }
+.colagem-wrap { position: relative; min-width: 0; }
+.colagem { position: relative; height: 630px; isolation: isolate; }
+.colagem::before { content: ''; position: absolute; inset: 8% -1% 2%; border-radius: 50%; background: var(--secundaria); z-index: -1; }
+.artefato { margin: 0; padding: 12px; background: var(--base-pura); border-radius: 20px; }
+.artefato .quadro { overflow: hidden; border-radius: 12px; }
+.artefato img { width: 100%; }
+.artefato figcaption { margin-top: 12px; font-size: 14px; line-height: 1.5; color: var(--texto-legenda); }
+.colagem .artefato { position: absolute; padding: 8px; }
+.colagem .artefato figcaption { font-size: 14px; }
+.colagem .f1 { width: 35%; left: 0; top: 23%; transform: rotate(-7deg); }
+.colagem .f2 { width: 48%; left: 25%; top: 3%; z-index: 2; }
+.colagem .f3 { width: 34%; right: 0; top: 30%; transform: rotate(8deg); }
+.colagem .f1 .quadro,.colagem .f3 .quadro { max-height: 350px; }
+.colagem .f1 figcaption,.colagem .f3 figcaption { max-width: 16ch; }
+.dor-bloco { max-width: var(--largo); display: grid; grid-template-columns: 1fr 1.05fr; gap: 32px 9%; }
+.dor-bloco h2 { align-self: start; max-width: 14ch; }
+.dor-historia { grid-column: 2; grid-row: 1 / 3; }
+.dor-historia p { margin-top: 0; margin-bottom: 16px; }
+.dor-destaque { align-self: end; padding: 32px; border-radius: 0 64px 0 0; background: var(--secundaria); }
+.dor-destaque p { font-size: 24px; line-height: 1.5; }
+.dor-conclusao { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.05fr; gap: 9%; margin-top: 16px; }
+.dor-conclusao p { margin: 0; }
+.secao3-header { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8%; margin-bottom: 48px; }
+.secao3-header h2 { grid-row: span 2; max-width: 14ch; }
+.duo-conceito { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: start; }
+.card-conceito { padding: 40px; }
+.card-tradicional { padding-left: 0; }
+.card-ritmo { background: var(--complementar-suave); border-radius: 0 80px 0 0; }
+.lista-conceito { list-style: none; display: grid; gap: 20px; }
+.lista-conceito li { display: flex; gap: 16px; }
+.bullet-check,.bullet-x,.ico,.check-oferta { flex: 0 0 20px; color: var(--complementar-escuro); }
+.bullet-check svg,.ico svg,.check-oferta svg { margin-top: 5px; }
+.fecho-secao3,.fecho-diferenca { max-width: 65ch; margin-top: 40px; font-size: 20px; }
+.produto-texto .negacao-card { margin-block: 24px; color: var(--texto-forte); }
+.produto-video-box { max-width: 380px; margin: auto; }
+.produto-video-box video { width: 100%; }
+.como-header { margin-bottom: 56px; }
+.grade-etapas { list-style: none; display: grid; gap: 64px; }
+.card-etapa { display: grid; grid-template-columns: .9fr 1.1fr; column-gap: 9%; align-items: start; }
+.card-etapa > div { display: contents; }
+.miniatura-etapa { grid-column: 1; grid-row: 1 / 8; max-height: 420px; overflow: hidden; border-radius: 0 80px 0 0; background: var(--complementar-suave); padding: 32px 48px 0; }
+.miniatura-etapa img { width: 100%; }
+.card-etapa h3,.card-etapa p { grid-column: 2; }
+.card-etapa h3 { font-size: 32px; margin-bottom: 24px; padding-top: 16px; }
+.card-etapa p { margin-top: 0; margin-bottom: 16px; }
+.card-etapa .destaque-etapa { margin-top: 16px; font-weight: 500; }
+.card-etapa:nth-child(2) .miniatura-etapa { background: var(--secundaria); }
+.fecho-etapas { margin-top: 56px; max-width: 65ch; font-size: 20px; }
+.recebe-header { margin-bottom: 40px; }
+.grade-entregas { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 8%; }
+.card-entrega { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; align-items: start; }
+.card-entrega h3 { font-size: 20px; line-height: 1.4; }
+.card-entrega p { font-size: 16px; margin: 0; }
+.destaque-visual-entrega { background: var(--secundaria); margin-top: 72px; padding: 56px; border-radius: 0 100px 0 0; }
+.destaque-visual-entrega h3 { font-size: 40px; }
+.destaque-visual-entrega .artefato { max-width: 280px; }
+.fases-header { max-width: 820px; margin-bottom: 48px; }
+.fases-grade { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
+.card-fase { padding: 0; }
+.fase-lua { display: block; width: 48px; height: 48px; border-radius: 50%; background: var(--texto-forte); margin-bottom: 24px; overflow: hidden; position: relative; }
+.lua-1::after,.lua-3::after { content: ''; position: absolute; inset: 0 0 0 50%; background: var(--complementar); }
+.lua-2 { background: var(--complementar); }
+.lua-3::after { inset: 0 50% 0 0; }
+.fase-desc { font-size: 16px; }
+#fases .duo { margin-top: 64px !important; }
+#fases .artefato { max-width: 320px; }
+.diferencial-header { max-width: 820px; margin-bottom: 40px; }
+.tabela-diferencial { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; }
+.col-diferencial { padding: 32px 0; }
+.col-diferencial ul { list-style: none; display: grid; gap: 20px; }
+.col-diferencial li { display: flex; gap: 12px; }
+.col-ritmo { padding: 32px; background: var(--base-pura); border-radius: 0 64px 0 0; }
+.galeria-header { max-width: 820px; margin-bottom: 32px; }
+.galeria-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.galeria-card { min-width: 0; }
+.galeria-card .quadro { max-height: 460px; overflow: hidden; border-radius: 16px; }
+.galeria-card img { width: 100%; }
+.galeria-card figcaption { font-family: var(--titulo); font-size: 20px; font-weight: 500; margin-top: 20px; color: var(--texto-forte); }
+.galeria-card p { font-size: 16px; margin-top: 8px; }
+.gallery-controls { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+.gallery-controls button { border: none; border-radius: var(--r-pill); padding: 12px 24px; min-height: 48px; font-size: 16px; color: var(--texto); background: var(--secundaria-suave); transition: transform var(--tempo-press) var(--ease-out); }
+.gallery-controls button[aria-pressed="true"] { color: var(--base-pura); background: var(--texto-forte); }
+.gallery-enhanced { display: block; padding: 40px; background: var(--complementar-suave); border-radius: 0 100px 0 0; }
+.gallery-enhanced .galeria-card { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 10%; align-items: center; }
+.gallery-enhanced .quadro { grid-column: 2; grid-row: 1 / 4; max-height: none; width: min(100%,300px); justify-self: center; }
+.gallery-enhanced figcaption { font-size: 32px; align-self: end; margin: 0; }
+.gallery-enhanced p { font-size: 20px; max-width: 28ch; align-self: start; }
+.observacao-importante { max-width: 800px; margin-top: 64px; }
+.observacao-importante p { font-size: 16px; }
+.observacao-importante .fecho-obs { margin-top: 24px; font-weight: 500; }
+.bloco-oferta { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px 10%; align-items: start; }
+.bloco-oferta h2 { grid-column: 1; max-width: 12ch; margin: 0 0 8px; }
+.sub-oferta,.lead-oferta { grid-column: 1; margin: 0; }
+.sub-oferta { font-size: 24px; }
+.lista-oferta { grid-column: 2; grid-row: 1 / 9; list-style: none; padding: 40px; background: var(--base-pura); border-radius: 0 80px 0 0; display: grid; gap: 20px; }
+.lista-oferta li { display: flex; gap: 12px; }
+.preco-tag { font-size: 16px; margin: 16px 0 -20px; }
+.preco-grande { font: 500 80px/1.15 var(--titulo); color: var(--texto-forte); letter-spacing: -.04em; margin: 0; font-variant-numeric: tabular-nums; }
+.condicao-oferta { font-size: 16px; margin: 0; }
+.bloco-oferta .acoes { margin: 8px 0 0; }
+.selo-kiwify { grid-column: 1; font-size: 14px; margin: 0; }
+.faq { max-width: var(--largo); display: grid; grid-template-columns: .7fr 1.3fr; column-gap: 10%; align-items: start; }
+.faq h2 { grid-column: 1; grid-row: 1 / 13; }
+.faq details { grid-column: 2; margin-bottom: 12px; background: var(--secundaria-suave); border-radius: 16px; }
+.faq summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px; font-weight: 500; list-style: none; font-size: 18px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; font-size: 24px; flex-shrink: 0; }
+.faq details[open] summary::after { content: '−'; }
+.resposta { padding: 0 24px 24px; }
+.resposta p { font-size: 16px; }
+.chamada-final { text-align: center; background: var(--secundaria); }
+.chamada-final h2 { font-size: clamp(36px,5vw,64px); max-width: 16ch; margin: 0 auto 32px; }
+.chamada-corpo { max-width: 720px; margin: auto; }
+.chamada-corpo > p:nth-child(-n+3) { display: inline; }
+.chamada-corpo > p:nth-child(-n+3)::after { content: ' '; }
+.chamada-destaque-frase { display: block; margin-top: 24px; font-weight: 500; }
+.chamada-sub,.chamada-preco { font-size: 16px; }
+.chamada-final .acoes { justify-content: center; }
+.rodape { padding-block: 64px; }
+.rodape .marca-rodape { font: 500 clamp(50px,12vw,160px)/1.2 var(--titulo); letter-spacing: -.04em; color: var(--texto-forte); margin-bottom: 32px; }
+.rodape p { font-size: 16px; }
+.rodape .empresa-dados { max-width: 65ch; }
+.rodape .links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 24px 0; }
+.rodape .links button,.rodape .links a { border: 0; background: none; color: var(--texto); font: inherit; min-height: 44px; display: inline-flex; align-items: center; padding: 0; text-decoration: underline; text-underline-offset: .25em; }
+.rodape .aviso { max-width: 75ch; color: var(--texto-legenda); }
+.revelar { opacity: 1; }
+@media (max-width: 1000px) {
+  .site-header nav { gap: 16px; }
+  .colagem { height: 500px; }
+  .hero h1 { font-size: clamp(44px,6vw,60px); }
+  .grade-entregas { gap: 32px; }
+  .card-entrega { display: block; }
+  .galeria-grid:not(.gallery-enhanced) { grid-template-columns: 1fr 1fr; }
+  .miniatura-etapa { padding: 24px 24px 0; }
+  .card-etapa h3 { font-size: 28px; }
+  .destaque-visual-entrega { padding: 40px; }
+  .fases-grade { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+@media (max-width: 760px) {
+  body { font-size: 17px; }
+  .site-header { padding-block: 16px; }
+  .wordmark { font-size: 24px; gap: 8px; }
+  .wordmark img { width: 30px; height: 30px; }
+  .site-header nav a { font-size: 14px; }
+  .site-header nav a:not([href="#demonstracao"]) { display: none; }
+  .hero { padding-top: 24px; }
+  .hero .grade { grid-template-columns: 1fr; gap: 36px; }
+  .hero h1 { font-size: clamp(42px,11vw,64px); max-width: 12ch; }
+  .hero .bloco-sub { margin-top: 24px; max-width: 48ch; }
+  .corpo-g,.lead { font-size: 18px; }
+  .hero .slogan-ritmo { font-size: 16px; margin-top: 16px; }
+  .hero .acoes { margin-top: 24px; }
+  .hero .pill { width: 100%; }
+  .hero .apoio-preco { font-size: 14px; }
+  .colagem { height: 470px; max-width: 450px; margin: auto; }
+  .colagem .f1,.colagem .f3 { top: 20%; }
+  .colagem .f2 { width: 50%; }
+  .colagem .f1 .quadro,.colagem .f3 .quadro { max-height: 250px; }
+  .colagem .artefato figcaption { font-size: 14px; }
+  .hero-notes { grid-template-columns: 1fr; gap: 24px; padding-block: 24px 64px; }
+  .dor-bloco,.duo,.secao3-header,.duo-conceito,.dor-conclusao,.tabela-diferencial,.bloco-oferta,.faq { display: block; }
+  .dor-bloco h2,.secao3-header h2 { max-width: none; }
+  .dor-destaque { margin-top: 32px; padding: 24px; }
+  .dor-destaque p { font-size: 20px; }
+  .dor-conclusao p + p { margin-top: 16px; }
+  .card-conceito { padding: 24px; }
+  .card-tradicional { padding-left: 0; margin-bottom: 24px; }
+  .lado-visual { margin-top: 40px !important; }
+  .produto-video-box { max-width: 320px; }
+  .grade-etapas { gap: 56px; }
+  .card-etapa { display: flex; flex-direction: column; }
+  .card-etapa > div { display: contents; }
+  .miniatura-etapa { width: 100%; height: 300px; max-height: none; padding: 24px 48px 0; }
+  .card-etapa h3 { margin-top: 24px; padding: 0; font-size: 28px; }
+  .card-etapa p { margin-bottom: 12px; }
+  .grade-entregas { grid-template-columns: 1fr; gap: 28px; }
+  .card-entrega { display: block; }
+  .card-entrega h3 { font-size: 20px; margin-bottom: 8px; }
+  .destaque-visual-entrega { margin-top: 48px; padding: 32px 24px; border-radius: 0 64px 0 0; }
+  .destaque-visual-entrega h3 { font-size: 32px; }
+  .destaque-visual-entrega .artefato { margin: auto; }
+  .fases-grade { gap: 32px 24px; }
+  .card-fase h3 { font-size: 22px; }
+  .fase-lua { width: 40px; height: 40px; margin-bottom: 16px; }
+  .col-diferencial { padding: 24px; }
+  .col-tradicional { padding-left: 0; }
+  .gallery-controls { gap: 8px; }
+  .gallery-controls button { flex: 1 1 calc(50% - 8px); padding: 12px; font-size: 14px; }
+  .gallery-enhanced { padding: 32px 24px; border-radius: 0 64px 0 0; }
+  .gallery-enhanced .galeria-card { display: flex; flex-direction: column; align-items: stretch; gap: 16px; }
+  .gallery-enhanced .quadro { width: min(100%,270px); align-self: center; order: 2; }
+  .gallery-enhanced figcaption { font-size: 24px; align-self: start; }
+  .gallery-enhanced p { font-size: 18px; margin: 0; max-width: none; }
+  .galeria-grid:not(.gallery-enhanced) { gap: 32px; }
+  .bloco-oferta h2 { max-width: none; }
+  .sub-oferta { font-size: 20px; margin-block: 24px 16px; }
+  .lista-oferta { margin-block: 32px; padding: 24px; }
+  .preco-tag { margin: 24px 0 8px; }
+  .preco-grande { font-size: 72px; }
+  .bloco-oferta .acoes { margin-top: 24px; }
+  .bloco-oferta .pill { width: 100%; }
+  .selo-kiwify { margin-top: 16px; }
+  .faq summary { padding: 20px; font-size: 17px; }
+  .resposta { padding: 0 20px 24px; }
+  .chamada-corpo { text-align: left; }
+  .rodape { padding-bottom: calc(64px + env(safe-area-inset-bottom,0px)); }
+}
+@media (max-width: 370px) {
+  .site-header nav a { font-size: 13px; }
+  .wordmark { font-size: 20px; }
+  .colagem { height: 390px; }
+  .card-entrega { display: block; }
+  .card-entrega h3 { margin-bottom: 8px; }
+  .fases-grade { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,*::before,*::after { animation: none !important; transition: none !important; }
+  .pill:active,button:active { transform: none; }
 }
 
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--sans);
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--texto);
-  background-color: var(--base);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Link de Pular Navegação (Acessibilidade WCAG 2.2) */
-.pular-navegacao {
-  position: absolute;
-  top: -60px;
-  left: 20px;
-  z-index: 1000;
-  background: var(--acao-hover);
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: var(--r-pill);
-  font-weight: 500;
-  text-decoration: none;
-  transition: top 0.2s ease;
-}
-.pular-navegacao:focus {
-  top: 16px;
-}
-
-/* Tipografia */
-h1, h2, h3, h4, .serif {
-  font-family: var(--titulo);
-  font-weight: 500;
-  color: var(--texto-forte);
-  font-style: normal;
-}
-
-h1 {
-  font-size: clamp(34px, 5.2vw, 58px);
-  line-height: 1.14;
-  letter-spacing: -0.02em;
-}
-
-h2 {
-  font-size: clamp(28px, 4vw, 44px);
-  line-height: 1.18;
-  letter-spacing: -0.018em;
-}
-
-h3 {
-  font-size: clamp(21px, 2.4vw, 28px);
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-}
-
-h1 em, h2 em, h3 em, .serif em {
-  font-style: italic;
-  font-weight: 400;
-}
-
-p {
-  max-width: 62ch;
-}
-
-p + p {
-  margin-top: 1.15em;
-}
-
-strong {
-  font-weight: 500;
-  color: var(--texto-forte);
-}
-
-a {
-  color: inherit;
-}
-
-.corpo-g {
-  font-size: clamp(17px, 1.4vw, 19px);
-  line-height: 1.55;
-  color: var(--texto-suave);
-}
-
-.rotulo {
-  display: inline-block;
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--acao-texto);
-  margin-bottom: var(--e12);
-}
-
-.legenda {
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--texto-legenda);
-}
-
-/* Containers e Seções */
-.env {
-  width: 100%;
-  max-width: var(--largo);
-  margin: 0 auto;
-  padding: 0 var(--e24);
-}
-
-.env-leitura {
-  width: 100%;
-  max-width: var(--leitura);
-  margin: 0 auto;
-  padding: 0 var(--e24);
-}
-
-@media (min-width: 769px) {
-  .env {
-    padding: 0 var(--e40);
-  }
-  .env-leitura {
-    padding: 0 var(--e40);
-  }
-}
-
-.fundo-base { background-color: var(--base); }
-.fundo-alt { background-color: var(--secundaria-suave); }
-
-.r-sm { padding-block: var(--e48); }
-.r-md { padding-block: var(--e64); }
-.r-lg { padding-block: var(--e80); }
-.r-xl { padding-block: var(--e96); }
-
-@media (min-width: 769px) {
-  .r-sm { padding-block: var(--e64); }
-  .r-md { padding-block: var(--e80); }
-  .r-lg { padding-block: var(--e96); }
-  .r-xl { padding-block: var(--e120); }
-}
-
-/* Grid de duas colunas */
-.duo {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e40);
-}
-
-@media (min-width: 960px) {
-  .duo {
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--e48);
-    align-items: center;
-  }
-  .duo > .lado-texto {
-    grid-column: 1 / span 6;
-  }
-  .duo > .lado-visual {
-    grid-column: 7 / span 6;
-  }
-  .duo.espelhado > .lado-texto {
-    grid-column: 7 / span 6;
-  }
-  .duo.espelhado > .lado-visual {
-    grid-column: 1 / span 6;
-    grid-row: 1;
-  }
-}
-
-/* Botões do Sistema de Design */
-.acoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--e12);
-  align-items: center;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  max-width: 100%;
-  min-height: 50px;
-  font-family: var(--sans);
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
-  text-decoration: none;
-  padding: 16px var(--e32);
-  border-radius: var(--r-pill);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.pill-cheio {
-  background-color: var(--acao-texto);
-  color: #FFFDFB;
-  border-color: var(--acao);
-  box-shadow: 0 4px 12px rgba(132, 106, 148, 0.25);
-}
-
-.pill-cheio:hover {
-  background-color: var(--acao-hover);
-  border-color: var(--acao-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(132, 106, 148, 0.32);
-}
-
-.pill-cheio:active {
-  background-color: var(--acao-active);
-  transform: translateY(0);
-}
-
-.pill-fantasma {
-  background-color: transparent;
-  color: var(--texto-forte);
-  border-color: var(--secundaria-borda);
-}
-
-.pill-fantasma:hover,
-.pill-fantasma:focus-visible {
-  border-color: var(--acao);
-  color: var(--acao-texto);
-  background-color: rgba(220, 213, 233, 0.25);
-}
-
-.pill-largo {
-  width: 100%;
-}
-
-@media (max-width: 480px) {
-  .pill {
-    width: 100%;
-    padding: 15px var(--e20);
-    font-size: 15px;
-  }
-}
-
-.link-seta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--acao-texto);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.16s ease, color 0.16s ease;
-}
-
-.link-seta:hover,
-.link-seta:focus-visible {
-  color: var(--acao-hover);
-  border-bottom-color: var(--acao-hover);
-}
-
-/* Indicador de Foco de Alta Visibilidade (Acessibilidade WCAG 2.2) */
-:focus-visible {
-  outline: 3px solid var(--acao);
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-/* Molduras de Artefato Real do App */
-.artefato {
-  background: var(--base-pura);
-  border-radius: var(--r-alto);
-  box-shadow: var(--flutua);
-  padding: var(--e12);
-  overflow: hidden;
-  border: 1px solid var(--fio);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.artefato .quadro {
-  border-radius: var(--r-img);
-  overflow: hidden;
-  background: var(--secundaria-suave);
-  line-height: 0;
-}
-
-.artefato .quadro img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
-}
-
-.artefato figcaption {
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--texto-legenda);
-  padding: var(--e12) var(--e4) var(--e4);
-}
-
-/* ===============================================================
-   SEÇÃO 1. PRIMEIRA DOBRA (HERO)
-   =============================================================== */
-.hero {
-  padding-top: var(--e48);
-  padding-bottom: var(--e80);
-}
-
-@media (min-width: 769px) {
-  .hero {
-    padding-top: var(--e80);
-    padding-bottom: var(--e120);
-  }
-}
-
-.hero .grade {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e48);
-}
-
-@media (min-width: 980px) {
-  .hero .grade {
-    grid-template-columns: repeat(12, 1fr);
-    gap: var(--e40);
-    align-items: center;
-  }
-  .hero .texto {
-    grid-column: 1 / span 6;
-  }
-  .hero .colagem-wrap {
-    grid-column: 7 / span 6;
-  }
-}
-
-.hero h1 {
-  margin-bottom: var(--e24);
-}
-
-.hero .bloco-sub {
-  margin-bottom: var(--e28);
-}
-
-.hero .complemento {
-  margin-top: var(--e24);
-}
-
-.hero .complemento p {
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--texto-suave);
-}
-
-.hero .bloco-sub p {
-  margin-bottom: var(--e16);
-}
-
-.hero .slogan-ritmo {
-  font-family: var(--titulo);
-  font-size: clamp(21px, 2.4vw, 26px);
-  color: var(--texto-forte);
-  letter-spacing: -0.01em;
-  margin-top: var(--e16);
-}
-
-.hero .apoio-preco {
-  margin-top: var(--e16);
-  font-size: 14px;
-  color: var(--texto-suave);
-  font-weight: 500;
-}
-
-/* Colagem de telas flutuantes da Primeira Dobra */
-.colagem-wrap {
-  width: 100%;
-}
-
-.colagem {
-  position: relative;
-  width: 100%;
-  max-width: 540px;
-  aspect-ratio: 1 / 0.98;
-  margin: 0 auto;
-}
-
-.colagem .artefato {
-  position: absolute;
-}
-
-.colagem .f1 {
-  width: 48%;
-  left: 0;
-  top: 8%;
-  transform: rotate(-2.5deg);
-  z-index: 1;
-}
-
-.colagem .f2 {
-  width: 53%;
-  right: 0;
-  top: 0;
-  transform: rotate(2deg);
-  z-index: 3;
-}
-
-.colagem .f3 {
-  width: 52%;
-  left: 12%;
-  bottom: 0;
-  transform: rotate(1deg);
-  z-index: 2;
-}
-
-@media (max-width: 600px) {
-  .colagem-wrap {
-    margin-top: var(--e32);
-    padding-top: var(--e16);
-  }
-  .colagem {
-    aspect-ratio: 1 / 1.12;
-  }
-  .colagem .f1 { width: 52%; left: -2%; top: 12%; }
-  .colagem .f2 { width: 56%; right: -2%; top: 4%; }
-  .colagem .f3 { width: 56%; left: 8%; bottom: 0; }
-}
-
-/* ===============================================================
-   SEÇÃO 2. IDENTIFICAÇÃO COM A DOR
-   =============================================================== */
-.dor-bloco {
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-.dor-bloco h2 {
-  margin-bottom: var(--e32);
-}
-
-.dor-historia {
-  font-size: 18px;
-  line-height: 1.65;
-  color: var(--texto);
-}
-
-.dor-destaque {
-  margin: var(--e40) 0;
-  padding: var(--e32) var(--e24);
-  background: var(--base-pura);
-  border-left: 4px solid var(--acao);
-  border-radius: 0 var(--r-cartao) var(--r-cartao) 0;
-  box-shadow: var(--flutua);
-}
-
-.dor-destaque p {
-  font-family: var(--titulo);
-  font-size: clamp(22px, 2.6vw, 29px);
-  line-height: 1.35;
-  color: var(--texto-forte);
-  letter-spacing: -0.015em;
-  max-width: 38ch;
-}
-
-.dor-conclusao {
-  font-size: 18px;
-  color: var(--texto-suave);
-  padding-top: var(--e16);
-}
-
-/* ===============================================================
-   SEÇÃO 3. POR QUE OS PLANNERS TRADICIONAIS NÃO FUNCIONARAM
-   =============================================================== */
-.secao3-header {
-  max-width: 760px;
-  margin-bottom: var(--e48);
-}
-
-.secao3-header h2 {
-  margin-bottom: var(--e20);
-}
-
-.duo-conceito {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e24);
-  margin-bottom: var(--e40);
-}
-
-@media (min-width: 769px) {
-  .duo-conceito {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--e32);
-  }
-}
-
-.card-conceito {
-  border-radius: var(--r-cartao);
-  padding: var(--e32) var(--e28);
-}
-
-.card-tradicional {
-  background: var(--base-pura);
-  border: 1px solid var(--fio);
-}
-
-.card-ritmo {
-  background: var(--secundaria-suave);
-  border: 1px solid var(--secundaria-borda);
-}
-
-.card-conceito h3 {
-  font-size: 24px;
-  margin-bottom: var(--e20);
-}
-
-.card-tradicional h3 {
-  color: var(--texto-suave);
-}
-
-.card-ritmo h3 {
-  color: var(--texto-forte);
-}
-
-.lista-conceito {
-  list-style: none;
-  display: grid;
-  gap: var(--e16);
-}
-
-.lista-conceito li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--e12);
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.lista-conceito .bullet-x {
-  color: var(--texto-legenda);
-  font-weight: 500;
-  line-height: 1;
-  margin-top: 3px;
-}
-
-.lista-conceito .bullet-check {
-  color: var(--acao-texto);
-  font-weight: 500;
-  line-height: 1;
-  margin-top: 3px;
-}
-
-.fecho-secao3 {
-  max-width: 620px;
-  font-family: var(--titulo);
-  font-size: clamp(21px, 2.2vw, 26px);
-  color: var(--texto-forte);
-  letter-spacing: -0.01em;
-  margin-top: var(--e32);
-}
-
-/* ===============================================================
-   SEÇÃO 4. APRESENTAÇÃO DO PRODUTO (VÍDEO REAL)
-   =============================================================== */
-.produto-texto h2 {
-  margin-bottom: var(--e24);
-}
-
-.produto-texto .lead {
-  font-size: 18px;
-  color: var(--texto-suave);
-  margin-bottom: var(--e20);
-}
-
-.produto-texto .negacao-card {
-  background: var(--base-pura);
-  border: 1px dashed var(--secundaria-borda);
-  border-radius: var(--r-cartao);
-  padding: var(--e20) var(--e24);
-  margin: var(--e24) 0;
-  font-size: 15px;
-  color: var(--texto-forte);
-}
-
-.produto-video-box {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.produto-video-box .quadro {
-  border-radius: var(--r-alto);
-  box-shadow: var(--flutua);
-  background: var(--secundaria-suave);
-  overflow: hidden;
-}
-
-.produto-video-box video {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--r-alto);
-}
-
-/* ===============================================================
-   SEÇÃO 5. COMO FUNCIONA (3 ETAPAS)
-   =============================================================== */
-.como-header {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto var(--e48);
-}
-
-.grade-etapas {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e28);
-}
-
-@media (min-width: 900px) {
-  .grade-etapas {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--e28);
-  }
-}
-
-.card-etapa {
-  background: var(--base-pura);
-  border: 1px solid var(--fio);
-  border-radius: var(--r-cartao);
-  padding: var(--e28) var(--e24);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--flutua);
-}
-
-.etapa-num {
-  font-family: var(--titulo);
-  font-size: 40px;
-  line-height: 1;
-  color: var(--acao-texto);
-  margin-bottom: var(--e16);
-  display: block;
-}
-
-.card-etapa h3 {
-  font-size: 21px;
-  margin-bottom: var(--e16);
-}
-
-.card-etapa p {
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--texto);
-  margin-bottom: var(--e16);
-}
-
-.card-etapa .destaque-etapa {
-  font-weight: 500;
-  color: var(--texto-forte);
-  font-size: 15px;
-  margin-top: auto;
-  padding-top: var(--e12);
-  border-top: 1px solid var(--fio);
-}
-
-.card-etapa .miniatura-etapa {
-  border-radius: var(--r-img);
-  overflow: hidden;
-  margin-bottom: var(--e20);
-  background: var(--secundaria-suave);
-  border: 1px solid var(--fio);
-  padding: var(--e8);
-}
-
-.card-etapa .miniatura-etapa img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 8px;
-  display: block;
-}
-
-.fecho-etapas {
-  text-align: center;
-  max-width: 640px;
-  margin: var(--e48) auto 0;
-  padding: var(--e24);
-  background: var(--secundaria-suave);
-  border: 1px solid var(--secundaria-borda);
-  border-radius: var(--r-cartao);
-}
-
-.fecho-etapas p {
-  font-family: var(--titulo);
-  font-size: clamp(20px, 2.2vw, 24px);
-  line-height: 1.35;
-  color: var(--texto-forte);
-  margin: 0 auto;
-}
-
-/* ===============================================================
-   SEÇÃO 6. O QUE VOCÊ RECEBE (8 ENTREGAS)
-   =============================================================== */
-.recebe-header {
-  max-width: 760px;
-  margin-bottom: var(--e48);
-}
-
-.grade-entregas {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e20);
-  margin-bottom: var(--e48);
-}
-
-@media (min-width: 680px) {
-  .grade-entregas {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--e24);
-  }
-}
-
-.card-entrega {
-  background: var(--base-pura);
-  border: 1px solid var(--fio);
-  border-radius: var(--r-cartao);
-  padding: var(--e24) var(--e20);
-  box-shadow: var(--flutua);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.card-entrega:hover {
-  border-color: var(--secundaria-borda);
-  transform: translateY(-2px);
-}
-
-.card-entrega.protagonista {
-  background: var(--base-pura);
-  border-color: var(--acao);
-  position: relative;
-}
-
-.card-entrega.protagonista::before {
-  content: "Destaque Principal";
-  position: absolute;
-  top: -10px;
-  right: var(--e20);
-  background: var(--acao);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 2px 10px;
-  border-radius: var(--r-pill);
-}
-
-.entrega-tag {
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--texto-legenda);
-  letter-spacing: 0.1em;
-  display: block;
-  margin-bottom: var(--e8);
-}
-
-.card-entrega h3 {
-  font-size: 19px;
-  margin-bottom: var(--e8);
-}
-
-.card-entrega p {
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--texto);
-}
-
-.destaque-visual-entrega {
-  background: var(--secundaria-suave);
-  border: 1px solid var(--secundaria-borda);
-  border-radius: var(--r-cartao);
-  padding: var(--e32) var(--e24);
-  margin: var(--e40) 0;
-  color: var(--texto-forte);
-}
-
-@media (min-width: 769px) {
-  .destaque-visual-entrega {
-    padding: var(--e40) var(--e36);
-  }
-}
-
-.destaque-visual-entrega .duo {
-  align-items: center;
-}
-
-.destaque-visual-entrega h3 {
-  color: var(--texto-forte);
-  font-size: clamp(24px, 2.8vw, 32px);
-  margin-bottom: var(--e16);
-}
-
-.destaque-visual-entrega p {
-  font-size: 16px;
-  color: var(--texto);
-}
-
-/* ===============================================================
-   SEÇÃO 7. RESPEITAR SEU RITMO É PARTE DO PLANO (4 FASES)
-   =============================================================== */
-.fases-header {
-  max-width: 760px;
-  margin-bottom: var(--e40);
-}
-
-.fases-grade {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e16);
-  margin: var(--e32) 0;
-}
-
-@media (min-width: 600px) {
-  .fases-grade {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .fases-grade {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--e16);
-  }
-}
-
-.card-fase {
-  background: var(--base-pura);
-  border: 1px solid var(--fio);
-  border-radius: var(--r-cartao);
-  padding: var(--e24) var(--e20);
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--flutua);
-}
-
-.card-fase .fase-lua {
-  font-size: 24px;
-  margin-bottom: var(--e8);
-}
-
-.card-fase h4 {
-  font-family: var(--titulo);
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--texto-forte);
-  margin-bottom: var(--e8);
-}
-
-.card-fase .fase-desc {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--texto);
-}
-
-/* ===============================================================
-   SEÇÃO 8. O DIFERENCIAL DO MEU RITMO
-   =============================================================== */
-.diferencial-header {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto var(--e48);
-}
-
-.tabela-diferencial {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e24);
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-@media (min-width: 769px) {
-  .tabela-diferencial {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--e32);
-  }
-}
-
-.col-diferencial {
-  border-radius: var(--r-cartao);
-  padding: var(--e36) var(--e28);
-}
-
-.col-tradicional {
-  background: var(--base-pura);
-  border: 1px solid var(--fio);
-  box-shadow: var(--flutua);
-}
-
-.col-ritmo {
-  background: var(--secundaria-suave);
-  border: 2px solid var(--acao);
-  position: relative;
-  box-shadow: var(--flutua-forte);
-}
-
-.col-ritmo::before {
-  content: "Abordagem Inteligente";
-  position: absolute;
-  top: -12px;
-  left: var(--e24);
-  background: var(--acao);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 2px 12px;
-  border-radius: var(--r-pill);
-}
-
-.col-diferencial h3 {
-  font-size: 24px;
-  margin-bottom: var(--e24);
-}
-
-.col-ritmo h3 {
-  margin-top: var(--e8);
-}
-
-.col-diferencial ul {
-  list-style: none;
-  display: grid;
-  gap: var(--e16);
-}
-
-.col-diferencial li {
-  font-size: 16px;
-  line-height: 1.5;
-  display: flex;
-  align-items: flex-start;
-  gap: var(--e12);
-}
-
-.col-diferencial .ico {
-  flex-shrink: 0;
-  margin-top: 3px;
-}
-
-.fecho-diferenca {
-  text-align: center;
-  max-width: 640px;
-  margin: var(--e48) auto 0;
-  font-family: var(--titulo);
-  font-size: clamp(21px, 2.4vw, 27px);
-  line-height: 1.35;
-  color: var(--texto-forte);
-}
-
-/* ===============================================================
-   SEÇÃO 9. DEMONSTRAÇÃO E CONFIANÇA (GALERIA EDITORIAL)
-   =============================================================== */
-.galeria-header {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto var(--e48);
-}
-
-.galeria-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--e24);
-  margin-bottom: var(--e48);
-}
-
-@media (min-width: 600px) {
-  .galeria-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--e24);
-  }
-}
-
-@media (min-width: 960px) {
-  .galeria-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--e24);
-  }
-}
-
-.galeria-card {
-  background: var(--base-pura);
-  border-radius: var(--r-alto);
-  box-shadow: var(--flutua);
-  border: 1px solid var(--fio);
-  overflow: hidden;
-  padding: var(--e12);
-  display: flex;
-  flex-direction: column;
-}
-
-.galeria-card .quadro {
-  border-radius: var(--r-img);
-  overflow: hidden;
-  background: var(--secundaria-suave);
-  aspect-ratio: 9 / 16;
-}
-
-.galeria-card .quadro img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  display: block;
-}
-
-.galeria-card figcaption {
-  padding: var(--e12) var(--e4) var(--e4);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--texto-forte);
-}
-
-.galeria-card p {
-  font-size: 12px;
-  color: var(--texto-legenda);
-  padding: 0 var(--e4) var(--e8);
-}
-
-.observacao-importante {
-  background: var(--base-pura);
-  border: 1px solid var(--secundaria-borda);
-  border-radius: var(--r-cartao);
-  padding: var(--e36) var(--e28);
-  max-width: 760px;
-  margin: var(--e48) auto 0;
-  box-shadow: var(--flutua);
-}
-
-.observacao-importante h3 {
-  font-size: 22px;
-  color: var(--texto-forte);
-  margin-bottom: var(--e16);
-}
-
-.observacao-importante p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--texto);
-}
-
-.observacao-importante .fecho-obs {
-  margin-top: var(--e16);
-  font-weight: 500;
-  color: var(--texto-forte);
-}
-
-/* ===============================================================
-   SEÇÃO 10. APRESENTAÇÃO DA OFERTA
-   =============================================================== */
-.bloco-oferta {
-  background: var(--base-pura);
-  border: 1px solid var(--secundaria-borda);
-  border-radius: var(--r-cartao);
-  box-shadow: var(--flutua-forte);
-  padding: var(--e48) var(--e24);
-  max-width: 680px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-@media (min-width: 769px) {
-  .bloco-oferta {
-    padding: var(--e64) var(--e48);
-  }
-}
-
-.bloco-oferta h2 {
-  font-size: clamp(30px, 4vw, 44px);
-  margin-bottom: var(--e12);
-}
-
-.bloco-oferta .sub-oferta {
-  font-family: var(--titulo);
-  font-size: 24px;
-  color: var(--acao-texto);
-  margin-bottom: var(--e24);
-}
-
-.bloco-oferta .lead-oferta {
-  font-size: 16px;
-  color: var(--texto-suave);
-  margin-bottom: var(--e32);
-}
-
-.lista-oferta {
-  text-align: left;
-  list-style: none;
-  display: grid;
-  gap: var(--e12);
-  margin: 0 auto var(--e40);
-  max-width: 480px;
-  padding: var(--e24);
-  background: var(--secundaria-suave);
-  border-radius: var(--r-cartao);
-  border: 1px solid var(--fio);
-}
-
-.lista-oferta li {
-  display: flex;
-  align-items: baseline;
-  gap: var(--e12);
-  font-size: 15px;
-  line-height: 1.45;
-  color: var(--texto);
-}
-
-.lista-oferta .check-oferta {
-  color: var(--acao-texto);
-  font-weight: 500;
-}
-
-.preco-tag {
-  font-size: 18px;
-  color: var(--texto-suave);
-  margin-bottom: var(--e8);
-}
-
-.preco-grande {
-  font-family: var(--titulo);
-  font-size: clamp(64px, 12vw, 108px);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  color: var(--texto-forte);
-}
-
-.condicao-oferta {
-  font-size: 16px;
-  color: var(--texto-suave);
-  margin-top: var(--e12);
-  margin-bottom: var(--e32);
-}
-
-.bloco-oferta .acoes {
-  justify-content: center;
-}
-
-.selo-kiwify {
-  font-size: 13px;
-  color: var(--texto-legenda);
-  margin-top: var(--e16);
-}
-
-/* ===============================================================
-   SEÇÃO 11. PERGUNTAS FREQUENTES (FAQ)
-   =============================================================== */
-.faq h2 {
-  margin-bottom: var(--e40);
-  text-align: center;
-}
-
-.faq details {
-  border-bottom: 1px solid var(--fio);
-}
-
-.faq details:first-of-type {
-  border-top: 1px solid var(--fio);
-}
-
-.faq summary {
-  list-style: none;
-  cursor: pointer;
-  position: relative;
-  padding: var(--e24) var(--e40) var(--e24) 0;
-  font-family: var(--titulo);
-  font-size: clamp(20px, 2.4vw, 25px);
-  line-height: 1.25;
-  letter-spacing: -0.015em;
-  color: var(--texto-forte);
-  transition: color 0.16s ease;
-}
-
-.faq summary:hover {
-  color: var(--acao-texto);
-}
-
-.faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq summary::after {
-  content: "";
-  position: absolute;
-  right: 4px;
-  top: calc(var(--e24) + 4px);
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M4 7.5l6 5.5 6-5.5' fill='none' stroke='%2353465C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  transition: transform 0.2s ease;
-}
-
-.faq details[open] summary::after {
-  transform: rotate(180deg);
-}
-
-.faq .resposta {
-  padding: 0 0 var(--e28);
-}
-
-.faq .resposta p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--texto-suave);
-}
-
-/* ===============================================================
-   SEÇÃO 12. CHAMADA FINAL
-   =============================================================== */
-.chamada-final {
-  text-align: center;
-}
-
-.chamada-final h2 {
-  margin: 0 auto var(--e32);
-  max-width: 18ch;
-  font-size: clamp(34px, 5.5vw, 68px);
-}
-
-.chamada-corpo {
-  max-width: 600px;
-  margin: 0 auto var(--e40);
-  font-size: 17px;
-  line-height: 1.6;
-}
-
-.chamada-corpo p {
-  margin-inline: auto;
-}
-
-.chamada-destaque-frase {
-  font-family: var(--titulo);
-  font-size: clamp(24px, 3vw, 36px);
-  color: var(--texto-forte);
-  margin: var(--e32) auto var(--e8);
-  display: block;
-}
-
-.chamada-sub {
-  font-size: 14px;
-  color: var(--texto-legenda);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--e8);
-}
-
-.chamada-preco {
-  font-size: 19px;
-  font-weight: 500;
-  color: var(--acao-texto);
-  margin-bottom: var(--e32);
-}
-
-.chamada-final .acoes {
-  justify-content: center;
-}
-
-/* ===============================================================
-   RODAPÉ
-   =============================================================== */
-.rodape {
-  border-top: 1px solid var(--fio);
-  padding: var(--e48) 0 var(--e32);
-  text-align: center;
-}
-
-.rodape p {
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--texto-legenda);
-  margin-inline: auto;
-}
-
-.rodape .marca-rodape {
-  font-weight: 500;
-  color: var(--texto-forte);
-  margin-bottom: var(--e8);
-}
-
-.rodape .empresa-dados {
-  margin: var(--e8) auto;
-  font-size: 12px;
-  color: var(--texto-legenda);
-}
-
-.rodape .links {
-  margin: var(--e12) 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: var(--e4) var(--e12);
-}
-
-.rodape .links a,
-.rodape .links button {
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: 13px;
-  cursor: pointer;
-  color: var(--texto-suave);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.16s ease, color 0.16s ease;
-  margin: 0 6px;
-  padding: 0;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-}
-
-.rodape .links a:hover,
-.rodape .links a:focus-visible,
-.rodape .links button:hover,
-.rodape .links button:focus-visible {
-  color: var(--acao-texto);
-  border-bottom-color: var(--acao-texto);
-}
-
-.rodape .aviso {
-  margin-top: var(--e20);
-  padding-top: var(--e16);
-  border-top: 1px solid var(--fio);
-  font-style: italic;
-  font-size: 13px;
-  color: var(--texto-legenda);
-  max-width: 62ch;
-}
-
-@media (max-width: 768px) {
-  .rodape {
-    padding-bottom: 110px; /* Espaço para a barra fixa mobile */
-  }
-}
-
-/* ===============================================================
-   BARRA FIXA (SOMENTE MOBILE)
-   =============================================================== */
-.barra-fixa {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
-  background: rgba(247, 243, 237, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid var(--secundaria-borda);
-  padding: var(--e12) var(--e16) calc(var(--e12) + env(safe-area-inset-bottom, 0px));
-  transform: translateY(115%);
-  transition: transform 0.28s ease;
-  display: flex;
-  justify-content: center;
-}
-
-.barra-fixa.visivel {
-  transform: translateY(0);
-}
-
-.barra-fixa .pill {
-  width: 100%;
-  font-size: 15px;
-  padding: 14px var(--e20);
-}
-
-@media (min-width: 769px) {
-  .barra-fixa {
-    display: none;
-  }
-}
-
-/* ===============================================================
-   AVISO DE COOKIES LGPD (MECANISMO DE CONSENTIMENTO FUNCIONAL)
-   =============================================================== */
 .banner-cookies {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 150;
+  position: relative;
   background: var(--base-pura);
-  border-top: 1px solid var(--secundaria-borda);
-  box-shadow: 0 -8px 24px rgba(83, 70, 92, 0.08);
+  border: none;
   padding: var(--e20) var(--e24) calc(var(--e20) + env(safe-area-inset-bottom, 0px));
   display: none;
 }
@@ -1535,34 +413,38 @@ a {
 
 .btn-cookie {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   padding: 10px 18px;
   border-radius: var(--r-pill);
   cursor: pointer;
   min-height: 44px;
-  border: 1px solid transparent;
-  transition: all 0.16s ease;
+  border: none;
+  transition: transform 160ms var(--ease-out);
 }
 
 .btn-cookie-primario {
   background: var(--acao);
   color: #fff;
   border-color: var(--acao);
-}
+}@media (hover: hover) and (pointer: fine) {
+
 
 .btn-cookie-primario:hover {
   background: var(--acao-hover);
+}
 }
 
 .btn-cookie-secundario {
   background: transparent;
   color: var(--texto-forte);
   border-color: var(--secundaria-borda);
-}
+}@media (hover: hover) and (pointer: fine) {
+
 
 .btn-cookie-secundario:hover {
   background: var(--secundaria-suave);
+}
 }
 
 .btn-cookie-detalhes {
@@ -1570,10 +452,12 @@ a {
   color: var(--texto-legenda);
   text-decoration: underline;
   padding-inline: 10px;
-}
+}@media (hover: hover) and (pointer: fine) {
+
 
 .btn-cookie-detalhes:hover {
   color: var(--acao-texto);
+}
 }
 
 /* ===============================================================
@@ -1584,8 +468,6 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(50, 37, 56, 0.65);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   z-index: 200;
   align-items: center;
   justify-content: center;
@@ -1609,8 +491,8 @@ a {
   overflow-wrap: anywhere;
   padding: var(--e36) var(--e28);
   position: relative;
-  box-shadow: var(--flutua-forte);
-  border: 1px solid var(--secundaria-borda);
+  box-shadow: var(--flutua-forte); /* taste-skill-ignore: modal elevation identifies the active foreground surface. */
+  border: none;
 }
 
 .modal-conteudo h3 {
@@ -1654,16 +536,18 @@ a {
   border-radius: 4px;
   width: 44px;
   height: 44px;
-}
+}@media (hover: hover) and (pointer: fine) {
+
 
 .modal-fechar:hover,
 .modal-fechar:focus-visible {
   color: var(--acao-texto);
 }
+}
 
 .categoria-cookie-item {
   background: var(--base-pura);
-  border: 1px solid var(--fio);
+  border: none;
   border-radius: var(--r-alto);
   padding: var(--e16);
   margin-bottom: var(--e16);
@@ -1685,7 +569,7 @@ a {
 }
 
 .cookie-status-fixo {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--complementar-escuro);
   background: var(--complementar-suave);
@@ -1711,28 +595,10 @@ body.modal-aberto {
   .modal-fechar { top: var(--e12); right: var(--e12); }
   .modal-conteudo .acoes { flex-direction: column; align-items: stretch; }
   .banner-cookies { padding: var(--e16); padding-bottom: calc(var(--e16) + env(safe-area-inset-bottom, 0px)); }
-  .banner-cookies-texto { font-size: 13px; }
+  .banner-cookies-texto { font-size: 14px; }
   .banner-cookies-acoes .btn-cookie { flex: 1 1 auto; }
 }
 
-/* Visibilidade Garantida para SEO e Acessibilidade */
-.revelar {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-  html {
-    scroll-behavior: auto;
-  }
-  .barra-fixa {
-    transition: none;
-  }
-}
 </style>
 
 <!-- Script de Controle do Meta Pixel (Executado apenas mediante Consentimento LGPD) -->
@@ -1781,9 +647,27 @@ function dispararInitiateCheckout() {
 </script>
 </head>
 
-<body>
+<body id="inicio">
 
 <a href="#conteudo-principal" class="pular-navegacao">Pular para o conteúdo principal</a>
+
+<aside id="bannerCookies" class="banner-cookies" aria-label="Gerenciamento de privacidade e cookies" role="region">
+  <div class="banner-cookies-conteudo">
+    <div class="banner-cookies-texto">
+      <p class="banner-cookies-titulo"><strong>Sua privacidade é prioridade</strong></p>
+      <p>O Meta Pixel só mede visitas e cliques com sua autorização. Sua escolha fica salva neste navegador e pode ser alterada em Preferências de Cookies no rodapé.</p>
+    </div>
+    <div class="banner-cookies-acoes">
+      <button type="button" class="btn-cookie btn-cookie-secundario" onclick="recusarCookies()">Apenas necessários</button>
+      <button type="button" class="btn-cookie btn-cookie-detalhes" onclick="abrirModal('modal-cookies')">Personalizar preferências</button>
+      <button type="button" class="btn-cookie btn-cookie-primario" onclick="aceitarTodosCookies()">Aceitar todos</button>
+    </div>
+  </div>
+</aside>
+<header class="site-header env">
+  <a class="wordmark" href="#inicio" aria-label="Meu Ritmo, início"><img src="assets/favicon.svg" aria-hidden="true" alt="" width="36" height="36">Meu Ritmo</a>
+  <nav aria-label="Navegação principal"><a href="#como-funciona">Como funciona</a><a href="#demonstracao">Por dentro do app</a><a href="#oferta">O que está incluído</a></nav>
+</header>
 
 <main id="conteudo-principal" tabindex="-1">
 
@@ -1794,24 +678,20 @@ function dispararInitiateCheckout() {
   <div class="env grade">
 
     <div class="texto">
-      <span class="rotulo">MEU RITMO &middot; Organização pessoal com IA | Desafio 28 Dias</span>
 
-      <h1 id="titulo-principal">Sua cabeça está cheia, sua rotina não para e você já não sabe por onde começar?</h1>
+      <h1 id="titulo-principal">Organize no seu ritmo</h1>
 
       <div class="bloco-sub">
         <p class="corpo-g">O Meu Ritmo é um aplicativo com inteligência artificial que transforma suas responsabilidades, metas e prioridades em um plano personalizado de 28 dias.</p>
-        <p class="slogan-ritmo"><em>Sua vida. Seu plano. Seu ritmo.</em></p>
+        <p class="slogan-ritmo">Sua vida. Seu plano. Seu ritmo.</p>
       </div>
 
       <div class="acoes">
-        <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">QUERO MEU PLANO PERSONALIZADO</a>
+        <a class="pill pill-cheio" href="#dor">Conhecer o Meu Ritmo</a>
       </div>
 
       <p class="apoio-preco">R$ 37, pagamento único. Acesso vitalício ao aplicativo.</p>
-      <div class="complemento">
-        <p>Você não precisa de mais um planner que exige que você dê conta de tudo, todos os dias. <strong>Precisa de um plano que seja feito para a sua vida, e não de uma rotina à qual você precise se adaptar.</strong></p>
-        <p>Você recebe orientações diárias, acompanha seu progresso e, ao final, ganha um relatório dos seus padrões de organização e um planner criado especialmente para você.</p>
-      </div>
+
     </div>
 
     <div class="colagem-wrap">
@@ -1823,7 +703,6 @@ function dispararInitiateCheckout() {
               <img src="assets/check-in-diario.jpg" width="590" height="1280" decoding="async" alt="Captura de tela real do app Meu Ritmo: tela de check-in diário com seleção de fase do ciclo, nível de energia e estado de presença.">
             </picture>
           </div>
-          <figcaption>Check-in diário de energia</figcaption>
         </figure>
         <figure class="artefato f2">
           <div class="quadro">
@@ -1832,7 +711,6 @@ function dispararInitiateCheckout() {
               <img src="assets/painel-do-dia.jpg" width="590" height="1280" fetchpriority="high" decoding="async" alt="Captura de tela real do app Meu Ritmo: painel inicial com fase atual, progresso da jornada e acesso ao plano, relatório e planner.">
             </picture>
           </div>
-          <figcaption>Painel do dia e acompanhamento</figcaption>
         </figure>
         <figure class="artefato f3">
           <div class="quadro">
@@ -1841,12 +719,14 @@ function dispararInitiateCheckout() {
               <img src="assets/plano-do-dia.jpg" width="590" height="1280" decoding="async" alt="Captura de tela real do app Meu Ritmo: plano diário com lista de tarefas distribuídas por períodos (manhã e tarde) com prioridades inegociáveis.">
             </picture>
           </div>
-          <figcaption>Plano e tarefas por período</figcaption>
         </figure>
       </div>
     </div>
 
   </div>
+<div class="env hero-notes">
+        <p>Você não precisa de mais um planner que exige que você dê conta de tudo, todos os dias. <strong>Precisa de um plano que seja feito para a sua vida, e não de uma rotina à qual você precise se adaptar.</strong></p>
+        <p>Você recebe orientações diárias, acompanha seu progresso e, ao final, ganha um relatório dos seus padrões de organização e um planner criado especialmente para você.</p></div>
 </section>
 
 <!-- ===============================================================
@@ -1854,8 +734,7 @@ function dispararInitiateCheckout() {
      =============================================================== -->
 <section id="dor" class="fundo-alt r-lg" aria-labelledby="titulo-dor">
   <div class="env-leitura dor-bloco">
-    <span class="rotulo">Identificação com a dor</span>
-    <h2 id="titulo-dor" class="revelar">Você passa o dia inteiro ocupada, mas sente que não avança no que realmente importa?</h2>
+    <h2 id="titulo-dor" class="revelar">Quando tudo se acumula</h2>
 
     <div class="dor-historia">
       <p>Você acorda pensando em tudo o que precisa resolver.</p>
@@ -1885,8 +764,7 @@ function dispararInitiateCheckout() {
 <section id="metodos" class="fundo-base r-xl" aria-labelledby="titulo-metodos">
   <div class="env">
     <div class="secao3-header">
-      <span class="rotulo">Por que os métodos tradicionais falham</span>
-      <h2 id="titulo-metodos" class="revelar">O problema de muitos métodos de organização é que eles esperam que você se adapte a eles.</h2>
+      <h2 id="titulo-metodos" class="revelar">Um plano que se adapta</h2>
       <p class="corpo-g">Uma rotina pronta não conhece suas responsabilidades. Um planner tradicional não sabe quais são suas prioridades. Uma lista de tarefas não considera necessariamente como sua energia varia de um dia para o outro.</p>
       <p class="corpo-g" style="margin-top:var(--e12)">E, quando tudo depende de você decidir o que fazer, em que ordem e em qual momento, organizar-se acaba virando mais uma tarefa.</p>
     </div>
@@ -1895,19 +773,19 @@ function dispararInitiateCheckout() {
       <div class="card-conceito card-tradicional">
         <h3>Planejamento tradicional</h3>
         <ul class="lista-conceito">
-          <li><span class="bullet-x">&times;</span><span>Exige adaptação da usuária.</span></li>
-          <li><span class="bullet-x">&times;</span><span>Depende da organização manual.</span></li>
-          <li><span class="bullet-x">&times;</span><span>Não conhece a vida individual.</span></li>
-          <li><span class="bullet-x">&times;</span><span>Exige o mesmo ritmo todos os dias.</span></li>
+          <li><span class="bullet-x" aria-hidden="true">−</span><span>Exige adaptação da usuária.</span></li>
+          <li><span class="bullet-x" aria-hidden="true">−</span><span>Depende da organização manual.</span></li>
+          <li><span class="bullet-x" aria-hidden="true">−</span><span>Não conhece a vida individual.</span></li>
+          <li><span class="bullet-x" aria-hidden="true">−</span><span>Exige o mesmo ritmo todos os dias.</span></li>
         </ul>
       </div>
 
       <div class="card-conceito card-ritmo">
-        <h3>O Meu Ritmo propõe inverter essa lógica</h3>
+        <h3>Planejamento com contexto</h3>
         <ul class="lista-conceito">
-          <li><span class="bullet-check">&#10003;</span><span>Em vez de entregar um planejamento igual para todas as mulheres, ele usa as suas informações para construir um plano de ação personalizado.</span></li>
-          <li><span class="bullet-check">&#10003;</span><span>Em vez de exigir o mesmo ritmo todos os dias, considera suas fases de energia e suas demandas reais.</span></li>
-          <li><span class="bullet-check">&#10003;</span><span>Em vez de deixar você sozinha diante de uma lista enorme, apresenta orientações para cada dia.</span></li>
+          <li><span class="bullet-check"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Em vez de entregar um planejamento igual para todas as mulheres, ele usa as suas informações para construir um plano de ação personalizado.</span></li>
+          <li><span class="bullet-check"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Em vez de exigir o mesmo ritmo todos os dias, considera suas fases de energia e suas demandas reais.</span></li>
+          <li><span class="bullet-check"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Em vez de deixar você sozinha diante de uma lista enorme, apresenta orientações para cada dia.</span></li>
         </ul>
       </div>
     </div>
@@ -1922,8 +800,7 @@ function dispararInitiateCheckout() {
 <section id="produto" class="fundo-alt r-xl" aria-labelledby="titulo-produto">
   <div class="env duo">
     <div class="lado-texto produto-texto">
-      <span class="rotulo">Conheça o Meu Ritmo</span>
-      <h2 id="titulo-produto" class="revelar">Um plano de 28 dias que só existe para você.</h2>
+      <h2 id="titulo-produto" class="revelar">28 dias para você</h2>
 
       <p class="lead">O Meu Ritmo é um aplicativo de organização pessoal com inteligência artificial, criado para mulheres que desejam ter mais clareza sobre suas prioridades e construir uma rotina que respeite seu próprio ritmo.</p>
 
@@ -1939,7 +816,7 @@ function dispararInitiateCheckout() {
       <p style="margin-top:var(--e16)"><strong>Você não precisa montar tudo do zero. O Meu Ritmo prepara seu plano com você.</strong></p>
 
       <div class="acoes" style="margin-top:var(--e32)">
-        <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero começar meus 28 dias. Ir para o checkout Kiwify.">QUERO COMEÇAR MEUS 28 DIAS</a>
+        <a class="pill pill-cheio" href="#como-funciona">Veja como funciona</a>
       </div>
     </div>
 
@@ -1973,63 +850,59 @@ function dispararInitiateCheckout() {
 <section id="como-funciona" class="fundo-base r-xl" aria-labelledby="titulo-como">
   <div class="env">
     <div class="como-header">
-      <span class="rotulo">Simplicidade de uso</span>
-      <h2 id="titulo-como" class="revelar">Como funciona o seu plano personalizado?</h2>
+      <h2 id="titulo-como" class="revelar">Da sua vida ao seu plano</h2>
     </div>
 
-    <div class="grade-etapas">
+    <ol class="grade-etapas">
       <!-- Etapa 1 -->
-      <article class="card-etapa">
+      <li class="card-etapa">
         <div>
           <div class="miniatura-etapa">
             <picture>
               <source srcset="assets/entrevista-ia.webp" type="image/webp">
-              <img src="assets/entrevista-ia.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: etapa de mapeamento inicial guiada por inteligência artificial para registrar áreas da vida e rotina.">
+              <img loading="lazy" decoding="async" src="assets/entrevista-ia.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: etapa de mapeamento inicial guiada por inteligência artificial para registrar áreas da vida e rotina.">
             </picture>
           </div>
-          <span class="etapa-num">01</span>
-          <h3>1. Conte como é a sua vida</h3>
+          <h3>Conte a sua realidade</h3>
           <p>O primeiro passo é um mapeamento da sua realidade.</p>
           <p>Você informa suas responsabilidades, metas, objetivos, compromissos, demandas e aspectos importantes da sua rotina.</p>
           <p>O sistema utiliza essas informações como ponto de partida.</p>
         </div>
         <p class="destaque-etapa">Você não começa com um planejamento pronto. Começa contando como é a sua vida.</p>
-      </article>
+      </li>
 
       <!-- Etapa 2 -->
-      <article class="card-etapa">
+      <li class="card-etapa">
         <div>
           <div class="miniatura-etapa">
             <picture>
               <source srcset="assets/os-28-dias.webp" type="image/webp">
-              <img src="assets/os-28-dias.jpg" width="590" height="752" alt="Captura de tela do aplicativo Meu Ritmo: visualização da jornada de 28 dias dividida nas 4 fases com progresso diário.">
+              <img loading="lazy" decoding="async" src="assets/os-28-dias.jpg" width="590" height="752" alt="Captura de tela do aplicativo Meu Ritmo: visualização da jornada de 28 dias dividida nas 4 fases com progresso diário.">
             </picture>
           </div>
-          <span class="etapa-num">02</span>
-          <h3>2. Receba seu plano de 28 dias criado pela IA</h3>
+          <h3>Receba seu plano</h3>
           <p>A inteligência artificial organiza suas informações e constrói um plano de ação personalizado.</p>
           <p>Suas prioridades são distribuídas ao longo dos 28 dias, considerando sua rotina, suas demandas e suas fases.</p>
         </div>
         <p class="destaque-etapa">Em vez de decidir sozinha como organizar tudo, você recebe um caminho para seguir.</p>
-      </article>
+      </li>
 
       <!-- Etapa 3 -->
-      <article class="card-etapa">
+      <li class="card-etapa">
         <div>
           <div class="miniatura-etapa">
             <picture>
               <source srcset="assets/check-in-diario.webp" type="image/webp">
-              <img src="assets/check-in-diario.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: registro de execução e check-in diário para identificar padrões pessoais.">
+              <img loading="lazy" decoding="async" src="assets/check-in-diario.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: registro de execução e check-in diário para identificar padrões pessoais.">
             </picture>
           </div>
-          <span class="etapa-num">03</span>
-          <h3>3. Saiba o que fazer a cada dia</h3>
+          <h3>Acompanhe cada dia</h3>
           <p>A cada dia, você acompanha as atividades planejadas e registra como foi sua execução por meio de check-ins.</p>
           <p>Esses registros ajudam o sistema a identificar seus padrões de organização e rotina.</p>
         </div>
         <p class="destaque-etapa">Você acompanha seu plano enquanto o sistema reúne informações sobre o que funciona para você.</p>
-      </article>
-    </div>
+      </li>
+    </ol>
 
     <div class="fecho-etapas revelar">
       <p>E o melhor: os 28 dias não são o fim da sua organização. Eles são a base para construir uma forma mais personalizada de continuar.</p>
@@ -2043,56 +916,47 @@ function dispararInitiateCheckout() {
 <section id="o-que-recebe" class="fundo-alt r-xl" aria-labelledby="titulo-recebe">
   <div class="env">
     <div class="recebe-header">
-      <span class="rotulo">Entregas concretas</span>
-      <h2 id="titulo-recebe" class="revelar">Muito mais do que uma lista de tarefas para 28 dias</h2>
+      <h2 id="titulo-recebe" class="revelar">O que você recebe</h2>
       <p class="corpo-g">Ao entrar no Meu Ritmo, você terá acesso a:</p>
     </div>
 
     <div class="grade-entregas">
       <div class="card-entrega">
-        <span class="entrega-tag">01 &middot; Diagnóstico</span>
         <h3>Seu mapeamento pessoal</h3>
         <p>Um processo para reunir suas principais responsabilidades, objetivos e áreas da vida em um só lugar.</p>
       </div>
 
       <div class="card-entrega protagonista">
-        <span class="entrega-tag">02 &middot; Plano de Ação</span>
-        <h3>Seu plano de ação personalizado de 28 dias</h3>
+        <h3>Plano de ação de 28 dias</h3>
         <p>Um planejamento criado pela inteligência artificial a partir das informações que você compartilha.</p>
       </div>
 
       <div class="card-entrega">
-        <span class="entrega-tag">03 &middot; Rotina</span>
         <h3>Orientações e tarefas diárias</h3>
         <p>Atividades organizadas para que você saiba quais ações estão previstas a cada dia.</p>
       </div>
 
       <div class="card-entrega">
-        <span class="entrega-tag">04 &middot; Ciclicidade</span>
-        <h3>Planejamento que considera seu ritmo</h3>
+        <h3>Planejamento cíclico</h3>
         <p>Uma organização que leva em conta suas fases, seu ciclo e suas características individuais.</p>
       </div>
 
       <div class="card-entrega">
-        <span class="entrega-tag">05 &middot; Registro</span>
         <h3>Check-ins diários</h3>
         <p>Registros simples para acompanhar sua execução e reunir informações sobre sua rotina.</p>
       </div>
 
       <div class="card-entrega protagonista">
-        <span class="entrega-tag">06 &middot; Conclusão do Desafio</span>
-        <h3>Relatório personalizado ao final dos 28 dias</h3>
+        <h3>Relatório personalizado</h3>
         <p>Uma análise dos padrões de organização e rotina identificados a partir das suas informações e dos seus registros.</p>
       </div>
 
       <div class="card-entrega protagonista">
-        <span class="entrega-tag">07 &middot; Continuidade</span>
         <h3>Seu planner personalizado</h3>
         <p>Um planner construído com base no que foi identificado durante os 28 dias, para você continuar se organizando depois do desafio.</p>
       </div>
 
       <div class="card-entrega">
-        <span class="entrega-tag">08 &middot; Plataforma</span>
         <h3>Acesso vitalício ao aplicativo</h3>
         <p>Tudo isso com um único pagamento, sem mensalidade de acesso.</p>
       </div>
@@ -2102,8 +966,7 @@ function dispararInitiateCheckout() {
     <div class="destaque-visual-entrega">
       <div class="duo">
         <div class="lado-texto">
-          <span class="rotulo">Continuidade Real</span>
-          <h3>Plano de Ação, Relatório Final e Planner Personalizado</h3>
+          <h3>Depois dos 28 dias</h3>
           <p>Não é apenas um planejamento para começar. É um processo para descobrir uma forma de organização que faça sentido para você.</p>
           <p style="margin-top:var(--e12)">Ao concluir a jornada de 28 dias, o aplicativo consolida seus aprendizados de ritmo e gera seu relatório e planner definitivos.</p>
         </div>
@@ -2111,7 +974,7 @@ function dispararInitiateCheckout() {
           <figure class="artefato">
             <div class="quadro">
               <picture>
-                <img src="assets/IMG_4719.PNG" width="590" height="1200" alt="Captura de tela do aplicativo Meu Ritmo: painel de navegação destacando o acesso ao Relatório Personalizado e ao Planner Cíclico gerados ao final dos 28 dias.">
+                <img loading="lazy" decoding="async" src="assets/IMG_4719.PNG" width="1178" height="2399" alt="Captura de tela do aplicativo Meu Ritmo: painel de navegação destacando o acesso ao Relatório Personalizado e ao Planner Cíclico gerados ao final dos 28 dias.">
               </picture>
             </div>
             <figcaption>O aplicativo acompanha cada etapa e entrega seu relatório e planner ao final.</figcaption>
@@ -2129,35 +992,34 @@ function dispararInitiateCheckout() {
 <section id="fases" class="fundo-base r-xl" aria-labelledby="titulo-fases">
   <div class="env">
     <div class="fases-header">
-      <span class="rotulo">Respeito ao seu tempo</span>
-      <h2 id="titulo-fases" class="revelar">Você não tem a mesma energia todos os dias. Seu planejamento não precisa ignorar isso.</h2>
+      <h2 id="titulo-fases" class="revelar">Seu ritmo tem fases</h2>
       <p class="corpo-g">Existem dias em que você se sente mais disposta. Em outros, precisa lidar com mais cansaço, menos concentração ou diferentes responsabilidades.</p>
       <p class="corpo-g" style="margin-top:var(--e12)">Mesmo assim, muitos métodos de produtividade esperam que você mantenha sempre o mesmo desempenho. O Meu Ritmo considera essas variações na forma de organizar suas demandas.</p>
       <p class="corpo-g" style="margin-top:var(--e12)">Seu plano de 28 dias é estruturado em quatro fases:</p>
     </div>
 
     <div class="fases-grade">
-      <div class="card-fase" style="border-top: 4px solid var(--secundaria-borda)">
-        <span class="fase-lua">🌑</span>
-        <h4>Reflexiva</h4>
+      <div class="card-fase">
+        <span class="fase-lua lua-0" aria-hidden="true"></span>
+        <h3>Reflexiva</h3>
         <p class="fase-desc">Um momento para observar sua realidade e olhar para suas prioridades.</p>
       </div>
 
-      <div class="card-fase" style="border-top: 4px solid var(--complementar)">
-        <span class="fase-lua">🌓</span>
-        <h4>Dinâmica</h4>
+      <div class="card-fase">
+        <span class="fase-lua lua-1" aria-hidden="true"></span>
+        <h3>Dinâmica</h3>
         <p class="fase-desc">Uma fase orientada à movimentação e à execução de atividades.</p>
       </div>
 
-      <div class="card-fase" style="border-top: 4px solid var(--complementar-escuro)">
-        <span class="fase-lua">🌕</span>
-        <h4>Expressiva</h4>
+      <div class="card-fase">
+        <span class="fase-lua lua-2" aria-hidden="true"></span>
+        <h3>Expressiva</h3>
         <p class="fase-desc">Uma fase voltada à expressão e ao andamento das suas demandas.</p>
       </div>
 
-      <div class="card-fase" style="border-top: 4px solid var(--acao)">
-        <span class="fase-lua">🌘</span>
-        <h4>Criativa</h4>
+      <div class="card-fase">
+        <span class="fase-lua lua-3" aria-hidden="true"></span>
+        <h3>Criativa</h3>
         <p class="fase-desc">Uma fase para explorar possibilidades e organizar novas ideias.</p>
       </div>
     </div>
@@ -2172,7 +1034,7 @@ function dispararInitiateCheckout() {
           <div class="quadro">
             <picture>
               <source srcset="assets/as-quatro-fases.webp" type="image/webp">
-              <img src="assets/as-quatro-fases.jpg" width="590" height="980" alt="Captura de tela do aplicativo Meu Ritmo: visualização detalhada das 4 fases (Reflexiva, Dinâmica, Expressiva e Criativa) associadas aos ciclos e energias.">
+              <img loading="lazy" decoding="async" src="assets/as-quatro-fases.jpg" width="590" height="980" alt="Captura de tela do aplicativo Meu Ritmo: visualização detalhada das 4 fases (Reflexiva, Dinâmica, Expressiva e Criativa) associadas aos ciclos e energias.">
             </picture>
           </div>
           <figcaption>Tela real do app: As 4 fases explicadas na prática.</figcaption>
@@ -2188,8 +1050,7 @@ function dispararInitiateCheckout() {
 <section id="diferencial" class="fundo-alt r-xl" aria-labelledby="titulo-diferencial">
   <div class="env">
     <div class="diferencial-header">
-      <span class="rotulo">Comparação direta</span>
-      <h2 id="titulo-diferencial" class="revelar">O que torna o Meu Ritmo diferente de um planner comum?</h2>
+      <h2 id="titulo-diferencial" class="revelar">Planejar com contexto</h2>
     </div>
 
     <div class="tabela-diferencial">
@@ -2208,11 +1069,11 @@ function dispararInitiateCheckout() {
       <div class="col-diferencial col-ritmo">
         <h3>Meu Ritmo</h3>
         <ul>
-          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Cria um plano de ação a partir da sua vida.</span></li>
-          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Usa IA para organizar suas informações e prioridades.</span></li>
-          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Oferece orientação e check-ins diários.</span></li>
-          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Considera suas fases e seu ritmo.</span></li>
-          <li><span class="ico" style="color:var(--acao)">&#10003;</span><span>Entrega um relatório e um planner personalizados ao final.</span></li>
+          <li><span class="ico" style="color:var(--acao)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Cria um plano de ação a partir da sua vida.</span></li>
+          <li><span class="ico" style="color:var(--acao)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Usa IA para organizar suas informações e prioridades.</span></li>
+          <li><span class="ico" style="color:var(--acao)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Oferece orientação e check-ins diários.</span></li>
+          <li><span class="ico" style="color:var(--acao)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Considera suas fases e seu ritmo.</span></li>
+          <li><span class="ico" style="color:var(--acao)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Entrega um relatório e um planner personalizados ao final.</span></li>
         </ul>
       </div>
     </div>
@@ -2227,19 +1088,19 @@ function dispararInitiateCheckout() {
 <section id="demonstracao" class="fundo-base r-xl" aria-labelledby="titulo-demo">
   <div class="env">
     <div class="galeria-header">
-      <span class="rotulo">Telas reais do aplicativo</span>
-      <h2 id="titulo-demo" class="revelar">Veja como o Meu Ritmo funciona na prática</h2>
+      <h2 id="titulo-demo" class="revelar">Conheça o aplicativo</h2>
       <p class="corpo-g">Antes de começar, você pode conhecer as principais etapas do sistema. Veja como suas informações são organizadas, como o plano de 28 dias é apresentado e como funciona o acompanhamento diário.</p>
       <p class="corpo-g" style="margin-top:var(--e8)">Do primeiro mapeamento ao planner personalizado, cada etapa tem uma função na sua organização.</p>
     </div>
 
-    <div class="galeria-grid">
+    <div class="gallery-controls" role="group" aria-label="Escolha uma tela do aplicativo" hidden></div>
+    <div class="galeria-grid" id="telas-app">
       <!-- Mapa da vida -->
       <figure class="galeria-card">
         <div class="quadro">
           <picture>
             <source srcset="assets/mapa-da-vida.webp" type="image/webp">
-            <img src="assets/mapa-da-vida.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: Mapa da Vida categorizando crescimento pessoal, profissional, família e relacionamentos, e espiritual.">
+            <img loading="lazy" decoding="async" src="assets/mapa-da-vida.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: Mapa da Vida categorizando crescimento pessoal, profissional, família e relacionamentos, e espiritual.">
           </picture>
         </div>
         <figcaption>Mapa da vida</figcaption>
@@ -2251,7 +1112,7 @@ function dispararInitiateCheckout() {
         <div class="quadro">
           <picture>
             <source srcset="assets/plano-do-dia.webp" type="image/webp">
-            <img src="assets/plano-do-dia.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: visualização das tarefas do dia organizadas por blocos de tempo e limites saudáveis.">
+            <img loading="lazy" decoding="async" src="assets/plano-do-dia.jpg" width="590" height="1280" alt="Captura de tela do aplicativo Meu Ritmo: visualização das tarefas do dia organizadas por blocos de tempo e limites saudáveis.">
           </picture>
         </div>
         <figcaption>Plano diário</figcaption>
@@ -2262,7 +1123,7 @@ function dispararInitiateCheckout() {
       <figure class="galeria-card">
         <div class="quadro">
           <picture>
-            <img src="assets/IMG_4720.PNG" width="590" height="1200" alt="Captura de tela do aplicativo Meu Ritmo: acompanhamento detalhado dos 28 dias organizados por ciclo e fases lunares.">
+            <img loading="lazy" decoding="async" src="assets/IMG_4720.PNG" width="1178" height="2427" alt="Captura de tela do aplicativo Meu Ritmo: acompanhamento detalhado dos 28 dias organizados por ciclo e fases lunares.">
           </picture>
         </div>
         <figcaption>Os 28 dias</figcaption>
@@ -2273,7 +1134,7 @@ function dispararInitiateCheckout() {
       <figure class="galeria-card">
         <div class="quadro">
           <picture>
-            <img src="assets/IMG_4722.PNG" width="590" height="1200" alt="Captura de tela do aplicativo Meu Ritmo: ferramenta de matriz de priorização dividida nos quadrantes Fazer, Planejar, Delegar e Eliminar.">
+            <img loading="lazy" decoding="async" src="assets/IMG_4722.PNG" width="1178" height="2296" alt="Captura de tela do aplicativo Meu Ritmo: ferramenta de matriz de priorização dividida nos quadrantes Fazer, Planejar, Delegar e Eliminar.">
           </picture>
         </div>
         <figcaption>Matriz de priorização</figcaption>
@@ -2283,7 +1144,7 @@ function dispararInitiateCheckout() {
 
     <!-- Observação importante ética e transparente -->
     <div class="observacao-importante revelar">
-      <h3>Uma observação importante</h3>
+      <h3>O que esperar</h3>
       <p>O Meu Ritmo não promete mudar sua vida em 28 dias nem garantir que você alcance todas as suas metas.</p>
       <p style="margin-top:var(--e8)">Ele oferece um processo personalizado de planejamento e acompanhamento.</p>
       <p style="margin-top:var(--e8)">A identificação dos seus padrões depende das informações que você compartilha e dos check-ins que realiza ao longo dos 28 dias.</p>
@@ -2298,31 +1159,32 @@ function dispararInitiateCheckout() {
 <section id="oferta" class="fundo-alt r-xl" aria-labelledby="titulo-oferta">
   <div class="env">
     <div class="bloco-oferta">
-      <span class="rotulo">Acesso Imediato</span>
-      <h2 id="titulo-oferta" class="revelar">Sua vida não precisa de mais um planejamento igual ao de todo mundo.</h2>
+      <h2 id="titulo-oferta" class="revelar">Seu plano começa aqui</h2>
       <p class="sub-oferta">Precisa de um plano criado para você.</p>
       <p class="lead-oferta">Entre no Meu Ritmo e tenha acesso ao Desafio 28 Dias com inteligência artificial.</p>
 
-      <ul class="lista-oferta">
-        <li><span class="check-oferta">&#10003;</span><span>Mapeamento da sua rotina e das suas prioridades.</span></li>
-        <li><span class="check-oferta">&#10003;</span><span>Plano de ação personalizado de 28 dias.</span></li>
-        <li><span class="check-oferta">&#10003;</span><span>Orientação e acompanhamento diário.</span></li>
-        <li><span class="check-oferta">&#10003;</span><span>Organização considerando suas fases e seu ritmo.</span></li>
-        <li><span class="check-oferta">&#10003;</span><span>Check-ins para registrar sua execução.</span></li>
-        <li><span class="check-oferta">&#10003;</span><span>Relatório personalizado ao final.</span></li>
-        <li><span class="check-oferta">&#10003;</span><span>Planner personalizado para continuar sua organização.</span></li>
-        <li><span class="check-oferta">&#10003;</span><span>Acesso vitalício ao aplicativo.</span></li>
-      </ul>
 
-      <p class="preco-tag">Tudo isso por</p>
+
+
       <p class="preco-grande">R$ 37</p>
       <p class="condicao-oferta">Pagamento único. Sem mensalidade de acesso.</p>
 
       <div class="acoes">
-        <a class="pill pill-cheio pill-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">QUERO MEU PLANO PERSONALIZADO</a>
+        <a class="pill pill-cheio pill-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">Quero meu plano personalizado</a>
       </div>
 
       <p class="selo-kiwify">Compra realizada pela Kiwify &middot; Ambiente seguro &middot; Garantia de 7 dias</p>
+
+      <ul class="lista-oferta">
+        <li><span class="check-oferta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Mapeamento da sua rotina e das suas prioridades.</span></li>
+        <li><span class="check-oferta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Plano de ação personalizado de 28 dias.</span></li>
+        <li><span class="check-oferta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Orientação e acompanhamento diário.</span></li>
+        <li><span class="check-oferta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Organização considerando suas fases e seu ritmo.</span></li>
+        <li><span class="check-oferta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Check-ins para registrar sua execução.</span></li>
+        <li><span class="check-oferta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Relatório personalizado ao final.</span></li>
+        <li><span class="check-oferta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Planner personalizado para continuar sua organização.</span></li>
+        <li><span class="check-oferta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span><span>Acesso vitalício ao aplicativo.</span></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -2332,8 +1194,7 @@ function dispararInitiateCheckout() {
      =============================================================== -->
 <section id="faq" class="fundo-base r-lg" aria-labelledby="titulo-faq">
   <div class="env-leitura faq">
-    <span class="rotulo" style="display:block; text-align:center">Tire suas dúvidas</span>
-    <h2 id="titulo-faq" class="revelar">Perguntas Frequentes</h2>
+    <h2 id="titulo-faq" class="revelar">Perguntas frequentes</h2>
 
     <details open>
       <summary>O Meu Ritmo é um planner digital?</summary>
@@ -2392,7 +1253,7 @@ function dispararInitiateCheckout() {
 
     <details>
       <summary>Como recebo meu acesso?</summary>
-      <div class="resposta"><p>Logo após a confirmação do pagamento pela Kiwify, você recebe imediatamente no seu e-mail de compra os dados de acesso e as orientações para entrar no aplicativo em <strong>desafio28dias.app</strong>.</p></div>
+      <div class="resposta"><p>Logo após a confirmação do pagamento pela Kiwify, você recebe imediatamente no seu e-mail de compra os dados de acesso e as orientações para entrar no aplicativo em desafio28dias.app.</p></div>
     </details>
 
   </div>
@@ -2403,7 +1264,7 @@ function dispararInitiateCheckout() {
      =============================================================== -->
 <section class="chamada-final fundo-alt r-xl" aria-labelledby="titulo-final">
   <div class="env">
-    <h2 id="titulo-final" class="revelar">Você não precisa continuar tentando encaixar sua vida em uma rotina pronta.</h2>
+    <h2 id="titulo-final" class="revelar">Comece no seu ritmo</h2>
 
     <div class="chamada-corpo">
       <p>Suas responsabilidades são suas.</p>
@@ -2419,7 +1280,7 @@ function dispararInitiateCheckout() {
     </div>
 
     <div class="acoes">
-      <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero começar meus 28 dias. Ir para o checkout Kiwify.">QUERO COMEÇAR MEUS 28 DIAS</a>
+      <a class="pill pill-cheio" href="#contato">Ver contato e informações</a>
     </div>
   </div>
 </section>
@@ -2429,9 +1290,9 @@ function dispararInitiateCheckout() {
 <!-- ===============================================================
      RODAPÉ
      =============================================================== -->
-<footer class="rodape fundo-base">
+<footer id="contato" class="rodape fundo-base">
   <div class="env">
-    <p class="marca-rodape">Meu Ritmo &middot; Organização pessoal com inteligência artificial.</p>
+    <p class="marca-rodape">Meu Ritmo</p><p>Organização pessoal com inteligência artificial.</p>
     <p class="empresa-dados">Atendimento ao cliente: <a href="mailto:suporte@desafio28dias.app" style="color:var(--acao-texto); text-decoration:none">suporte@desafio28dias.app</a> &middot; Horário: Segunda a sexta, das 09h às 18h</p>
     <p class="links">
       <button type="button" aria-haspopup="dialog" aria-controls="modal-privacidade" onclick="abrirModal('modal-privacidade');">Política de Privacidade</button>
@@ -2444,30 +1305,6 @@ function dispararInitiateCheckout() {
     <p class="aviso">O Meu Ritmo é uma ferramenta de organização pessoal. Não realiza diagnósticos e não substitui acompanhamento médico ou psicológico.</p>
   </div>
 </footer>
-
-<!-- ===============================================================
-     BARRA FIXA (SOMENTE MOBILE)
-     =============================================================== -->
-<div class="barra-fixa" id="barraFixa" inert aria-hidden="true">
-  <a class="pill pill-cheio" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">QUERO MEU PLANO PERSONALIZADO</a>
-</div>
-
-<!-- ===============================================================
-     BANNER DE COOKIES LGPD
-     =============================================================== -->
-<aside id="bannerCookies" class="banner-cookies" aria-label="Gerenciamento de privacidade e cookies" role="region">
-  <div class="banner-cookies-conteudo">
-    <div class="banner-cookies-texto">
-      <p class="banner-cookies-titulo"><strong>Sua privacidade é prioridade</strong></p>
-      <p>Guardamos sua escolha de privacidade neste navegador. O Meta Pixel só é ativado com sua autorização para medir visitas e cliques de compra. Você pode mudar sua escolha em Preferências de Cookies no rodapé.</p>
-    </div>
-    <div class="banner-cookies-acoes">
-      <button type="button" class="btn-cookie btn-cookie-secundario" onclick="recusarCookies()">Apenas necessários</button>
-      <button type="button" class="btn-cookie btn-cookie-detalhes" onclick="abrirModal('modal-cookies')">Personalizar preferências</button>
-      <button type="button" class="btn-cookie btn-cookie-primario" onclick="aceitarTodosCookies()">Aceitar todos</button>
-    </div>
-  </div>
-</aside>
 
 <!-- ===============================================================
      MODAIS LEGAIS (POLÍTICA, TERMOS, REEMBOLSO E COOKIES)
@@ -2567,32 +1404,6 @@ function dispararInitiateCheckout() {
 </div>
 
 <script>
-(function () {
-  // Barra fixa no mobile após rolar a primeira dobra
-  var barra = document.getElementById('barraFixa');
-  var limite = function () { return window.innerHeight * 0.8; };
-  var pendente = false;
-
-  function avaliaScroll() {
-    if (barra) {
-      var visivel = window.scrollY > limite();
-      barra.classList.toggle('visivel', visivel);
-      barra.inert = !visivel || !!modalAtual;
-      barra.setAttribute('aria-hidden', String(!visivel));
-    }
-    pendente = false;
-  }
-
-  window.addEventListener('scroll', function () {
-    if (!pendente) {
-      pendente = true;
-      window.requestAnimationFrame(avaliaScroll);
-    }
-  }, { passive: true });
-
-  avaliaScroll();
-})();
-
 // Diálogos: foco contido, Escape, retorno ao acionador e fundo inerte.
 var modalAtual = null;
 var focoAnterior = null;
@@ -2721,5 +1532,6 @@ window.addEventListener('storage', function(e) {
 aplicarConsentimento(lerConsentimento(), false);
 </script>
 
+<script type="module" src="assets/site-motion.js"></script>
 </body>
 </html>

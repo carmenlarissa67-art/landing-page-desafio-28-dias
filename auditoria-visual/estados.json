@@ -1,0 +1,86 @@
+[
+  {
+    "width": 1440,
+    "navigation": [
+      {
+        "target": "#dor",
+        "hash": "#dor",
+        "next": "dor"
+      },
+      {
+        "target": "#como-funciona",
+        "hash": "#como-funciona",
+        "next": "como-funciona"
+      },
+      {
+        "target": "#contato",
+        "hash": "#contato",
+        "next": "contato"
+      }
+    ],
+    "gallery": {
+      "pressed": [
+        "Matriz de priorização"
+      ],
+      "shown": [
+        "Matriz de priorização"
+      ],
+      "running": 0
+    },
+    "layout": {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  },
+  {
+    "width": 390,
+    "navigation": [
+      {
+        "target": "#dor",
+        "hash": "#dor",
+        "next": "dor"
+      },
+      {
+        "target": "#como-funciona",
+        "hash": "#como-funciona",
+        "next": "como-funciona"
+      },
+      {
+        "target": "#contato",
+        "hash": "#contato",
+        "next": "contato"
+      }
+    ],
+    "gallery": {
+      "pressed": [
+        "Matriz de priorização"
+      ],
+      "shown": [
+        "Matriz de priorização"
+      ],
+      "running": 0
+    },
+    "layout": {
+      "width": 390,
+      "scrollWidth": 390
+    }
+  },
+  {
+    "reducedMotion": {
+      "reduced": true,
+      "running": 0,
+      "visible": [
+        "Os 28 dias"
+      ]
+    }
+  },
+  {
+    "noJavaScript": {
+      "cards": 4,
+      "titleVisible": "1",
+      "checkout": 1,
+      "width": 390,
+      "scrollWidth": 390
+    }
+  }
+]

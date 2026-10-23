@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-23T13:37:56.662Z",
+  "allow": [
+    "palette-cream"
+  ],
+  "findings": [
+    {
+      "level": "WARN",
+      "id": "size-count",
+      "width": 1440,
+      "message": "14 different font sizes (14, 15, 16, 18, 20, 24, 26, 32, 40, 52, 64, 80, 86, 160).",
+      "fix": "A page needs about five: display, heading, lead, body, small.",
+      "alsoAt": [
+        768,
+        390
+      ]
+    }
+  ],
+  "viewports": [
+    {
+      "width": 1440,
+      "height": 900,
+      "motion": {
+        "elements": 18,
+        "css": 0,
+        "transitions": 0,
+        "scripted": 18,
+        "videos": 1,
+        "playingVideos": 0
+      }
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "motion": {
+        "elements": 19,
+        "css": 0,
+        "transitions": 0,
+        "scripted": 19,
+        "videos": 1,
+        "playingVideos": 0
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "motion": {
+        "elements": 10,
+        "css": 0,
+        "transitions": 1,
+        "scripted": 9,
+        "videos": 1,
+        "playingVideos": 0
+      }
+    }
+  ]
+}
