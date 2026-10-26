@@ -23,7 +23,7 @@ Para visualizar, sirva `dist/` por HTTP; por exemplo, `python -m http.server 417
 
 ## Comportamentos preservados
 
-Somente o CTA de “Seu plano começa aqui” aponta para `https://pay.kiwify.com.br/NXZ0sjz`. O evento `InitiateCheckout` está associado apenas a esse botão e depende do consentimento de marketing. Os outros três CTAs avançam à seção seguinte: início → problema, apresentação do produto → como funciona, chamada final → contato no rodapé. O botão fixo foi removido.
+Somente o CTA de “Seu plano começa aqui” aponta para `https://pay.kiwify.com.br/NXZ0sjz`. O botão usa um link direto, sem disparo manual de `InitiateCheckout`. O evento `PageView` permanece condicionado ao consentimento de marketing. Os outros três CTAs avançam à seção seguinte: início → problema, apresentação do produto → como funciona, chamada final → contato no rodapé. O botão fixo foi removido.
 
 O Meta Pixel `735853032032044` mantém a inicialização condicionada à autorização, a revogação e a sincronização entre abas. Os testes executam os scripts reais com uma simulação do navegador, sem transmitir eventos à Meta nem fazer compras.
 

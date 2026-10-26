@@ -49,7 +49,6 @@ test('fresh visit and explicit refusal never load or fire the Pixel', () => {
   for (const saved of [null, 'necessary', 'invalid']) {
     const b = browser(saved);
     b.context.carregarMetaPixel();
-    b.context.dispararInitiateCheckout();
     assert.equal(b.requests.length, 0);
     assert.equal(b.calls().length, 0);
     assert.equal(b.element('bannerCookies').classList.contains('ativo'), saved !== 'necessary');
@@ -77,20 +76,18 @@ test('positive choice initializes once, including saved consent on a new visit',
   }
 });
 
-test('revocation stops checkout tracking and sends the SDK revoke command', () => {
+test('revocation sends the SDK revoke command and reauthorization does not duplicate PageView', () => {
   const b = browser('all');
-  b.context.dispararInitiateCheckout();
   b.element('checkMarketingCookies').checked = false;
   b.context.salvarPreferenciasCookies();
-  b.context.dispararInitiateCheckout();
-  assert.equal(b.calls().filter(c => c[1] === 'InitiateCheckout').length, 1);
+  assert.equal(b.context.consentimentoMarketing, false);
   assert.ok(b.calls().some(c => c[0] === 'consent' && c[1] === 'revoke'));
   assert.ok(b.deletedCookies.some(c => c.startsWith('_fbp=; Max-Age=0')));
   assert.ok(b.deletedCookies.some(c => c.startsWith('_fbc=; Max-Age=0')));
   assert.equal(b.values.get('meuritmo_cookie_consent'), 'necessary');
   b.context.aceitarTodosCookies();
-  b.context.dispararInitiateCheckout();
-  assert.equal(b.calls().filter(c => c[1] === 'InitiateCheckout').length, 2);
+  assert.equal(b.context.consentimentoMarketing, true);
+  assert.equal(b.calls().filter(c => c[0] === 'track' && c[1] === 'PageView').length, 1);
   assert.equal(b.requests.length, 1);
 });
 
@@ -109,7 +106,6 @@ test('revocation in another tab is applied to this page', () => {
   const b = browser('all');
   b.values.set('meuritmo_cookie_consent', 'necessary');
   b.listeners.storage.forEach(fn => fn({ key: 'meuritmo_cookie_consent' }));
-  b.context.dispararInitiateCheckout();
   assert.equal(b.context.consentimentoMarketing, false);
   assert.equal(b.calls().filter(c => c[1] === 'InitiateCheckout').length, 0);
 });
@@ -134,13 +130,22 @@ test('every referenced local asset is included in Git with matching filename cas
   assert.deepEqual(missing, [], `Assets missing from Git: ${missing.join(', ')}`);
 });
 
-test('only the offer button opens checkout and triggers checkout tracking', () => {
+test('only the offer button opens checkout, without a manual tracking handler', () => {
   const links = [...html.matchAll(/<a\b[^>]+href="https:\/\/pay\.kiwify\.com\.br\/NXZ0sjz"[^>]*>/g)];
   assert.equal(links.length, 1);
-  links.forEach(([tag]) => assert.match(tag, /onclick="dispararInitiateCheckout\(\);"/));
+  links.forEach(([tag]) => {
+    assert.doesNotMatch(tag, /onclick=/);
+    assert.match(tag, /target="_blank"/);
+    assert.match(tag, /rel="noopener"/);
+  });
   const offer = html.match(/<section id="oferta"[\s\S]*?<\/section>/)[0];
   assert.match(offer, /href="https:\/\/pay\.kiwify\.com\.br\/NXZ0sjz"/);
-  assert.equal([...html.matchAll(/onclick="dispararInitiateCheckout\(\);"/g)].length, 1);
+  assert.doesNotMatch(html, /InitiateCheckout/);
+  for (const file of ['src/motion.js', 'assets/site-motion.js']) {
+    assert.doesNotMatch(fs.readFileSync(path.join(root, file), 'utf8'), /InitiateCheckout/);
+  }
+  const b = browser('all');
+  assert.deepEqual(b.calls().filter(c => c[0] === 'track').map(c => c[1]), ['PageView']);
   assert.doesNotMatch(html, /<noscript>[\s\S]*facebook/);
   assert.doesNotMatch(html, /<form\b/);
 });

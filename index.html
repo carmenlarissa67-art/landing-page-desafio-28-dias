@@ -638,12 +638,6 @@ function carregarMetaPixel() {
   pixelAtivo = true;
 }
 
-// Disparo do evento InitiateCheckout respeitando o rastreamento
-function dispararInitiateCheckout() {
-  if (consentimentoMarketing && pixelAtivo && typeof fbq === 'function') {
-    fbq('track', 'InitiateCheckout');
-  }
-}
 </script>
 </head>
 
@@ -1170,7 +1164,7 @@ function dispararInitiateCheckout() {
       <p class="condicao-oferta">Pagamento único. Sem mensalidade de acesso.</p>
 
       <div class="acoes">
-        <a class="pill pill-cheio pill-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" onclick="dispararInitiateCheckout();" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">Quero meu plano personalizado</a>
+        <a class="pill pill-cheio pill-largo" href="https://pay.kiwify.com.br/NXZ0sjz" target="_blank" rel="noopener" aria-label="Quero meu plano personalizado. Ir para o checkout Kiwify.">Quero meu plano personalizado</a>
       </div>
 
       <p class="selo-kiwify">Compra realizada pela Kiwify &middot; Ambiente seguro &middot; Garantia de 7 dias</p>
